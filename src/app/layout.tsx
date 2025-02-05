@@ -1,8 +1,13 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { ServiceProvider } from '@/providers/service.provider'
+import { serviceConfig, validateConfig } from '@/config/services'
 
 const inter = Inter({ subsets: ['latin'] })
+
+// Validate environment variables
+validateConfig()
 
 export const metadata: Metadata = {
   title: 'Lead Gen Handyman',
@@ -16,7 +21,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <ServiceProvider config={serviceConfig}>
+          {children}
+        </ServiceProvider>
+      </body>
     </html>
   )
 }

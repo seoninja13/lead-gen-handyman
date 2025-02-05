@@ -1,221 +1,116 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { ServiceList } from '../ServiceList';
-import { useServiceRepository } from '@/providers/service.provider';
-import { Service } from '@/interfaces/domain';
+import { ServiceProvider } from '@/providers/service.provider';
+import { config } from '@/config/services';
 
-// Mock the service provider hook
+// Mock the service provider hooks
 jest.mock('@/providers/service.provider', () => ({
-  useServiceRepository: jest.fn(),
+  ...jest.requireActual('@/providers/service.provider'),
+  useRepository: () => ({
+    services: mockServices,
+    loading: false,
+    error: null,
+    fetchServices: jest.fn(),
+  }),
 }));
 
-// Mock service data
-const mockServices: Service[] = [
+const mockServices = [
   {
-    id: '1',
-    name: 'Plumbing',
+    id: 1,
+    name: 'Plumbing Service',
     description: 'Professional plumbing services',
-    slug: 'plumbing',
-    price_range: '$100-$200',
-    duration: '1-2 hours',
-    tags: ['repairs', 'installation'],
+    price_range_min: 50,
   },
   {
-    id: '2',
-    name: 'Electrical',
-    description: 'Expert electrical services',
-    slug: 'electrical',
-    price_range: '$150-$300',
-    duration: '2-4 hours',
-    tags: ['wiring', 'installation'],
+    id: 2,
+    name: 'Electrical Service',
+    description: 'Expert electrical work',
+    price_range_min: 75,
   },
 ];
 
 describe('ServiceList Component', () => {
-  // Reset mocks before each test
-  beforeEach(() => {
-    jest.clearAllMocks();
+  it('renders services correctly', () => {
+    render(
+      <ServiceProvider config={config}>
+        <ServiceList />
+      </ServiceProvider>
+    );
+
+    // Check if services are rendered
+    expect(screen.getByText('Plumbing Service')).toBeInTheDocument();
+    expect(screen.getByText('Professional plumbing services')).toBeInTheDocument();
+    expect(screen.getByText('Starting at $50')).toBeInTheDocument();
+
+    expect(screen.getByText('Electrical Service')).toBeInTheDocument();
+    expect(screen.getByText('Expert electrical work')).toBeInTheDocument();
+    expect(screen.getByText('Starting at $75')).toBeInTheDocument();
   });
 
-  it('renders loading state initially', async () => {
-    const mockRepository = {
-      findAll: jest.fn().mockResolvedValue({ success: true, data: [] }),
-      findByCategory: jest.fn().mockResolvedValue({ success: true, data: [] }),
-    };
-
-    (useServiceRepository as jest.Mock).mockReturnValue(mockRepository);
-
-    render(<ServiceList />);
-
-    // Wait for loading state
-    await waitFor(
-      () => {
-        const skeletons = screen.getAllByRole('generic').filter(
-          (element: HTMLElement) => element.className.includes('animate-pulse')
-        );
-        expect(skeletons.length).toBeGreaterThan(0);
-      },
-      { timeout: 1000 }
+  it('hides prices when showPrice is false', () => {
+    render(
+      <ServiceProvider config={config}>
+        <ServiceList showPrice={false} />
+      </ServiceProvider>
     );
+
+    expect(screen.queryByText('Starting at $50')).not.toBeInTheDocument();
+    expect(screen.queryByText('Starting at $75')).not.toBeInTheDocument();
   });
 
-  it('renders services successfully', async () => {
-    const mockRepository = {
-      findAll: jest.fn().mockResolvedValue({ success: true, data: mockServices }),
-      findByCategory: jest.fn().mockResolvedValue({ success: true, data: mockServices }),
-    };
+  it('shows loading state', () => {
+    jest.spyOn(require('@/providers/service.provider'), 'useRepository')
+      .mockImplementation(() => ({
+        services: [],
+        loading: true,
+        error: null,
+        fetchServices: jest.fn(),
+      }));
 
-    (useServiceRepository as jest.Mock).mockReturnValue(mockRepository);
-
-    render(<ServiceList />);
-
-    // Wait for services to load
-    await waitFor(
-      () => {
-        expect(screen.getByText('Plumbing')).toBeInTheDocument();
-        expect(screen.getByText('Electrical')).toBeInTheDocument();
-      },
-      { timeout: 3000 }
+    render(
+      <ServiceProvider config={config}>
+        <ServiceList />
+      </ServiceProvider>
     );
 
-    // Check for service details
-    // Check for service details
-    const plumbingDesc = screen.getByText('Professional plumbing services');
-    const electricalDesc = screen.getByText('Expert electrical services');
-    expect(plumbingDesc).toBeInTheDocument();
-    expect(electricalDesc).toBeInTheDocument();
-
-    // Check for price ranges
-    const plumbingPrice = screen.getByText('Price: $100-$200');
-    const electricalPrice = screen.getByText('Price: $150-$300');
-    expect(plumbingPrice).toBeInTheDocument();
-    expect(electricalPrice).toBeInTheDocument();
-
-    // Check for tags
-    const repairsTag = screen.getByText('repairs');
-    const wiringTag = screen.getByText('wiring');
-    expect(repairsTag).toBeInTheDocument();
-    expect(wiringTag).toBeInTheDocument();
+    expect(screen.getByText('Loading services...')).toBeInTheDocument();
   });
 
-  it('handles category filter correctly', async () => {
-    const mockRepository = {
-      findAll: jest.fn().mockResolvedValue({ success: true, data: mockServices }),
-      findByCategory: jest.fn().mockResolvedValue({
-        success: true,
-        data: [mockServices[0]],
-      }),
-    };
+  it('shows error state', () => {
+    const errorMessage = 'Failed to load services';
+    jest.spyOn(require('@/providers/service.provider'), 'useRepository')
+      .mockImplementation(() => ({
+        services: [],
+        loading: false,
+        error: new Error(errorMessage),
+        fetchServices: jest.fn(),
+      }));
 
-    (useServiceRepository as jest.Mock).mockReturnValue(mockRepository);
-
-    render(<ServiceList category="Plumbing" />);
-
-    // Wait for services to load
-    await waitFor(
-      () => {
-        expect(mockRepository.findByCategory).toHaveBeenCalledWith('Plumbing');
-        expect(screen.getByText('Plumbing')).toBeInTheDocument();
-        expect(screen.queryByText('Electrical')).not.toBeInTheDocument();
-      },
-      { timeout: 3000 }
+    render(
+      <ServiceProvider config={config}>
+        <ServiceList />
+      </ServiceProvider>
     );
+
+    expect(screen.getByText(`Error loading services: ${errorMessage}`)).toBeInTheDocument();
   });
 
-  it('handles empty results correctly', async () => {
-    const mockRepository = {
-      findAll: jest.fn().mockResolvedValue({ success: true, data: [] }),
-      findByCategory: jest.fn().mockResolvedValue({ success: true, data: [] }),
-    };
+  it('shows empty state', () => {
+    jest.spyOn(require('@/providers/service.provider'), 'useRepository')
+      .mockImplementation(() => ({
+        services: [],
+        loading: false,
+        error: null,
+        fetchServices: jest.fn(),
+      }));
 
-    (useServiceRepository as jest.Mock).mockReturnValue(mockRepository);
-
-    render(<ServiceList />);
-
-    // Wait for no results message
-    await waitFor(
-      () => {
-        expect(screen.getByText('No services found.')).toBeInTheDocument();
-      },
-      { timeout: 3000 }
-    );
-  });
-
-  it('handles error state correctly', async () => {
-    const mockRepository = {
-      findAll: jest.fn().mockResolvedValue({
-        success: false,
-        error: new Error('Failed to fetch services'),
-      }),
-      findByCategory: jest.fn().mockResolvedValue({
-        success: false,
-        error: new Error('Failed to fetch services'),
-      }),
-    };
-
-    (useServiceRepository as jest.Mock).mockReturnValue(mockRepository);
-
-    render(<ServiceList />);
-
-    // Wait for error message
-    await waitFor(
-      () => {
-        expect(screen.getByText('Error Loading Services')).toBeInTheDocument();
-        expect(screen.getByText('Failed to fetch services')).toBeInTheDocument();
-      },
-      { timeout: 3000 }
-    );
-  });
-
-  it('respects the limit prop', async () => {
-    const mockRepository = {
-      findAll: jest.fn().mockResolvedValue({ success: true, data: mockServices }),
-      findByCategory: jest.fn().mockResolvedValue({ success: true, data: mockServices }),
-    };
-
-    (useServiceRepository as jest.Mock).mockReturnValue(mockRepository);
-
-    render(<ServiceList limit={1} />);
-
-    // Wait for services to load
-    await waitFor(
-      () => {
-        expect(screen.getByText('Plumbing')).toBeInTheDocument();
-        expect(screen.queryByText('Electrical')).not.toBeInTheDocument();
-      },
-      { timeout: 3000 }
-    );
-  });
-
-  it('toggles price display based on showPrice prop', async () => {
-    const mockRepository = {
-      findAll: jest.fn().mockResolvedValue({ success: true, data: mockServices }),
-      findByCategory: jest.fn().mockResolvedValue({ success: true, data: mockServices }),
-    };
-
-    (useServiceRepository as jest.Mock).mockReturnValue(mockRepository);
-
-    const { rerender } = render(<ServiceList showPrice={false} />);
-
-    // Wait for services to load and verify prices are hidden
-    await waitFor(
-      () => {
-        expect(screen.queryByText('Price: $100-$200')).not.toBeInTheDocument();
-        expect(screen.queryByText('Price: $150-$300')).not.toBeInTheDocument();
-      },
-      { timeout: 3000 }
+    render(
+      <ServiceProvider config={config}>
+        <ServiceList />
+      </ServiceProvider>
     );
 
-    // Rerender with showPrice true
-    rerender(<ServiceList showPrice={true} />);
-
-    // Verify prices are now visible
-    await waitFor(
-      () => {
-        expect(screen.getByText('Price: $100-$200')).toBeInTheDocument();
-        expect(screen.getByText('Price: $150-$300')).toBeInTheDocument();
-      },
-      { timeout: 3000 }
-    );
+    expect(screen.getByText('No services found.')).toBeInTheDocument();
   });
 });

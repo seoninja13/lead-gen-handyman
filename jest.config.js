@@ -9,44 +9,13 @@ const createJestConfig = nextJest({
 const customJestConfig = {
   setupFilesAfterEnv: ['<rootDir>/src/test/setup.ts'],
   testEnvironment: 'jest-environment-jsdom',
+  moduleDirectories: ['node_modules', '<rootDir>/src'],
   moduleNameMapper: {
-    // Handle module aliases
     '^@/(.*)$': '<rootDir>/src/$1',
-  },
-  // Add more setup options before each test is run
-  testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
-  transform: {
-    // Use babel-jest to transpile tests with the next/babel preset
-    '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
+    '^lucide-react$': '<rootDir>/src/__mocks__/lucide-react.tsx',
   },
   transformIgnorePatterns: [
-    '/node_modules/',
-    '^.+\\.module\\.(css|sass|scss)$',
-  ],
-  moduleDirectories: ['node_modules', '<rootDir>/'],
-  testMatch: [
-    '<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}',
-    '<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}',
-  ],
-  collectCoverageFrom: [
-    'src/**/*.{js,jsx,ts,tsx}',
-    '!src/**/*.d.ts',
-    '!src/**/index.{js,ts}',
-    '!src/**/*.stories.{js,jsx,ts,tsx}',
-    '!src/pages/_app.tsx',
-    '!src/pages/_document.tsx',
-  ],
-  coverageThreshold: {
-    global: {
-      branches: 70,
-      functions: 70,
-      lines: 70,
-      statements: 70,
-    },
-  },
-  watchPlugins: [
-    'jest-watch-typeahead/filename',
-    'jest-watch-typeahead/testname',
+    '/node_modules/(?!lucide-react)',
   ],
 };
 

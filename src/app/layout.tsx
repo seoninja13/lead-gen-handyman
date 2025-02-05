@@ -1,31 +1,22 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
-import { ServiceProvider } from '@/providers/service.provider'
-import { serviceConfig, validateConfig } from '@/config/services'
+import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] })
-
-// Validate environment variables
-validateConfig()
-
-export const metadata: Metadata = {
+export const metadata = {
   title: 'Lead Gen Handyman',
-  description: 'Find trusted handyman services in your area',
-}
+  description: 'Professional handyman services in Greater Sacramento area',
+};
+
+import { LayoutProvider } from '@/components/layout/LayoutProvider';
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <ServiceProvider config={serviceConfig}>
-          {children}
-        </ServiceProvider>
+      <body>
+        <LayoutProvider>{children}</LayoutProvider>
       </body>
     </html>
-  )
+  );
 }

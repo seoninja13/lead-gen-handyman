@@ -1,30 +1,76 @@
-import React, { createContext, useContext } from 'react';
-import { ServiceContainer, ServiceConfig, createServices } from '@/services';
-import { createRepositories } from '@/repositories';
+'use client';
 
-// Create context for services
-const ServiceContext = createContext<ServiceContainer | null>(null);
+import React, { createContext, useContext, useState } from 'react';
+import { createClient } from '@/utils/supabase/client';
 
-// Props interface for the provider
-interface ServiceProviderProps {
-  config: ServiceConfig;
-  children: React.ReactNode;
+export interface ServiceConfig {
+  supabaseUrl: string;
+  supabaseKey: string;
+  defaultLimit: number;
+  defaultCategory: string;
+  defaultLocation: string;
+  categories: string[];
+  locations: string[];
 }
 
-// Service provider component
-export function ServiceProvider({ config, children }: ServiceProviderProps) {
-  // Initialize services with configuration
-  const services = createServices(config);
+interface ServiceContextType {
+  services: any[];
+  loading: boolean;
+  error: Error | null;
+  fetchServices: (params?: { category?: string; location?: string; limit?: number }) => Promise<void>;
+}
+
+const ServiceContext = createContext<ServiceContextType | null>(null);
+
+interface ServiceProviderProps {
+  children: React.ReactNode;
+  config: ServiceConfig;
+}
+
+export function ServiceProvider({ children, config }: ServiceProviderProps) {
+  const [services, setServices] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  const supabase = createClient(config.supabaseUrl, config.supabaseKey);
+
+  const fetchServices = async (params?: { category?: string; location?: string; limit?: number }) => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      let query = supabase
+        .from('services')
+        .select('*')
+        .limit(params?.limit || config.defaultLimit);
+
+      if (params?.category && params.category !== config.defaultCategory) {
+        query = query.eq('category', params.category);
+      }
+
+      if (params?.location && params.location !== config.defaultLocation) {
+        query = query.eq('location', params.location);
+      }
+
+      const { data, error } = await query;
+
+      if (error) throw error;
+      setServices(data || []);
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error('Failed to fetch services'));
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <ServiceContext.Provider value={services}>
+    <ServiceContext.Provider value={{ services, loading, error, fetchServices }}>
       {children}
     </ServiceContext.Provider>
   );
 }
 
-// Custom hook to use services
-export function useServices(): ServiceContainer {
+export function useServices() {
   const context = useContext(ServiceContext);
   if (!context) {
     throw new Error('useServices must be used within a ServiceProvider');
@@ -32,68 +78,7 @@ export function useServices(): ServiceContainer {
   return context;
 }
 
-// Custom hooks for individual services
-export function useDatabase() {
-  const services = useServices();
-  return services.database;
+export function useRepository() {
+  const { services, loading, error, fetchServices } = useServices();
+  return { services, loading, error, fetchServices };
 }
-
-export function useApi() {
-  const services = useServices();
-  if (!services.api) {
-    throw new Error('API service not initialized');
-  }
-  return services.api;
-}
-
-export function useAnalytics() {
-  const services = useServices();
-  if (!services.analytics) {
-    throw new Error('Analytics service not initialized');
-  }
-  return services.analytics;
-}
-
-export function useImage() {
-  const services = useServices();
-  if (!services.image) {
-    throw new Error('Image service not initialized');
-  }
-  return services.image;
-}
-
-export function useCache() {
-  const services = useServices();
-  if (!services.cache) {
-    throw new Error('Cache service not initialized');
-  }
-  return services.cache;
-}
-
-export function useSeo() {
-  const services = useServices();
-  if (!services.seo) {
-    throw new Error('SEO service not initialized');
-  }
-  return services.seo;
-}
-
-// Repository provider hook factory
-export function createRepositoryHook<T>(repositoryName: string) {
-  return function useRepository() {
-    const { database } = useServices();
-    const repositories = createRepositories(database);
-    return repositories[repositoryName as keyof typeof repositories] as T;
-  };
-}
-
-// Import repository types
-import { CityRepository, ServiceRepository, CityServiceRepository } from '@/repositories';
-
-// Export pre-configured repository hooks
-export const useCityRepository = createRepositoryHook<CityRepository>('cities');
-export const useServiceRepository = createRepositoryHook<ServiceRepository>('services');
-export const useCityServiceRepository = createRepositoryHook<CityServiceRepository>('cityServices');
-
-// Export context for advanced use cases
-export { ServiceContext };

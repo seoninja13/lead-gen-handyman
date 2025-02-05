@@ -30,6 +30,7 @@ Start here to understand the project:
 
 ### 2. Technical Guides
 Detailed technical documentation:
+- [Database Operations](src/utils/supabase/README.md) - CRUD operations guide
 - [Database Schema](docs/database-schema.md) - Database structure
 - [UI Components](docs/ui-components.md) - Component library
 

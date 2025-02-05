@@ -23,6 +23,11 @@
   - CI/CD pipeline
 
 ### Database
+- [Database Operations](../src/utils/supabase/README.md)
+  - CRUD operations
+  - Type definitions
+  - Error handling
+  - Examples
 - [Database Schema](database-schema.md)
   - Table structures
   - Relationships

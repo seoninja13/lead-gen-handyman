@@ -1,123 +1,65 @@
-import { createClient } from './client.js'
-import { Database } from '../../types/database.js'
+import { createClient } from './server'
+import { cookies } from 'next/headers'
 
-interface TestResult {
-  success: boolean
-  error?: string
-}
-
-type TestResults = Record<string, TestResult>
-
-export async function testSupabaseConnection(): Promise<TestResults> {
-  const supabase = createClient()
-  const results: TestResults = {}
-
-  // Test basic connection
+export async function testConnection() {
   try {
-    const { data, error } = await supabase.from('cities').select('count')
-    if (error) throw error
-    results.connection = { success: true }
-  } catch (error) {
-    results.connection = { 
-      success: false, 
-      error: error instanceof Error ? error.message : 'Unknown error occurred' 
-    }
-    return results
-  }
+    console.log('Testing Supabase connection...')
+    const cookieStore = cookies()
+    const supabase = createClient(cookieStore)
 
-  // Test cities table
-  try {
-    const { data, error } = await supabase
+    // Test cities table
+    const { data: cities, error: citiesError } = await supabase
       .from('cities')
-      .select('*')
+      .select('count')
       .limit(1)
-    if (error) throw error
-    results.citiesTable = { success: true }
-  } catch (error) {
-    results.citiesTable = { 
-      success: false, 
-      error: error instanceof Error ? error.message : 'Failed to query cities table' 
-    }
-  }
-
-  // Test services table
-  try {
-    const { data, error } = await supabase
-      .from('services')
-      .select('*')
-      .limit(1)
-    if (error) throw error
-    results.servicesTable = { success: true }
-  } catch (error) {
-    results.servicesTable = { 
-      success: false, 
-      error: error instanceof Error ? error.message : 'Failed to query services table' 
-    }
-  }
-
-  // Test city_services table
-  try {
-    const { data, error } = await supabase
-      .from('city_services')
-      .select(`
-        *,
-        cities (*),
-        services (*)
-      `)
-      .limit(1)
-    if (error) throw error
-    results.cityServicesTable = { success: true }
-  } catch (error) {
-    results.cityServicesTable = { 
-      success: false, 
-      error: error instanceof Error ? error.message : 'Failed to query city_services table' 
-    }
-  }
-
-  // Test JSON field parsing
-  try {
-    const { data, error } = await supabase
-      .from('cities')
-      .select('coordinates')
-      .limit(1)
-    if (error) throw error
     
-    if (data && data[0]) {
-      const coordinates = data[0].coordinates
-      if (typeof coordinates === 'object' && coordinates !== null) {
-        results.jsonParsing = { success: true }
-      } else {
-        throw new Error('Invalid coordinates format')
-      }
-    } else {
-      throw new Error('No data returned')
+    if (citiesError) {
+      console.error('Error accessing cities table:', citiesError)
+      throw citiesError
+    }
+    console.log('Cities table accessible')
+
+    // Test services table
+    const { data: services, error: servicesError } = await supabase
+      .from('services')
+      .select('count')
+      .limit(1)
+    
+    if (servicesError) {
+      console.error('Error accessing services table:', servicesError)
+      throw servicesError
+    }
+    console.log('Services table accessible')
+
+    // Test city_services table
+    const { data: cityServices, error: cityServicesError } = await supabase
+      .from('city_services')
+      .select('count')
+      .limit(1)
+    
+    if (cityServicesError) {
+      console.error('Error accessing city_services table:', cityServicesError)
+      throw cityServicesError
+    }
+    console.log('City services table accessible')
+
+    return {
+      success: true,
+      message: 'Successfully connected to all tables'
     }
   } catch (error) {
-    results.jsonParsing = { 
-      success: false, 
-      error: error instanceof Error ? error.message : 'Failed to parse JSON fields' 
+    console.error('Connection test failed:', error)
+    return {
+      success: false,
+      message: error instanceof Error ? error.message : 'Unknown error occurred',
+      error
     }
   }
-
-  return results
 }
 
-// Helper function to print test results
-export function printTestResults(results: TestResults): void {
-  console.log('\nSupabase Connection Test Results:')
-  console.log('================================')
-  
-  Object.entries(results).forEach(([test, result]) => {
-    const status = result.success ? '✅ PASS' : '❌ FAIL'
-    console.log(`\n${test}:`)
-    console.log(`Status: ${status}`)
-    if (!result.success && result.error) {
-      console.log(`Error: ${result.error}`)
-    }
-  })
-  
-  const allPassed = Object.values(results).every(result => result.success)
-  console.log('\n================================')
-  console.log(`Overall Status: ${allPassed ? '✅ ALL TESTS PASSED' : '❌ SOME TESTS FAILED'}`)
-  console.log('================================\n')
-}
+// Test the connection
+testConnection().then(result => {
+  console.log('Connection test result:', result)
+}).catch(error => {
+  console.error('Test execution failed:', error)
+})

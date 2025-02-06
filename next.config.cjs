@@ -9,8 +9,17 @@ const nextConfig = {
       use: ['@svgr/webpack'],
     });
 
+    config.module.rules.push({
+      test: /\.cjs$/,
+      include: [path.resolve(__dirname, 'scripts')],
+      use: 'babel-loader',
+    });
+
     return config;
   },
+  transpilePackages: ['openai']
 }
+
+const path = require('path');
 
 export default nextConfig

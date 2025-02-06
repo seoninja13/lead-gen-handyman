@@ -85,6 +85,10 @@
 - [ ] Development workflow
 - [ ] Deployment procedures
 
+### 7. Populate City Services Table (Suspended)
+- [ ] Investigate module resolution issues
+- [ ] Implement a working script to populate the city_services table
+
 ## Notes
 - Focus on modern, clean UI design
 - Ensure strong internal linking structure

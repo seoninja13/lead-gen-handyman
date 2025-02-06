@@ -116,3 +116,13 @@ Priority: Medium
 1. Updated documentation with current progress.
 2. Updated ServiceList component to display images from public/images directory.
 3. Updated ServiceImage component to use src prop directly.
+
+## Current Tasks
+
+### 1. Implement City Selection Component
+- [ ] Add interactive map using Leaflet or Google Maps
+- [ ] Populate city list with data from the database
+- [ ] Implement location-based filtering
+
+### 2. Update Documentation
+- [ ] Update tracking-progress.md with current progress

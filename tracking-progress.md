@@ -113,16 +113,31 @@ Priority: Medium
    - Added FAQ component ✅
 
 ### February 5, 2025
-1. Updated documentation with current progress.
-2. Updated ServiceList component to display images from public/images directory.
-3. Updated ServiceImage component to use src prop directly.
+1.  Updated documentation with current progress.
+2.  Updated ServiceList component to display images from public/images directory.
+3.  Updated ServiceImage component to use src prop directly.
+4.  Implemented YouTube video embeds in the YouTubeVideos component.
+5.  Updated FAQ component with actual questions and answers.
+6.  Implemented clickable city links in the CitySelection component.
+
+## Current State
+
+1.  **Featured Services:** Currently, the featured services section displays 3 rows of service cards.
+2.  **Service Titles:** All service cards are displaying "No Title", indicating an issue with the data being fetched from the database.
+3.  **Google Maps API Key:** The Google Maps API key is currently being rejected, preventing the map from loading in the CitySelection component.
 
 ## Current Tasks
 
 ### 1. Implement City Selection Component
-- [ ] Add interactive map using Leaflet or Google Maps
+- [ ] Add interactive map using Leaflet or Google Maps (blocked by API key issue)
 - [ ] Populate city list with data from the database
 - [ ] Implement location-based filtering
 
 ### 2. Update Documentation
-- [ ] Update tracking-progress.md with current progress
+- [x] Update tracking-progress.md with current progress
+
+### February 5, 2025 (Continued)
+
+1.  **Attempting to Populate `city_service` Table:** Created the `scripts/populate-city-service.ts` script to populate the `city_service` table with missing SEO data using the OpenAI API.
+2.  **Encountered Execution Issues:** Faced challenges executing the script directly due to environment and configuration issues. Tried using `ts-node` and `npx ts-node` but encountered "Unknown file extension" errors.
+3.  **Seeking User Assistance:** Due to the inability to directly execute the script and view the output, requested the user to manually execute the script and provide the output.

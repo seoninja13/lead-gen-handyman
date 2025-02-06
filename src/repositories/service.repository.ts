@@ -28,6 +28,7 @@ export class ServiceRepository extends BaseRepository<Service> {
       .select('*');
 
     if (error) throw error;
+    console.log('Raw service data:', data);
     return data || [];
   }
 

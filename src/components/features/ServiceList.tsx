@@ -60,7 +60,7 @@ export function ServiceList({
             />
           </div>
           <div className="p-6 flex-1 flex flex-col">
-            <h3 className="text-2xl font-bold mb-2 text-primary">{service.title}</h3>
+            <h3 className="text-2xl font-bold mb-2 text-primary">{service.title || "No Title"}</h3>
             <p className="text-gray-600 mb-4 flex-1">{service.description}</p>
             {showPrice && (service.price_range || service.base_price) && (
               <div className="bg-primary/10 text-primary font-bold py-2 px-4 rounded-lg inline-block">

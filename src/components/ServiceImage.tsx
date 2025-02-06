@@ -8,24 +8,29 @@ interface ServiceImageProps {
   title?: string
   width?: number
   height?: number
+  className?: string
 }
 
-export default function ServiceImage({ src, alt, title, width = 800, height = 600 }: ServiceImageProps) {
+export default function ServiceImage({ src, alt, title, width = 800, height = 600, className }: ServiceImageProps) {
   const [isError, setIsError] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
 
   // Use the path as-is since it's relative to the public directory
-  const imageUrl = src.startsWith('http') ? src : src
+  const imageUrl = src;
+
+  // If it's an SVG, add specific styling
+  const isSvg = imageUrl.endsWith('.svg')
+  const imgClassName = `${className || 'w-24 h-24'} ${isSvg ? 'bg-gray-100 p-4' : 'object-cover rounded'}`
 
   // If there's an error loading the image, use a placeholder
   if (isError) {
     return (
       <div 
-        className="w-24 h-24 bg-gray-200 rounded flex items-center justify-center"
+        className={`bg-gray-200 rounded flex items-center justify-center ${className || 'w-24 h-24'}`}
         title={title || alt}
       >
         <svg 
-          className="w-12 h-12 text-gray-400" 
+          className={`${className ? 'w-1/3 h-1/3' : 'w-12 h-12'} text-gray-400`} 
           fill="none" 
           stroke="currentColor" 
           viewBox="0 0 24 24"
@@ -41,6 +46,7 @@ export default function ServiceImage({ src, alt, title, width = 800, height = 60
     )
   }
 
+  console.log("imageUrl:", imageUrl);
   return (
     <img 
       src={imageUrl}
@@ -48,7 +54,7 @@ export default function ServiceImage({ src, alt, title, width = 800, height = 60
       title={title}
       width={width}
       height={height}
-      className="w-24 h-24 object-cover rounded"
+      className={imgClassName}
       onError={() => setIsError(true)}
       onLoad={() => setIsLoading(false)}
     />

@@ -131,6 +131,9 @@ export const DatabaseOperations = {
           .select()
           .order('name', { ascending: true })
         if (error) throw error
+        services?.forEach(service => {
+          console.log(`Service ID: ${service.id}, Image URL: ${service.image_url}`);
+        });
         return services || []
       } catch (error) {
         console.error(`Error fetching services: ${error instanceof Error ? error.message : String(error)}`)

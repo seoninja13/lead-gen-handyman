@@ -111,3 +111,8 @@ Priority: Medium
    - Added CitySelection component ✅
    - Added YouTubeVideos component ✅
    - Added FAQ component ✅
+
+### February 5, 2025
+1. Updated documentation with current progress.
+2. Updated ServiceList component to display images from public/images directory.
+3. Updated ServiceImage component to use src prop directly.

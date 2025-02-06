@@ -3,6 +3,16 @@
 import { useRepository } from '@/providers/service.provider';
 import { useEffect } from 'react';
 import Link from 'next/link';
+import ServiceImage from '@/components/ServiceImage';
+
+const images = [
+  'house10.jpg',
+  'house5.jpg',
+  'house6.jpg',
+  'house7.jpg',
+  'house8.jpg',
+  'house9.jpg',
+];
 
 interface ServiceListProps {
   category?: string;
@@ -39,6 +49,16 @@ export function ServiceList({
           href={`/services/${service.slug}`}
           className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow h-full flex flex-col"
         >
+          <div className="relative">
+            <ServiceImage
+              src={`/images/${images[Math.floor(Math.random() * images.length)]}`}
+              alt={service.title}
+              title={service.title}
+              width={400}
+              height={300}
+              className="w-full h-48 object-cover"
+            />
+          </div>
           <div className="p-6 flex-1 flex flex-col">
             <h3 className="text-2xl font-bold mb-2 text-primary">{service.title}</h3>
             <p className="text-gray-600 mb-4 flex-1">{service.description}</p>

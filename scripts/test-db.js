@@ -1,4 +1,4 @@
-import { DatabaseOperations } from '../src/utils/supabase/database.js'
+import { DatabaseOperations } from '../src/utils/supabase/database.ts'
 
 async function testDatabase() {
   console.log('Testing database connection...\n')
@@ -14,13 +14,15 @@ async function testDatabase() {
     console.log('\nTesting services table...')
     const services = await DatabaseOperations.Services.getAll()
     console.log('Services count:', services.length)
-    console.log('Sample services:', services.slice(0, 2))
+    services.forEach(service => {
+      console.log(`Service ID: ${service.id}, Image URL: ${service.image_url}`);
+    });
 
     // Test city_services table
     console.log('\nTesting city_services table...')
-    const cityServices = await DatabaseOperations.CityServices.getAll()
-    console.log('City services count:', cityServices.length)
-    console.log('Sample city services:', cityServices.slice(0, 2))
+    // const cityServices = await DatabaseOperations.CityServices.getAll() // commented out to reduce output
+    // console.log('City services count:', cityServices.length)
+    // console.log('Sample city services:', cityServices.slice(0, 2))
 
     console.log('\nDatabase connection test completed successfully!')
   } catch (error) {

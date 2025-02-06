@@ -3,25 +3,17 @@ import { CityRepository } from './city.repository';
 import { ServiceRepository } from './service.repository';
 import { CityServiceRepository } from './city-service.repository';
 
-export interface Repositories {
-  cities: CityRepository;
-  services: ServiceRepository;
-  cityServices: CityServiceRepository;
-}
-
-// Factory function to create all repositories
-export function createRepositories(db: DatabaseService): Repositories {
+/**
+ * Creates and returns repository instances for data access
+ * @param db Database service implementation
+ * @returns Object containing repository instances
+ */
+export function createRepositories(db: DatabaseService) {
   return {
     cities: new CityRepository(db),
-    services: new ServiceRepository(db),
+    services: ServiceRepository.getInstance(db),
     cityServices: new CityServiceRepository(db)
   };
 }
 
-// Export individual repositories for direct use
-export { CityRepository } from './city.repository';
-export { ServiceRepository } from './service.repository';
-export { CityServiceRepository } from './city-service.repository';
-
-// Export base repository for extension
-export { BaseRepository } from './base.repository';
+export type Repositories = ReturnType<typeof createRepositories>;

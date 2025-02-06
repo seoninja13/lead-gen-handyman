@@ -1,12 +1,15 @@
 'use client';
 
-import { ServiceProvider } from '@/providers/service.provider';
-import { config } from '@/config/services';
+interface LayoutProviderProps {
+  children: React.ReactNode;
+}
 
-export function LayoutProvider({ children }: { children: React.ReactNode }) {
+export function LayoutProvider({ children }: LayoutProviderProps) {
   return (
-    <ServiceProvider config={config}>
-      {children}
-    </ServiceProvider>
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {children}
+      </div>
+    </div>
   );
 }

@@ -2,6 +2,7 @@
 
 import { useRepository } from '@/providers/service.provider';
 import { useEffect } from 'react';
+import Link from 'next/link';
 
 interface ServiceListProps {
   category?: string;
@@ -26,23 +27,28 @@ export function ServiceList({
   if (error) return <div>Error loading services: {error.message}</div>;
   if (!services.length) return <div>No services found.</div>;
 
+  const formatPrice = (price: number) => {
+    return `$${price.toLocaleString()}`;
+  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {services.map((service) => (
-        <div 
+        <Link 
           key={service.id} 
-          className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+          href={`/services/${service.slug}`}
+          className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow h-full flex flex-col"
         >
-          <div className="p-6">
-            <h3 className="text-lg font-semibold mb-2">{service.name}</h3>
-            <p className="text-gray-600 mb-4 line-clamp-2">{service.description}</p>
-            {showPrice && (
-              <p className="text-primary font-medium">
-                Starting at ${service.price_range_min}
-              </p>
+          <div className="p-6 flex-1 flex flex-col">
+            <h3 className="text-2xl font-bold mb-2 text-primary">{service.title}</h3>
+            <p className="text-gray-600 mb-4 flex-1">{service.description}</p>
+            {showPrice && (service.price_range || service.base_price) && (
+              <div className="bg-primary/10 text-primary font-bold py-2 px-4 rounded-lg inline-block">
+                {service.price_range || (service.base_price && `Starting at ${formatPrice(service.base_price)}`)}
+              </div>
             )}
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );

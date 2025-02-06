@@ -13,10 +13,6 @@ export interface ServiceContainer {
 
 // Service configuration interface
 export interface ServiceConfig {
-  supabase: {
-    url: string;
-    key: string;
-  };
   api?: {
     baseUrl: string;
     apiKey?: string;
@@ -41,7 +37,7 @@ export class ServiceFactory {
   static initialize(config: ServiceConfig): ServiceContainer {
     if (!ServiceFactory.instance) {
       const container: ServiceContainer = {
-        database: createSupabaseService(config.supabase.url, config.supabase.key)
+        database: createSupabaseService()
       };
 
       // Initialize other services as needed

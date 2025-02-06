@@ -172,6 +172,101 @@ src/
 └── utils/             # Utility functions
 ```
 
+## Netlify Integration
+
+### Directory Structure
+```
+project-root/
+├── netlify/
+│   ├── functions/     # Serverless functions
+│   └── edge-functions/ # Edge functions
+├── src/              # Application source code
+└── netlify.toml      # Netlify configuration
+```
+
+### Configuration Components
+
+1. **Netlify Configuration (netlify.toml)**:
+   ```toml
+   [build]
+     command = "npm run build"
+     publish = ".next"
+     environment = { NODE_VERSION = "18" }
+
+   [dev]
+     framework = "#custom"
+     command = "npm run dev"
+     targetPort = 3000
+     port = 8888
+     publish = ".next"
+     autoLaunch = true
+
+   [[plugins]]
+     package = "@netlify/plugin-nextjs"
+
+   [[headers]]
+     for = "/*"
+     [headers.values]
+       X-Frame-Options = "SAMEORIGIN"
+       Content-Security-Policy = "frame-ancestors 'self' https://app.netlify.com"
+   ```
+
+2. **Tailwind Configuration (tailwind.config.ts)**:
+   ```typescript
+   const config: Config = {
+     content: [
+       './src/**/*.{js,ts,jsx,tsx,mdx}',
+       './netlify/**/*.{js,jsx,ts,tsx}',
+     ],
+     // ... rest of config
+   };
+   ```
+
+3. **PostCSS Configuration (postcss.config.js)**:
+   ```javascript
+   module.exports = {
+     plugins: {
+       'postcss-import': {},
+       'tailwindcss': {},
+       'autoprefixer': {},
+     }
+   }
+   ```
+
+### Setup Process
+
+1. **Initial Setup**:
+   - Install Netlify CLI: `npm install -g netlify-cli`
+   - Create required directories: `netlify/functions` and `netlify/edge-functions`
+   - Configure netlify.toml with build settings and headers
+
+2. **Visual Editor Integration**:
+   - Update security headers to allow Netlify Visual Editor
+   - Include Netlify paths in Tailwind configuration
+   - Configure PostCSS for compatibility
+
+3. **Development Workflow**:
+   - Use `netlify dev` for local development
+   - Test Visual Editor compatibility
+   - Verify security headers and CSP settings
+
+### Best Practices
+
+1. **Security**:
+   - Maintain secure headers configuration
+   - Use environment variables for sensitive data
+   - Follow Netlify's security recommendations
+
+2. **Performance**:
+   - Optimize build settings
+   - Use appropriate caching strategies
+   - Implement efficient edge functions
+
+3. **Maintenance**:
+   - Keep dependencies updated
+   - Monitor build logs
+   - Regular security audits
+
 ## Best Practices
 
 1. **Component Design**:

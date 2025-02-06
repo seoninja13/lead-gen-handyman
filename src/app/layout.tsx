@@ -6,6 +6,8 @@ export const metadata = {
 };
 
 import { LayoutProvider } from '@/components/layout/LayoutProvider';
+import { config } from '@/config/services';
+import { ServiceProvider } from '@/providers/service.provider';
 
 export default function RootLayout({
   children,
@@ -15,7 +17,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <LayoutProvider>{children}</LayoutProvider>
+        <ServiceProvider config={{
+          defaultLimit: config.defaultLimit,
+          defaultCategory: config.defaultCategory,
+          defaultLocation: config.defaultLocation,
+          categories: config.categories,
+          locations: config.locations,
+        }}>
+          <LayoutProvider>{children}</LayoutProvider>
+        </ServiceProvider>
       </body>
     </html>
   );

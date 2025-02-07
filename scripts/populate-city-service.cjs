@@ -1,10 +1,14 @@
 // @ts-nocheck
+require('dotenv').config();
 const { Configuration, OpenAIApi } = require('openai');
-const { createClient } = require('../../src/utils/supabase/server');
+const { createSupabaseServerClient } = require('../../src/utils/supabase/supabase.server');
 
 (async () => {
   // Initialize Supabase client
-  const supabase = createClient();
+  const supabase = createSupabaseServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  );
 
   // Initialize OpenAI client
   const configuration = new Configuration({
@@ -14,6 +18,7 @@ const { createClient } = require('../../src/utils/supabase/server');
 
   // Function to generate SEO content using ChatGPT 3.5 Turbo
   async function generateSeoContent(city, service) {
+    console.log(`Generating SEO content for ${city} - ${service} in generateSeoContent`);
     try {
       const prompt = `Generate the following content for a page about ${service} in ${city}:
 
@@ -38,6 +43,7 @@ const { createClient } = require('../../src/utils/supabase/server');
         temperature: 0.7,
       });
 
+      console.log("OpenAI completion successful");
       const text = completion.data.choices[0].message.content;
 
       // Parse the generated text to extract the title, description, and H1
@@ -63,6 +69,7 @@ const { createClient } = require('../../src/utils/supabase/server');
 
   // Function to update the city_service table
   async function populateCityService() {
+    console.log("Starting populateCityService");
     try {
       // Fetch all city services
       const { data: cityServices, error } = await supabase
@@ -100,10 +107,13 @@ const { createClient } = require('../../src/utils/supabase/server');
           continue;
         }
 
+        console.log(`Generating SEO content for ${city} - ${service}`);
         // Generate SEO content
         const seoContent = await generateSeoContent(city, service);
+        console.log(`Generated SEO content for ${city} - ${service}`);
 
         // Update the city_service table
+        console.log(`Updating city service ${cityService.id}`);
         const { error: updateError } = await supabase
           .from('city_services')
           .update({
@@ -126,6 +136,7 @@ const { createClient } = require('../../src/utils/supabase/server');
         } else {
           console.log(`Successfully updated city service ${cityService.id}`);
         }
+        console.log(`Finished updating city service ${cityService.id}`);
 
         // Add a timeout between queries to avoid getting locked out
         await new Promise(resolve => setTimeout(resolve, 1000));
@@ -133,7 +144,7 @@ const { createClient } = require('../../src/utils/supabase/server');
 
       console.log("Finished populating city service table.");
     } catch (error) {
-      console.error(`An error occurred: ${error}`);
+      console.error(`An error occurred in populateCityService: ${error}`);
     }
   }
 

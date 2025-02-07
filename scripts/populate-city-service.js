@@ -34,48 +34,51 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var _this = this;
-// @ts-nocheck
-var _a = require('openai'), Configuration = _a.Configuration, OpenAIApi = _a.OpenAIApi;
-var createClient = require('@/utils/supabase/server').createClient;
-(function () { return __awaiter(_this, void 0, void 0, function () {
+import 'dotenv/config';
+import OpenAI from 'openai';
+import { createSupabaseServerClient } from '../src/utils/supabase/supabase.server.js';
+(function () { return __awaiter(void 0, void 0, void 0, function () {
     // Function to generate SEO content using ChatGPT 3.5 Turbo
     function generateSeoContent(city, service) {
         return __awaiter(this, void 0, void 0, function () {
             var prompt_1, completion, text, lines, seo_title, seo_description, seo_h1, main_content, features_content, benefits_content, service_area_content, faq_content, testimonials, structured_data, service_city_ca, error_1;
-            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
-            return __generator(this, function (_m) {
-                switch (_m.label) {
+            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
+            return __generator(this, function (_o) {
+                switch (_o.label) {
                     case 0:
-                        _m.trys.push([0, 2, , 3]);
+                        console.log("Generating SEO content for ".concat(city, " - ").concat(service, " in generateSeoContent"));
+                        _o.label = 1;
+                    case 1:
+                        _o.trys.push([1, 3, , 4]);
                         prompt_1 = "Generate the following content for a page about ".concat(service, " in ").concat(city, ":\n\n  - SEO title: A concise and engaging title for the page.\n  - SEO description: An informative description to entice users to click.\n  - SEO H1: A clear and keyword-rich main heading for the page.\n  - Main content: A detailed overview of the service.\n  - Features content: Key features of the service.\n  - Benefits content: Benefits of using the service.\n  - Service area content: A description of the area where the service is offered.\n  - FAQ content: Frequently asked questions about the service (in JSON format).\n  - Testimonials: Positive reviews from satisfied customers (in JSON format).\n  - Structured data: JSON-LD schema data for the service.\n  - Service City CA: Information about the service specific to California.\n\n  Please provide the FAQ content and Testimonials in JSON format.");
-                        return [4 /*yield*/, openai.createChatCompletion({
+                        return [4 /*yield*/, openai.chat.completions.create({
                                 model: "gpt-3.5-turbo",
                                 messages: [{ role: "user", content: prompt_1 }],
                                 max_tokens: 2000,
                                 temperature: 0.7,
                             })];
-                    case 1:
-                        completion = _m.sent();
-                        text = completion.data.choices[0].message.content;
-                        lines = text.split("\\n");
-                        seo_title = ((_a = lines.find(function (line) { return line.startsWith("SEO title:"); })) === null || _a === void 0 ? void 0 : _a.substring(11).trim()) || "";
-                        seo_description = ((_b = lines.find(function (line) { return line.startsWith("SEO description:"); })) === null || _b === void 0 ? void 0 : _b.substring(17).trim()) || "";
-                        seo_h1 = ((_c = lines.find(function (line) { return line.startsWith("SEO H1:"); })) === null || _c === void 0 ? void 0 : _c.substring(7).trim()) || "";
-                        main_content = ((_d = lines.find(function (line) { return line.startsWith("Main content:"); })) === null || _d === void 0 ? void 0 : _d.substring(13).trim()) || "";
-                        features_content = ((_e = lines.find(function (line) { return line.startsWith("Features content:"); })) === null || _e === void 0 ? void 0 : _e.substring(17).trim()) || "";
-                        benefits_content = ((_f = lines.find(function (line) { return line.startsWith("Benefits content:"); })) === null || _f === void 0 ? void 0 : _f.substring(17).trim()) || "";
-                        service_area_content = ((_g = lines.find(function (line) { return line.startsWith("Service area content:"); })) === null || _g === void 0 ? void 0 : _g.substring(21).trim()) || "";
-                        faq_content = JSON.parse(((_h = lines.find(function (line) { return line.startsWith("FAQ content:"); })) === null || _h === void 0 ? void 0 : _h.substring(12).trim()) || "[]");
-                        testimonials = JSON.parse(((_j = lines.find(function (line) { return line.startsWith("Testimonials:"); })) === null || _j === void 0 ? void 0 : _j.substring(13).trim()) || "[]");
-                        structured_data = ((_k = lines.find(function (line) { return line.startsWith("Structured data:"); })) === null || _k === void 0 ? void 0 : _k.substring(16).trim()) || "";
-                        service_city_ca = ((_l = lines.find(function (line) { return line.startsWith("Service City CA:"); })) === null || _l === void 0 ? void 0 : _l.substring(17).trim()) || "";
-                        return [2 /*return*/, { seo_title: seo_title, seo_description: seo_description, seo_h1: seo_h1, main_content: main_content, features_content: features_content, benefits_content: benefits_content, service_area_content: service_area_content, faq_content: faq_content, testimonials: testimonials, structured_data: structured_data, service_city_ca: service_city_ca }];
                     case 2:
-                        error_1 = _m.sent();
+                        completion = _o.sent();
+                        console.log("OpenAI completion successful");
+                        text = ((_a = completion.choices[0].message) === null || _a === void 0 ? void 0 : _a.content) || '';
+                        lines = text.split("\n");
+                        seo_title = ((_b = lines.find(function (line) { return line.startsWith("SEO title:"); })) === null || _b === void 0 ? void 0 : _b.substring(11).trim()) || "";
+                        seo_description = ((_c = lines.find(function (line) { return line.startsWith("SEO description:"); })) === null || _c === void 0 ? void 0 : _c.substring(17).trim()) || "";
+                        seo_h1 = ((_d = lines.find(function (line) { return line.startsWith("SEO H1:"); })) === null || _d === void 0 ? void 0 : _d.substring(7).trim()) || "";
+                        main_content = ((_e = lines.find(function (line) { return line.startsWith("Main content:"); })) === null || _e === void 0 ? void 0 : _e.substring(13).trim()) || "";
+                        features_content = ((_f = lines.find(function (line) { return line.startsWith("Features content:"); })) === null || _f === void 0 ? void 0 : _f.substring(17).trim()) || "";
+                        benefits_content = ((_g = lines.find(function (line) { return line.startsWith("Benefits content:"); })) === null || _g === void 0 ? void 0 : _g.substring(17).trim()) || "";
+                        service_area_content = ((_h = lines.find(function (line) { return line.startsWith("Service area content:"); })) === null || _h === void 0 ? void 0 : _h.substring(21).trim()) || "";
+                        faq_content = JSON.parse(((_j = lines.find(function (line) { return line.startsWith("FAQ content:"); })) === null || _j === void 0 ? void 0 : _j.substring(12).trim()) || "[]");
+                        testimonials = JSON.parse(((_k = lines.find(function (line) { return line.startsWith("Testimonials:"); })) === null || _k === void 0 ? void 0 : _k.substring(13).trim()) || "[]");
+                        structured_data = ((_l = lines.find(function (line) { return line.startsWith("Structured data:"); })) === null || _l === void 0 ? void 0 : _l.substring(16).trim()) || "";
+                        service_city_ca = ((_m = lines.find(function (line) { return line.startsWith("Service City CA:"); })) === null || _m === void 0 ? void 0 : _m.substring(17).trim()) || "";
+                        return [2 /*return*/, { seo_title: seo_title, seo_description: seo_description, seo_h1: seo_h1, main_content: main_content, features_content: features_content, benefits_content: benefits_content, service_area_content: service_area_content, faq_content: faq_content, testimonials: testimonials, structured_data: structured_data, service_city_ca: service_city_ca }];
+                    case 3:
+                        error_1 = _o.sent();
                         console.error("Error generating SEO content:", error_1);
                         return [2 /*return*/, { seo_title: "", seo_description: "", seo_h1: "", main_content: "", features_content: "", benefits_content: "", service_area_content: "", faq_content: "", testimonials: "", structured_data: "", service_city_ca: "" }];
-                    case 3: return [2 /*return*/];
+                    case 4: return [2 /*return*/];
                 }
             });
         });
@@ -88,11 +91,14 @@ var createClient = require('@/utils/supabase/server').createClient;
             return __generator(this, function (_d) {
                 switch (_d.label) {
                     case 0:
-                        _d.trys.push([0, 8, , 9]);
+                        console.log("Starting populateCityService");
+                        _d.label = 1;
+                    case 1:
+                        _d.trys.push([1, 9, , 10]);
                         return [4 /*yield*/, supabase
                                 .from('city_services')
-                                .select("\n          id,\n          city_id,\n          service_id,\n          cities (name, slug),\n          services (name)\n        ")];
-                    case 1:
+                                .select("\n          id,\n          city_id,\n          service_id,\n          seo_title,\n          seo_description,\n          seo_h1,\n          main_content,\n          features_content,\n          benefits_content,\n          service_area_content,\n          faq_content,\n          testimonials,\n          structured_data,\n          service_city_ca,\n          cities (name, slug),\n          services (name)\n        ")];
+                    case 2:
                         _a = _d.sent(), cityServices = _a.data, error = _a.error;
                         if (error) {
                             throw new Error("Error fetching city services: ".concat(error.message));
@@ -102,23 +108,27 @@ var createClient = require('@/utils/supabase/server').createClient;
                             return [2 /*return*/];
                         }
                         _i = 0, cityServices_1 = cityServices;
-                        _d.label = 2;
-                    case 2:
-                        if (!(_i < cityServices_1.length)) return [3 /*break*/, 7];
+                        _d.label = 3;
+                    case 3:
+                        if (!(_i < cityServices_1.length)) return [3 /*break*/, 8];
                         cityService = cityServices_1[_i];
                         if (cityService.seo_title && cityService.seo_description && cityService.seo_h1 && cityService.main_content && cityService.features_content && cityService.benefits_content && cityService.service_area_content && cityService.faq_content && cityService.testimonials && cityService.structured_data) {
                             console.log("City service ".concat(cityService.id, " already has SEO content. Skipping..."));
-                            return [3 /*break*/, 6];
+                            return [3 /*break*/, 7];
                         }
-                        city = (_b = cityService.cities) === null || _b === void 0 ? void 0 : _b.name;
-                        service = (_c = cityService.services) === null || _c === void 0 ? void 0 : _c.name;
+                        city = (_b = cityService.cities[0]) === null || _b === void 0 ? void 0 : _b.name;
+                        service = (_c = cityService.services[0]) === null || _c === void 0 ? void 0 : _c.name;
                         if (!city || !service) {
                             console.warn("Could not extract city or service name for city service ".concat(cityService.id, ". Skipping..."));
-                            return [3 /*break*/, 6];
+                            return [3 /*break*/, 7];
                         }
+                        console.log("Generating SEO content for ".concat(city, " - ").concat(service));
                         return [4 /*yield*/, generateSeoContent(city, service)];
-                    case 3:
+                    case 4:
                         seoContent = _d.sent();
+                        console.log("Generated SEO content for ".concat(city, " - ").concat(service));
+                        // Update the city_service table
+                        console.log("Updating city service ".concat(cityService.id));
                         return [4 /*yield*/, supabase
                                 .from('city_services')
                                 .update({
@@ -135,7 +145,7 @@ var createClient = require('@/utils/supabase/server').createClient;
                                 service_city_ca: seoContent.service_city_ca,
                             })
                                 .eq('id', cityService.id)];
-                    case 4:
+                    case 5:
                         updateError = (_d.sent()).error;
                         if (updateError) {
                             console.error("Error updating city service ".concat(cityService.id, ": ").concat(updateError.message));
@@ -143,34 +153,34 @@ var createClient = require('@/utils/supabase/server').createClient;
                         else {
                             console.log("Successfully updated city service ".concat(cityService.id));
                         }
+                        console.log("Finished updating city service ".concat(cityService.id));
                         // Add a timeout between queries to avoid getting locked out
                         return [4 /*yield*/, new Promise(function (resolve) { return setTimeout(resolve, 1000); })];
-                    case 5:
+                    case 6:
                         // Add a timeout between queries to avoid getting locked out
                         _d.sent();
-                        _d.label = 6;
-                    case 6:
-                        _i++;
-                        return [3 /*break*/, 2];
+                        _d.label = 7;
                     case 7:
-                        console.log("Finished populating city service table.");
-                        return [3 /*break*/, 9];
+                        _i++;
+                        return [3 /*break*/, 3];
                     case 8:
+                        console.log("Finished populating city service table.");
+                        return [3 /*break*/, 10];
+                    case 9:
                         error_2 = _d.sent();
-                        console.error("An error occurred: ".concat(error_2));
-                        return [3 /*break*/, 9];
-                    case 9: return [2 /*return*/];
+                        console.error("An error occurred in populateCityService: ".concat(error_2));
+                        return [3 /*break*/, 10];
+                    case 10: return [2 /*return*/];
                 }
             });
         });
     }
-    var supabase, configuration, openai;
+    var supabase, openai;
     return __generator(this, function (_a) {
-        supabase = createClient();
-        configuration = new Configuration({
+        supabase = createSupabaseServerClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+        openai = new OpenAI({
             apiKey: process.env.OPENAI_API_KEY,
         });
-        openai = new OpenAIApi(configuration);
         // Initialize Supabase client
         populateCityService();
         return [2 /*return*/];

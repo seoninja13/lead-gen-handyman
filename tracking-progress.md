@@ -1,18 +1,15 @@
 # Project Progress Tracking
 
-## February 6, 2025
-- ✅ Completed OpenAI content generation script
-- ✅ Verified all city services have SEO content populated
-- ✅ Added comprehensive documentation:
-  * Updated development-progress.md with current status and next steps
-  * Updated TODO.md with future improvements
-  * Added detailed JSDoc comments to populate-city-service.ts
-- ✅ Script is ready for future use with new city services
-- 📝 Next focus areas:
-  * Error handling improvements
-  * Monitoring and logging
-  * Content validation
-  * API usage optimization
+## February 7, 2025
+- ✅ Created handyman-v2 project plan and documentation
+- ✅ Created initial starter code files (openai-client.ts, populate-v2.ts, supabase-client.ts, README.md, SQL migration scripts)
+- ✅ Executed SQL scripts to rename legacy tables and create new v2 tables (`businesses`, `cities`, `services`, `reviews`, `bookings`)
+- ✅ Added all columns from provided CSV file to the `businesses` table
+
+- 📝 Next steps:
+  * Modify `populate-v2.ts` script to read CSV data and populate `businesses` table
+  * Implement OpenAI enriched descriptions
+  * Test data population
 
 ## Previous Updates
 [Previous entries would be here - preserved from existing content]

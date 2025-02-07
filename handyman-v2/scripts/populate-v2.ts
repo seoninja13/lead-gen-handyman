@@ -1,82 +1,83 @@
-import { safeCompletion, openai } from '../lib/openai-client';
-import { supabase } from '../utils/supabase/client'; // Assuming supabase client is set up
+import { safeCompletion, openai } from '../src/lib/openai-client';
+import { supabase } from '../src/utils/supabase/client';
+import * as Papa from 'papaparse';
+import fs from 'fs';
+import { Businesses } from '../src/types/database';
 
-async function loadV1Data(tableName: string) {
+interface PapaParseError { // Added interface for PapaParseError
+  type: string;
+  code: string;
+  message: string;
+  row: number;
+}
+
+
+async function loadCsvData(filePath: string): Promise<any[]> {
+  const csvFile: string = fs.readFileSync(filePath, 'utf-8'); // Added type annotation here
+  return new Promise<any[]>((resolve, reject) => { // Added type annotation here
+    Papa.parse<any>(csvFile, {
+      header: true,
+      dynamicTyping: true,
+      complete: (results: Papa.ParseResult<any>) => {
+        resolve(results.data);
+      },
+      error: (error: any) => { // Changed type to any here
+        reject(error);
+      },
+    });
+  });
+}
+
+async function enrichDescriptionWithOpenAI(businessData: any): Promise<string | null> {
+  const prompt: string = `Create an engaging and informative description for a handyman business profile based on the following information:\n\n${JSON.stringify(businessData)}\n\n Aim for approximately 100-150 words. Focus on highlighting their key services, unique selling points, and local appeal.`; // Added type annotation here
+
   try {
-    const { data, error } = await supabase
-      .from(tableName)
-      .select('*');
-    if (error) {
-      console.error('Error loading v1 data:', error);
-      throw error;
-    }
-    return data;
-  } catch (error) {
-    console.error('Failed to load v1 data', error);
-    throw error;
+    const enrichedDescription = await safeCompletion(prompt);
+    return enrichedDescription;
+  } catch (error: any) {
+    console.error('Error enriching description with OpenAI:', error);
+    return null; // Return null or a default description in case of error
   }
 }
 
-async function processWithGPT35(legacyData: any[]) {
-  const processedData = [];
-  for (const item of legacyData) {
-    const prompt = `Generate a professional profile based on this data: ${JSON.stringify(item)}`;
-    try {
-      const response = await safeCompletion(prompt);
-      if (response) {
-        const professionalProfile = JSON.parse(response); // Assuming response is JSON
-        processedData.push(professionalProfile);
-      }
-    } catch (error) {
-      console.error('OpenAI processing failed for item:', item, error);
-      // Handle error or skip item
-    }
-  }
-  return processedData;
-}
 
-async function populateV2Professionals() {
+async function populateBusinessesTable() {
   try {
-    const legacyCities = await loadV1Data('cities_v1_legacy'); // Load cities data
-    // For each city, generate professionals (example - adjust as needed)
-    let allProfessionals = [];
-    for (const city of legacyCities) {
-      const prompt = `Generate a list of handyman professionals in ${city.name} with skills and hourly rates in JSON format.`;
+    const csvData: any[] = await loadCsvData('handyman-v2/Feed Data/handyman-200_near-eldoardo_co-all-fields.csv'); // Added type annotation here
+    
+    for (const business of csvData) {
       try {
-        const response = await safeCompletion(prompt);
-        if (response) {
-          const professionals = JSON.parse(response); // Assuming response is JSON array of professionals
-          allProfessionals = allProfessionals.concat(professionals);
+        const enriched_description: string | null = await enrichDescriptionWithOpenAI(business); // Added type annotation here
+        
+        const businessRecord: Businesses = { // Asserting type here
+          ...business,
+          enriched_description: enriched_description,
+        } as Businesses;
+
+        const { error } = await supabase
+          .from('businesses')
+          .insert<Businesses>([businessRecord]); // Added type Businesses for insert
+
+        if (error) {
+          console.error('Error inserting business record:', business.business_name, error);
+        } else {
+          console.log('Successfully inserted business record:', business.business_name);
         }
       } catch (error) {
-        console.error('OpenAI processing failed for city:', city.name, error);
+        console.error('Error processing or inserting business:', business.business_name, error);
       }
     }
 
-
-    if (allProfessionals.length > 0) {
-      const { error: insertError } = await supabase
-        .from('professionals')
-        .insert(allProfessionals); // Insert all generated professionals
-
-      if (insertError) {
-        console.error('Error inserting data into professionals table:', insertError);
-      } else {
-        console.log('Successfully populated professionals table');
-      }
-    } else {
-      console.log('No professionals data to insert.');
-    }
-
+    console.log('Data population completed for businesses table.');
 
   } catch (error) {
-    console.error('Data population failed:', error);
+    console.error('Error loading or processing CSV data:', error);
   }
 }
 
 
 async function main() {
-  await populateV2Professionals();
+  await populateBusinessesTable();
 }
 
 main().catch(error => console.error(error));

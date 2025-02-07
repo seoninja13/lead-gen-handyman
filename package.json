@@ -4,17 +4,20 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3001",
-    "build": "next build",
+    "build": "node_modules/.bin/tsc -p tsconfig.json && next build",
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "populate:v2": "node build/scripts/populate-v2.js"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.2",
     "@supabase/auth-helpers-nextjs": "^0.8.7",
     "@supabase/supabase-js": "^2.48.1",
+    "@types/papaparse": "^5.3.15",
     "class-variance-authority": "^0.7.1",
+    "csv-parse": "^5.6.0",
     "dotenv": "^16.4.7",
     "limiter": "^3.0.0",
     "lucide-react": "^0.316.0",

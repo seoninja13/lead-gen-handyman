@@ -1,0 +1,1 @@
+To start working on the Handyman project, navigate to the `handyman-v2/Envato-template-files/themeforest-fdkNKA8O-findhouse-real-estate-react-nextjs-template/findhouse` directory. This is the new project built with Next.js, Supabase, and OpenAI.

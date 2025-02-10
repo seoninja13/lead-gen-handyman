@@ -124,7 +124,7 @@ const SignleChatboxReply = () => {
             width={57}
             height={57}
             className="img-fluid align-self-start mr-3"
-            src="/assets/images/team/s6.jpg"
+            src="/assets/images/resource/54683-stone-fireplace-in-living-room-2023-11-27-05-19-47-utc.jpg"
             alt="s6.jpg"
           />
           <div className="media-body">

@@ -17,7 +17,14 @@ export default function SlickAsNav() {
     autoplay: false,
   };
 
-  const imgItem = ["5", "3", "4", "6", "7", "4"];
+  const imgItem = [
+    "54683-stone-fireplace-in-living-room-2023-11-27-05-19-47-utc",
+    "a-big-house-in-the-middle-of-a-hill-with-a-tree-an-2024-01-19-22-55-37-utc",
+    "beautiful-modern-house-surrounded-by-nature-in-win-2023-11-27-05-09-17-utc",
+    "close-up-image-of-a-wooden-staircase-with-several-2024-01-08-22-11-19-utc",
+    "stunning-interior-decor-with-a-wooden-floor-and-fu-2024-01-08-22-11-19-utc",
+    "what-a-beautiful-place-to-call-home-2024-06-25-15-39-29-utc",
+  ];
 
   return (
     <>
@@ -34,7 +41,7 @@ export default function SlickAsNav() {
             <Image
               width={100}
               height={100}
-              src={`/assets/images/testimonial/${item}.png`}
+              src={`/assets/images/resource/${item}.jpg`}
               alt="feature"
             />
           </div>

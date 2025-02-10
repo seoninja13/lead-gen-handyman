@@ -35,11 +35,11 @@ const SliderGallery = () => {
 
   // Array of image paths
   const imagePaths = [
-    "/assets/images/property/lsslider1.jpg",
-    "/assets/images/property/lsslider2.jpg",
-    "/assets/images/property/lsslider3.jpg",
-    "/assets/images/property/lsslider1.jpg",
-    "/assets/images/property/lsslider2.jpg",
+    "/assets/images/resource/54683-stone-fireplace-in-living-room-2023-11-27-05-19-47-utc.jpg",
+    "/assets/images/resource/a-big-house-in-the-middle-of-a-hill-with-a-tree-an-2024-01-19-22-55-37-utc.jpg",
+    "/assets/images/resource/beautiful-modern-house-surrounded-by-nature-in-win-2023-11-27-05-09-17-utc.jpg",
+    "/assets/images/resource/close-up-image-of-a-wooden-staircase-with-several-2024-01-08-22-11-19-utc.jpg",
+    "/assets/images/resource/stunning-interior-decor-with-a-wooden-floor-and-fu-2024-01-08-22-11-19-utc.jpg",
   ];
 
   return (

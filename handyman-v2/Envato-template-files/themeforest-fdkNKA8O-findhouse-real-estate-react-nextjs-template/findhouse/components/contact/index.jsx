@@ -12,19 +12,19 @@ import Form from "./Form";
 const index = () => {
   return (
     <>
-      {/* <!-- Main Header Nav --> */}
+      {/* <!&ndash; Main Header Nav &ndash;> */}
       <Header />
 
-      {/* <!--  Mobile Menu --> */}
+      {/* <!&ndash;  Mobile Menu &ndash;> */}
       <MobileMenu />
 
-      {/* <!-- Modal --> */}
+      {/* <!&ndash; Modal &ndash;> */}
       <PopupSignInUp />
 
-      {/* <!-- Inner Page Breadcrumb --> */}
+      {/* <!&ndash; Inner Page Breadcrumb &ndash;> */}
       <BreadCrumbBanner />
 
-      {/* <!-- Our Contact --> */}
+      {/* <!&ndash; Our Contact &ndash;> */}
       <section className="our-contact pb0 bgc-f7">
         <div className="container">
           <div className="row">
@@ -67,7 +67,7 @@ const index = () => {
                     width={32}
                     height={50}
                     className="location-finder"
-                    src="/assets/images/location.png"
+                    src="/assets/images/resource/54683-stone-fireplace-in-living-room-2023-11-27-05-19-47-utc.jpg"
                     alt="location"
                   />
                 </div>
@@ -77,14 +77,14 @@ const index = () => {
         </div>
       </section>
 
-      {/* <!-- Start Call to Action --> */}
+      {/* <!&ndash; Start Call to Action &ndash;> */}
       <section className="start-partners bgc-thm pt50 pb50">
         <div className="container">
           <CallToAction />
         </div>
       </section>
 
-      {/* <!-- Our Footer --> */}
+      {/* <!&ndash; Our Footer &ndash;> */}
       <section className="footer_one">
         <div className="container">
           <div className="row">
@@ -93,7 +93,7 @@ const index = () => {
         </div>
       </section>
 
-      {/* <!-- Our Footer Bottom Area --> */}
+      {/* <!&ndash; Our Footer Bottom Area &ndash;> */}
       <section className="footer_middle_area pt40 pb40">
         <div className="container">
           <CopyrightFooter />

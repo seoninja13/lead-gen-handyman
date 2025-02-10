@@ -35,7 +35,7 @@ const Header = () => {
               width={40}
               height={45}
               className="logo1 img-fluid"
-              src="/assets/images/header-logo2.png"
+              src="/assets/images/resource/54683-stone-fireplace-in-living-room-2023-11-27-05-19-47-utc.jpg"
               alt="header-logo.png"
             />
             <Image

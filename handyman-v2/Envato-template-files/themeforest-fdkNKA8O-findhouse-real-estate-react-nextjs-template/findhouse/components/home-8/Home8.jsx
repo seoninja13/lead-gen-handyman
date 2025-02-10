@@ -107,7 +107,7 @@ const Home8 = () => {
                 width={32}
                 height={50}
                 className="location-finder"
-                src="/assets/images/location.png"
+                src="/assets/images/resource/54683-stone-fireplace-in-living-room-2023-11-27-05-19-47-utc.jpg"
                 alt="location"
               />
             </div>

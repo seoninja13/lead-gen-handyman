@@ -5,7 +5,7 @@ const AuthorReview = () => {
   const reviewContent = [
     {
       id: 1,
-      img: "/assets/images/resource/review.png",
+      img: "/assets/images/resource/54683-stone-fireplace-in-living-room-2023-11-27-05-19-47-utc.jpg",
       ratings: (
         <>
           {" "}
@@ -38,17 +38,12 @@ const AuthorReview = () => {
           </ul>
         </>
       ),
-      reviewOn: "Villa called Archangel",
-      text: `Beautiful home, very picturesque and close to everything in jtree! A
-      little warm for a hot weekend, but would love to come back during
-      the cooler seasons! Lorem ipsum dolor sit amet, consectetur
-      adipisicing elit. Accusantium voluptates eum, velit recusandae,
-      ducimus earum aperiam commodi error officia optio aut et quae nam
-      nostrum!`,
+      reviewOn: "Fix Leaky Faucet",
+      text: `Great service! Fixed my leaky faucet quickly and efficiently. Highly recommend!`,
     },
     {
       id: 2,
-      img: "/assets/images/resource/review4.png",
+      img: "/assets/images/resource/a-big-house-in-the-middle-of-a-hill-with-a-tree-an-2024-01-19-22-55-37-utc.jpg",
       ratings: (
         <>
           {" "}
@@ -81,13 +76,8 @@ const AuthorReview = () => {
           </ul>
         </>
       ),
-      reviewOn: "Sunset Studio",
-      text: `Beautiful home, very picturesque and close to everything in jtree! A
-      little warm for a hot weekend, but would love to come back during
-      the cooler seasons! Lorem ipsum dolor sit amet, consectetur
-      adipisicing elit. Accusantium voluptates eum, velit recusandae,
-      ducimus earum aperiam commodi error officia optio aut et quae nam
-      nostrum!`,
+      reviewOn: "Install New Lighting",
+      text: `Excellent work! The new lighting looks amazing and the electrician was very professional.`,
     },
   ];
   return (

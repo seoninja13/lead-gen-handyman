@@ -1,18 +1,17 @@
-import GlobalHeroFilter from "../common/GlobalHeroFilter";
 
 const HeroFilter = () => {
     return (
         <div className="home_content">
             <div className="home-text text-center">
-                <h2 className="fz55">Find Your Dream Home</h2>
+                <h2 className="fz55">Find Your Local Handyman</h2>
                 <p className="fz18 color-white">
-                    From as low as $10 per day with limited time offer
-                    discounts.
+                    Get quick and reliable service for all your home repair and maintenance needs.
                 </p>
             </div>
             {/* End .home-text */}
 
-            <GlobalHeroFilter />
+            {/* <GlobalHeroFilter /> */}
+            <GlobalFilter />
         </div>
     );
 };

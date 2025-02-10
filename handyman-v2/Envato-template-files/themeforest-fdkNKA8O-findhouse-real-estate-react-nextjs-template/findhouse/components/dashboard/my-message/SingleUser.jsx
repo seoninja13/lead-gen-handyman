@@ -4,7 +4,7 @@ const SingleUser = () => {
   const singleUserConent = [
     {
       id: 1,
-      img: "/assets/images/team/s1.jpg",
+      img: "/assets/images/resource/54683-stone-fireplace-in-living-room-2023-11-27-05-19-47-utc.jpg",
       name: "Vincent Porter",
       meta: `I'm going to office.`,
       unreadMessage: "2",
@@ -13,7 +13,7 @@ const SingleUser = () => {
     },
     {
       id: 2,
-      img: "/assets/images/team/s2.jpg",
+      img: "/assets/images/resource/a-big-house-in-the-middle-of-a-hill-with-a-tree-an-2024-01-19-22-55-37-utc.jpg",
       name: "Vincent Porter",
       meta: `I'm going to office.`,
       unreadMessage: "2",
@@ -22,7 +22,7 @@ const SingleUser = () => {
     },
     {
       id: 3,
-      img: "/assets/images/team/s3.jpg",
+      img: "/assets/images/resource/beautiful-modern-house-surrounded-by-nature-in-win-2023-11-27-05-09-17-utc.jpg",
       name: "Vincent Porter",
       meta: `I'm going to office.`,
       unreadMessage: "",
@@ -31,7 +31,7 @@ const SingleUser = () => {
     },
     {
       id: 4,
-      img: "/assets/images/team/s4.jpg",
+      img: "/assets/images/resource/close-up-image-of-a-wooden-staircase-with-several-2024-01-08-22-11-19-utc.jpg",
       name: "Vincent Porter",
       meta: `I'm going to office.`,
       unreadMessage: "",
@@ -40,7 +40,7 @@ const SingleUser = () => {
     },
     {
       id: 5,
-      img: "/assets/images/team/s5.jpg",
+      img: "/assets/images/resource/stunning-interior-decor-with-a-wooden-floor-and-fu-2024-01-08-22-11-19-utc.jpg",
       name: "Vincent Porter",
       meta: `I'm going to office.`,
       unreadMessage: "",
@@ -49,7 +49,7 @@ const SingleUser = () => {
     },
     {
       id: 6,
-      img: "/assets/images/team/s6.jpg",
+      img: "/assets/images/resource/what-a-beautiful-place-to-call-home-2024-06-25-15-39-29-utc.jpg",
       name: "Vincent Porter",
       meta: `I'm going to office.`,
       unreadMessage: "",
@@ -58,7 +58,7 @@ const SingleUser = () => {
     },
     {
       id: 7,
-      img: "/assets/images/team/s7.jpg",
+      img: "/assets/images/resource/54683-stone-fireplace-in-living-room-2023-11-27-05-19-47-utc.jpg",
       name: "Vincent Porter",
       meta: `I'm going to office.`,
       unreadMessage: "",
@@ -67,7 +67,7 @@ const SingleUser = () => {
     },
     {
       id: 8,
-      img: "/assets/images/team/s8.jpg",
+      img: "/assets/images/resource/a-big-house-in-the-middle-of-a-hill-with-a-tree-an-2024-01-19-22-55-37-utc.jpg",
       name: "Vincent Porter",
       meta: `I'm going to office.`,
       unreadMessage: "",
@@ -81,7 +81,7 @@ const SingleUser = () => {
         <li className="contact" key={user.id}>
           <a href="#">
             <div className="wrap">
-              <span className={`contact-status ${user.status}`}></span>
+              <span className={`contact-status ${user.status}`}</span>
               <Image
                 width={50}
                 height={50}

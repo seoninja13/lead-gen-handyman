@@ -43,7 +43,7 @@ const Hero = () => {
             <Image
               width={21}
               height={35}
-              src="/assets/images/resource/mouse.png"
+              src="/assets/images/resource/54683-stone-fireplace-in-living-room-2023-11-27-05-19-47-utc.jpg"
               alt="mouse.png"
             />
           </div>

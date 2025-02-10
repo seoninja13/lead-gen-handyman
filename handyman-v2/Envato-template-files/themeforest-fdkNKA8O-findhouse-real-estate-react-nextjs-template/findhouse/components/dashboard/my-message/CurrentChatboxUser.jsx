@@ -10,7 +10,7 @@ const CurrentChatboxUser = () => {
             width={45}
             height={45}
             className="img-fluid"
-            src="/assets/images/team/s5.jpg"
+            src="/assets/images/resource/54683-stone-fireplace-in-living-room-2023-11-27-05-19-47-utc.jpg"
             alt="s5.jpg"
           />
           <div className="meta">

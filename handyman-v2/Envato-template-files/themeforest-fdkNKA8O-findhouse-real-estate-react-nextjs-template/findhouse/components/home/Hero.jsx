@@ -3,7 +3,7 @@ import HeroFilter from "./HeroFilter";
 
 const Hero = () => {
   return (
-    <section className="home-one home1-overlay home1_bgi1">
+    <section className="home-one home1-overlay" style={{backgroundImage: `url('/assets/images/resource/54683-stone-fireplace-in-living-room-2023-11-27-05-19-47-utc.jpg')`}}>
       <div className="container">
         <div className="row posr">
           <div className="col-lg-12">
@@ -23,7 +23,7 @@ const Hero = () => {
             <Image
               width={21}
               height={35}
-              src="/assets/images/resource/mouse.png"
+              src="/assets/images/resource/54683-stone-fireplace-in-living-room-2023-11-27-05-19-47-utc.jpg"
               alt="mouse.png"
             />
           </div>

@@ -66,7 +66,7 @@ const LoginSignup = () => {
                   width={357}
                   height={494}
                   className="img-fluid w100 h-100 cover"
-                  src="/assets/images/resource/login.jpg"
+                  src="/assets/images/resource/54683-stone-fireplace-in-living-room-2023-11-27-05-19-47-utc.jpg"
                   alt="login.jpg"
                 />
               </div>
@@ -179,7 +179,7 @@ const LoginSignup = () => {
                   width={357}
                   height={659}
                   className="img-fluid w100 h-100 cover"
-                  src="/assets/images/resource/regstr.jpg"
+                  src="/assets/images/resource/54683-stone-fireplace-in-living-room-2023-11-27-05-19-47-utc.jpg"
                   alt="regstr.jpg"
                 />
               </div>

@@ -18,10 +18,11 @@ The project is organized into two main directories:
 -   **Environment Variables:** A `.env.local` file has been created in the `findhouse` directory with placeholder values for `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`. **These placeholders need to be replaced with the correct values for the Handyman v2 Supabase project.**
 -   **AddTodo Component:** A basic `AddTodo` component (`AddTodo.jsx`) has been created in the `findhouse/components` directory. This component is currently integrated into the main `app/page.jsx` file.
 -   **Basic Supabase Interaction:** The `app/page.jsx` file includes an `addTodo` function that attempts to insert data into a Supabase table named 'Todos'. **The existence and structure of this table in the Supabase database need to be verified and created if it doesn't exist.**
-- **Build and Run:** The `findhouse` project (Handyman v2) can be built (`npm run build`) and run in development mode (`npm run dev`) *after* installing dependencies.
-- **Dependencies:** The necessary dependencies `@supabase/supabase-js` and `@types/node` have been installed. However, there were dependency conflicts during installation, and `--legacy-peer-deps` was used to force the installation. This might need to be revisited.
-- **Project Documentation:** Created a central documentation file (`handyman-v2/documentation/handyman-v2-documentation.md`) outlining the project overview, URL structure, data model, template adaptation plan, technical implementation details, and future considerations.
-
+-   **Build and Run:** The `findhouse` project (Handyman v2) can be built (`npm run build`) and run in development mode (`npm run dev`) *after* installing dependencies.
+-   **Dependencies:** The necessary dependencies `@supabase/supabase-js` and `@types/node` have been installed. However, there were dependency conflicts during installation, and `--legacy-peer-deps` was used to force the installation. This might need to be revisited.
+-   **Project Documentation:** Created a central documentation file (`handyman-v2/documentation/handyman-v2-documentation.md`) outlining the project overview, URL structure, data model, template adaptation plan, technical implementation details, and future considerations.
+-   **Adapted `data/properties.js`:** Updated the file to include handyman service data and use existing property images.
+-   **Updated Global Filter:** Updated the keyword input and service category dropdown in `components/common/GlobalFilter.jsx`. Updated the "Amenities" section heading to "Specializations" and updated the options in the `CheckBoxFilter` component in `components/common/GlobalFilter.jsx`.
 
 ### Next Steps
 

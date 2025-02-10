@@ -24,7 +24,7 @@ const GlobalFilter = ({ className = "" }) => {
             <input
               type="text"
               className="form-control"
-              placeholder="Enter keyword..."
+              placeholder="Enter service..."
               onChange={(e) => dispatch(addKeyword(e.target.value))}
             />
           </div>
@@ -35,13 +35,13 @@ const GlobalFilter = ({ className = "" }) => {
           <div className="search_option_two">
             <div className="candidate_revew_select">
               <select className="selectpicker w100 form-select show-tick">
-                <option value="">Property Type</option>
-                <option>Apartment</option>
-                <option>Bungalow</option>
-                <option>Condo</option>
-                <option>House</option>
-                <option>Land</option>
-                <option>Single Family</option>
+                <option value="">Service Category</option>
+                <option>Plumbing</option>
+                <option>Electrical</option>
+                <option>Carpentry</option>
+                <option>Painting</option>
+                <option>Roofing</option>
+                <option>Landscaping</option>
               </select>
             </div>
           </div>
@@ -101,7 +101,7 @@ const GlobalFilter = ({ className = "" }) => {
               <div className="dropdown-content dropdown-menu ">
                 <div className="row p15">
                   <div className="col-lg-12">
-                    <h4 className="text-thm3 mb-4">Amenities</h4>
+                    <h4 className="text-thm3 mb-4">Specializations</h4>
                   </div>
 
                   <CheckBoxFilter />

@@ -23,6 +23,8 @@ The Handyman v2 project aims to create a website for handyman services based on 
 *   `handyman-v1`: Contains the original Handyman v1 project.
 *   `handyman-v2`: Contains the new Handyman v2 project.
     *   `handyman-v2/Envato-template-files/themeforest-fdkNKA8O-findhouse-real-estate-react-nextjs-template/findhouse`: Contains the Next.js application based on the FindHouse template.
+        *   `data/properties.js`: Contains data for the handyman services listings. The image paths have been updated to use existing property images.
+        *   `components/common/GlobalFilter.jsx`: Contains the global filter component. The keyword input and service category dropdown have been updated for handyman services.
     *   `handyman-v2/documentation/handyman-v2-documentation.md`: Central documentation hub.
 *   `NEXT_STEPS.md`: Tracks immediate next steps and progress.
 *   `project-requirements.md`: Outlines overall project requirements.

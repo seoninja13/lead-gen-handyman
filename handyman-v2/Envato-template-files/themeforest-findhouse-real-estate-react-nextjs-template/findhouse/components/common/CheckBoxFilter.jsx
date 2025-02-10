@@ -11,7 +11,7 @@ const CheckBoxFilter = () => {
                 id="customCheck1"
               />
               <label className="form-check-label" htmlFor="customCheck1">
-                Air Conditioning
+                Appliance Repair
               </label>
             </div>
           </li>
@@ -25,7 +25,7 @@ const CheckBoxFilter = () => {
                 id="customCheck2"
               />
               <label className="form-check-label" htmlFor="customCheck2">
-                Lawn
+                Carpentry
               </label>
             </div>
           </li>
@@ -39,7 +39,7 @@ const CheckBoxFilter = () => {
                 id="customCheck3"
               />
               <label className="form-check-label" htmlFor="customCheck3">
-                Swimming Pool
+                Electrical
               </label>
             </div>
           </li>
@@ -58,7 +58,7 @@ const CheckBoxFilter = () => {
                 id="customCheck4"
               />
               <label className="form-check-label" htmlFor="customCheck4">
-                Barbeque
+                Plumbing
               </label>
             </div>
           </li>
@@ -72,7 +72,7 @@ const CheckBoxFilter = () => {
                 id="customCheck5"
               />
               <label className="form-check-label" htmlFor="customCheck5">
-                Microwave
+                Painting
               </label>
             </div>
           </li>
@@ -86,7 +86,7 @@ const CheckBoxFilter = () => {
                 id="customCheck6"
               />
               <label className="form-check-label" htmlFor="customCheck6">
-                TV Cable
+                Roofing
               </label>
             </div>
           </li>
@@ -105,7 +105,7 @@ const CheckBoxFilter = () => {
                 id="customCheck7"
               />
               <label className="form-check-label" htmlFor="customCheck7">
-                Dryer
+                Tiling
               </label>
             </div>
           </li>
@@ -119,7 +119,7 @@ const CheckBoxFilter = () => {
                 id="customCheck8"
               />
               <label className="form-check-label" htmlFor="customCheck8">
-                Outdoor Shower
+                Flooring
               </label>
             </div>
           </li>
@@ -133,7 +133,7 @@ const CheckBoxFilter = () => {
                 id="customCheck9"
               />
               <label className="form-check-label" htmlFor="customCheck9">
-                Washer
+                Drywall
               </label>
             </div>
           </li>
@@ -152,7 +152,7 @@ const CheckBoxFilter = () => {
                 id="customCheck10"
               />
               <label className="form-check-label" htmlFor="customCheck10">
-                Gym
+                Landscaping
               </label>
             </div>
           </li>
@@ -166,7 +166,7 @@ const CheckBoxFilter = () => {
                 id="customCheck11"
               />
               <label className="form-check-label" htmlFor="customCheck11">
-                Refrigerator
+                Fencing
               </label>
             </div>
           </li>
@@ -180,7 +180,7 @@ const CheckBoxFilter = () => {
                 id="customCheck12"
               />
               <label className="form-check-label" htmlFor="customCheck12">
-                WiFi
+                Gutters
               </label>
             </div>
           </li>
@@ -199,7 +199,7 @@ const CheckBoxFilter = () => {
                 id="customCheck13"
               />
               <label className="form-check-label" htmlFor="customCheck13">
-                Laundry
+                Windows
               </label>
             </div>
           </li>
@@ -213,7 +213,7 @@ const CheckBoxFilter = () => {
                 id="customCheck14"
               />
               <label className="form-check-label" htmlFor="customCheck14">
-                Sauna
+                Doors
               </label>
             </div>
           </li>
@@ -227,7 +227,7 @@ const CheckBoxFilter = () => {
                 id="customCheck15"
               />
               <label className="form-check-label" htmlFor="customCheck15">
-                Window Coverings
+                Siding
               </label>
             </div>
           </li>

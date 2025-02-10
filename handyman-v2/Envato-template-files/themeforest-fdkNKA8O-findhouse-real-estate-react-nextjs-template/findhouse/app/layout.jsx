@@ -1,29 +1,20 @@
 
-'use client'
+import { Providers } from './providers'
+import "./globals.css"
 
-import { Provider } from "react-redux";
-import { store } from "../store/store";
-import ScrollToTop from "@/components/common/ScrollTop";
-import "../public/assets/scss/index.scss";
-
-if (typeof window !== "undefined") {
-  require("bootstrap/dist/js/bootstrap");
+export const metadata = {
+  title: 'FindHouse - Real Estate React Template',
+  description: 'FindHouse - Real Estate React Template',
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,400i,500,600,700&display=swap" />
-        <link rel="icon" href="./favicon.ico" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,400i,500,600,700&display=swap" />
       </head>
-      <body >
-      
-      <Provider store={store}>
-      {children}
-      </Provider>
-
-      <ScrollToTop />
+      <body>
+        <Providers>{children}</Providers>
       </body>
     </html>
   )

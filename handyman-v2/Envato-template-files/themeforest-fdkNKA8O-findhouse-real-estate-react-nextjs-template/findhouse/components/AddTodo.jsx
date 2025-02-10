@@ -1,15 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { addTodo } from '../app/page'
 
 export default function AddTodo() {
   const [todo, setTodo] = useState('')
-
-  const handleAddTodo = () => {
-    addTodo(todo)
-    setTodo('')
-  }
 
   return (
     <div>
@@ -19,7 +13,7 @@ export default function AddTodo() {
         value={todo}
         onChange={(e) => setTodo(e.target.value)}
       />
-      <button onClick={handleAddTodo} disabled={todo === ''}>
+      <button onClick={() => setTodo('')} disabled={todo === ''}>
         Add
       </button>
     </div>

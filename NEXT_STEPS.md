@@ -23,40 +23,50 @@ The project is organized into two main directories:
 
 ### Next Steps
 
+1.  **Build and Run the Base FindHouse Template:**
+    *   Ensure the `findhouse` project builds (`npm run build`) and runs in development mode (`npm run dev`) without any errors.
+    *   Verify basic functionality of the template.
+
+2.  **Adapt the FindHouse Template:**
+    *   Replace the placeholder content and components from the FindHouse template with content and components relevant to the handyman service.
+    *   Customize the UI/UX to match the desired design and functionality.
+
+### Supabase Integration (Later)
+
+**Note:** We have temporarily paused the Supabase integration to focus on building the base application. The following steps were taken for Supabase integration and will be revisited later:
+
+-   A Supabase client has been initialized in `handyman-v2/Envato-template-files/themeforest-fdkNKA8O-findhouse-real-estate-react-nextjs-template/findhouse/utils/supabase/client.ts`.
+-   A `.env.local` file has been created in the `findhouse` directory with Supabase credentials.
+-   A table named `testCrud` was created in the Supabase project.
+-   Initial code for adding and fetching data from `testCrud` was added to `app/page.jsx` but has been reverted.
+
+**Next Steps for Supabase (Later):**
+
 1.  **Verify and Update Environment Variables:**
     *   Obtain the correct `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` for the Handyman v2 Supabase project.
     *   Update the `.env.local` file within the `findhouse` directory with these correct values.
 
 2.  **Supabase Database Setup:**
     *   Ensure that a Supabase project is set up for Handyman v2.
-    *   Create a table named `Todos` (or adjust the name in the code) with at least the following columns:
-        *   `id` (e.g., UUID, auto-generated)
-        *   `description` (text)
-        *   `created_at` (timestamp, automatically managed by Supabase)
+    *   Create tables for `businesses`, `cities`, `services`, etc.
 
-3.  **Implement Data Fetching:**
-    *   Modify `app/page.jsx` to fetch and display the list of todos from the Supabase table.
-    *   Implement error handling and loading states for the data fetching.
+3.  **Implement CRUD Operations:**
+     *   Implement create, read, update, and delete operations for the core entities.
 
-4.  **Refactor for Better Structure ( পরবর্তীতে ):**
-    *   Move Supabase-related logic (client initialization, data fetching, and mutation functions) into separate files within the `utils/supabase` directory (e.g., `server.ts`, `database.ts`). This will improve code organization and maintainability.
-    *   Create a dedicated `types` directory to define TypeScript types for Supabase data (e.g., `Todo` type).
+4.  **Refactor for Better Structure:**
+    *   Move Supabase-related logic into separate files within the `utils/supabase` directory.
+    *   Create a `types` directory for TypeScript types.
 
-5.  **Implement Remaining CRUD Operations:**
-    *   Add functionality to update and delete todos.
+### Other Future Steps
 
-6.  **Integrate with OpenAI:**
-    *   Implement the OpenAI integration for features like enriched content generation, as per the project requirements.
+1.  **Integrate with OpenAI:**
+    *   Implement the OpenAI integration.
 
-7.  **Adapt the FindHouse Template:**
-    *   Replace the placeholder content and components from the FindHouse template with content and components relevant to the handyman service.
-    *   Customize the UI/UX to match the desired design and functionality.
+2.  **Address Dependency Conflicts:**
+    *   Investigate the dependency conflicts.
 
-8.  **Address Dependency Conflicts:**
-    *   Investigate the dependency conflicts encountered during `npm install`. Consider updating `react-input-range` or finding an alternative package.
+3.  **Testing:**
+    *   Write unit and integration tests.
 
-9.  **Testing:**
-    *   Write unit and integration tests to ensure the application's functionality.
-
-10. **Update `start-here.txt`:**
-    * Update the `start-here.txt` to reflect the correct project to work on.
+4.  **Update `start-here.txt`:**
+     *   Update to reflect project changes.

@@ -1,10 +1,10 @@
-module.exports = [Find Properties in These Cities
+module.exports = [
   {
     id: 1,
     img: "/assets/images/Sample envato images/54683-stone-fireplace-in-living-room-2023-11-27-05-19-47-utc.jpg",
     price: "75",
     type: "Plumbing",
-    title: "Fixing leaky faucets and pipes",
+    title: "Plumbing Services",
     location: "Sacramento, CA",
     saleTag: ["Featured", "Top Rated"],
     itemDetails: [
@@ -17,11 +17,11 @@ module.exports = [Find Properties in These Cities
         number: "5",
       },
     ],
-    posterAvatar: "/assets/images/Sample envato images/54683-stone-fireplace-in-living-room-2023-11-27-05-19-47-utc.jpg",
+    posterAvatar: "/assets/images/Sample envato images/close-up-image-of-a-wooden-staircase-with-several-2024-01-08-22-11-19-utc.jpg",
     posterName: "Sacramento Plumbing Experts",
     imgList: [
-      "/assets/images/Sample envato images/a-big-house-in-the-middle-of-a-hill-with-a-tree-an-2024-01-19-22-55-37-utc.jpg",
-      "/assets/images/Sample envato images/beautiful-modern-house-surrounded-by-nature-in-win-2023-11-27-05-09-17-utc.jpg",
+      "/assets/images/Sample envato images/stunning-interior-decor-with-a-wooden-floor-and-fu-2024-01-08-22-11-19-utc.jpg",
+      "/assets/images/Sample envato images/54683-stone-fireplace-in-living-room-2023-11-27-05-19-47-utc.jpg",
     ],
     amenities: "Leak Repair, Pipe Replacement, Drain Cleaning",
     featured: "true",
@@ -29,10 +29,10 @@ module.exports = [Find Properties in These Cities
   },
   {
     id: 2,
-    img: "/assets/images/Sample envato images/a-big-house-in-the-middle-of-a-hill-with-a-tree-an-2024-01-19-22-55-37-utc.jpg",
+    img: "/assets/images/Sample envato images/close-up-image-of-a-wooden-staircase-with-several-2024-01-08-22-11-19-utc.jpg",
     price: "80",
     type: "Electrical",
-    title: "Wiring and electrical repairs",
+    title: "Reliable Electrical Services",
     location: "Elk Grove, CA",
     saleTag: ["Featured"],
     itemDetails: [
@@ -45,11 +45,11 @@ module.exports = [Find Properties in These Cities
         number: "8",
       },
     ],
-    posterAvatar: "/assets/images/Sample envato images/54683-stone-fireplace-in-living-room-2023-11-27-05-19-47-utc.jpg",
+    posterAvatar: "/assets/images/Sample envato images/stunning-interior-decor-with-a-wooden-floor-and-fu-2024-01-08-22-11-19-utc.jpg",
     posterName: "Elk Grove Electricians",
     imgList: [
       "/assets/images/Sample envato images/54683-stone-fireplace-in-living-room-2023-11-27-05-19-47-utc.jpg",
-      "/assets/images/Sample envato images/beautiful-modern-house-surrounded-by-nature-in-win-2023-11-27-05-09-17-utc.jpg",
+      "/assets/images/Sample envato images/close-up-image-of-a-wooden-staircase-with-several-2024-01-08-22-11-19-utc.jpg",
     ],
     amenities: "Wiring, Repairs, Installations",
     featured: "true",
@@ -57,10 +57,10 @@ module.exports = [Find Properties in These Cities
   },
   {
     id: 3,
-    img: "/assets/images/Sample envato images/beautiful-modern-house-surrounded-by-nature-in-win-2023-11-27-05-09-17-utc.jpg",
+    img: "/assets/images/Sample envato images/stunning-interior-decor-with-a-wooden-floor-and-fu-2024-01-08-22-11-19-utc.jpg",
     price: "65",
     type: "Carpentry",
-    title: "Custom carpentry and woodworking",
+    title: "Quality Carpentry Services",
     location: "Roseville, CA",
     saleTag: ["Top Rated"],
     itemDetails: [
@@ -76,8 +76,8 @@ module.exports = [Find Properties in These Cities
     posterAvatar: "/assets/images/Sample envato images/54683-stone-fireplace-in-living-room-2023-11-27-05-19-47-utc.jpg",
     posterName: "Roseville Carpentry Pros",
     imgList: [
-      "/assets/images/Sample envato images/54683-stone-fireplace-in-living-room-2023-11-27-05-19-47-utc.jpg",
-      "/assets/images/Sample envato images/a-big-house-in-the-middle-of-a-hill-with-a-tree-an-2024-01-19-22-55-37-utc.jpg",
+      "/assets/images/Sample envato images/close-up-image-of-a-wooden-staircase-with-several-2024-01-08-22-11-19-utc.jpg",
+      "/assets/images/Sample envato images/stunning-interior-decor-with-a-wooden-floor-and-fu-2024-01-08-22-11-19-utc.jpg",
     ],
     amenities: "Custom Cabinets, Woodworking, Repairs",
     featured: "false",

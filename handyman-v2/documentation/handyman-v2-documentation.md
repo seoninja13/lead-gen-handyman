@@ -30,7 +30,7 @@ This documentation is intended to provide a comprehensive overview of the projec
 To get started with the Handyman v2 project, follow these steps:
 
 1.  **Clone the repository:** Clone the project repository to your local machine.
-2.  **Install dependencies:** Navigate to the `handyman-v2/Envato-template-files/themeforest-fdkNKA8O-findhouse-real-estate-react-nextjs-template/findhouse` directory and run `yarn install` to install the project dependencies.
+2.  **Install dependencies:** Navigate to the `@handyman-v2/Envato-template-files/themeforest-findhouse-real-estate-react-nextjs-template` directory and run `yarn install` to install the project dependencies.
 3.  **Configure environment variables:** Create a `.env.local` file in the `findhouse` directory and add the necessary environment variables, including the Supabase URL and API key.
 4.  **Run the development server:** Run `yarn dev` to start the development server.
 5.  **Access the application:** Access the application in your browser at `http://localhost:3000`.

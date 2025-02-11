@@ -9,7 +9,7 @@ Welcome to the Handyman v2 project! This document will guide you through the ini
 3.  **Read `handyman-v2/documentation/handyman-v2-documentation.md`:** This file provides a comprehensive overview of the project's architecture, data model, SEO strategy, UI/UX design, and technical implementation details.
 4.  **Review `NEXT_STEPS.md`:** This file outlines the immediate next steps and progress, giving you a clear understanding of what needs to be done next.
 5.  **Clone the repository:** Clone the project repository to your local machine.
-6.  **Install dependencies:** Navigate to the `handyman-v2/Envato-template-files/themeforest-fdkNKA8O-findhouse-real-estate-react-nextjs-template/findhouse` directory and run `yarn install` to install the project dependencies.
+6.  **Install dependencies:** Navigate to the `handyman-v2/Envato-template-files/themeforest-findhouse-real-estate-react-nextjs-template/findhouse` directory and run `yarn install` to install the project dependencies.
 7.  **Configure environment variables:** Create a `.env.local` file in the `findhouse` directory and add the necessary environment variables, including the Supabase URL and API key.
 8.  **Run the development server:** Run `yarn dev` to start the development server.
 9.  **Access the application:** Access the application in your browser at `http://localhost:3000`.
@@ -23,8 +23,11 @@ The Handyman v2 project aims to create a website for handyman services based on 
 *   `handyman-v1`: Contains the original Handyman v1 project.
 *   `handyman-v2`: Contains the new Handyman v2 project.
     *   `handyman-v2/Envato-template-files/themeforest-fdkNKA8O-findhouse-real-estate-react-nextjs-template/findhouse`: Contains the Next.js application based on the FindHouse template.
-        *   `data/properties.js`: Contains data for the handyman services listings. The image paths have been updated to use existing property images.
+        *   `data/properties.js`: Contains data for the handyman services listings.
+        *   `data/findServices.js`: Contains data for the handyman service categories.
         *   `components/common/GlobalFilter.jsx`: Contains the global filter component. The keyword input and service category dropdown have been updated for handyman services.
+        *   `components/home/FeaturedServices.jsx`: Contains the Featured Services component for the home page.
+        *   `components/home/FindServices.jsx`: Contains the Find Services component for the home page.
     *   `handyman-v2/documentation/handyman-v2-documentation.md`: Central documentation hub.
 *   `NEXT_STEPS.md`: Tracks immediate next steps and progress.
 *   `project-requirements.md`: Outlines overall project requirements.

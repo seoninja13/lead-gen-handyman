@@ -39,8 +39,8 @@ const FeaturedProperties = () => {
             width={343}
             height={220}
             className="img-whp w-100 h-100 cover"
-            src={item.img}
-            alt="fp1.jpg"
+            src={`/assets/images/Sample envato images/${item.img}`}
+            alt={item.title}
           />
           <div className="thmb_cntnt">
             <ul className="tag mb0">

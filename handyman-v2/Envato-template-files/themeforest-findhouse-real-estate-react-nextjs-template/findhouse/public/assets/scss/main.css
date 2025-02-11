@@ -114,6 +114,12 @@ Tag: advanced custom search, agency, agent, business, clean, corporate, director
 /*== Shop Single Page Style ==*/
 /*== New Pricing Range Smooth Slider ==*/
 
+/* Add styles for .service_category here (based on .properti_city) */
+
+/* Add styles for .feature-services here (based on .feature-property) */
+
+/* Add styles for .service-categories here (based on .property-city) */
+
 /*== Typography ==*/
 html {
   font-size: 100%;
@@ -4215,7 +4221,7 @@ form.home5_advanced_search_form .form-group input.form-control::-ms-input-placeh
 }
 
 .home1_bgi1 {
-  background-image: url(../images/background/1.jpg);
+  background-image: url("../images/Sample envato images/54683-stone-fireplace-in-living-room-2023-11-27-05-19-47-utc.jpg");
   -webkit-background-size: cover;
   background-size: cover;
   background-position: center center;
@@ -12008,12 +12014,6 @@ legend span {
   border-radius: 8px;
   background-color: #ffffff;
   margin-bottom: 30px;
-  padding: 30px;
-}
-
-.sidebar_recent_product,
-.sidebar_feature_listing {
-  padding: 30px 30px 0;
 }
 
 .sidebar_recent_product .title,

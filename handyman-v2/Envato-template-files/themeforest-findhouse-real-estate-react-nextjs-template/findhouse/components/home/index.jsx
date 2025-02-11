@@ -4,8 +4,8 @@ import Footer from "../common/footer/Footer";
 import MobileMenu from "../common/header/MobileMenu";
 import Partners from "../common/Partners";
 import Blogs from "../common/Blogs";
-import FeaturedProperties from "./FeaturedProperties";
-import FindProperties from "./FindProperties";
+import FeaturedServices from "./FeaturedServices";
+import FindServices from "./FindServices";
 import Header from "./Header";
 import Hero from "./Hero";
 import WhyChoose from "../common/WhyChoose";
@@ -26,38 +26,38 @@ const Index = () => {
       {/* <!-- Home Design --> */}
       <Hero />
 
-      {/* <!-- Feature Properties --> */}
-      <section id="feature-property" className="feature-property bgc-f7">
+      {/* <!-- Featured Services --> */}
+      <section id="feature-services" className="feature-services bgc-f7">
         <div className="container">
           <div className="row">
             <div className="col-lg-6 offset-lg-3">
               <div className="main-title text-center mb40">
-                <h2>Featured Properties</h2>
-                <p>Handpicked properties by our team.</p>
+                <h2>Featured Services</h2>
+                <p>Professional handyman services in your area</p>
               </div>
             </div>
             <div className="col-lg-12">
               <div className="feature_property_slider gutter-x15">
-                <FeaturedProperties />
+                <FeaturedServices />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* <!-- Property Cities --> */}
-      <section id="property-city" className="property-city pb30">
+      {/* <!-- Service Categories --> */}
+      <section id="service-categories" className="service-categories pb30">
         <div className="container">
           <div className="row">
             <div className="col-lg-6 offset-lg-3">
               <div className="main-title text-center">
-                <h2>Find Properties in These Cities</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <h2>Find Services in These Cities</h2>
+                <p>Expert handyman services available in major cities</p>
               </div>
             </div>
           </div>
           <div className="row">
-            <FindProperties />
+            <FindServices />
           </div>
         </div>
       </section>
@@ -86,7 +86,7 @@ const Index = () => {
             <div className="col-lg-6 offset-lg-3">
               <div className="main-title text-center">
                 <h2>Articles & Tips</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p>Expert advice and home maintenance tips from our professionals</p>
               </div>
             </div>
           </div>

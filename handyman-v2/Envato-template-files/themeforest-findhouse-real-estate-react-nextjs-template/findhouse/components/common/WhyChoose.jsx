@@ -2,24 +2,21 @@ const WhyChoose = ({ style = "" }) => {
   const whyCooseContent = [
     {
       id: 1,
-      icon: "flaticon-high-five",
-      title: "Trusted By Thousands",
-      descriptions: `Aliquam dictum elit vitae mauris facilisis at dictum urna
-      dignissim donec vel lectus vel felis.`,
+      icon: "flaticon-tool",
+      title: "Expert Craftsmen",
+      descriptions: `Our skilled handymen have years of experience and are fully licensed and insured. We take pride in delivering high-quality workmanship on every job.`,
     },
     {
       id: 2,
-      icon: "flaticon-home-1",
-      title: "Wide Renge Of Properties",
-      descriptions: `Aliquam dictum elit vitae mauris facilisis at dictum urna
-      dignissim donec vel lectus vel felis.`,
+      icon: "flaticon-clock",
+      title: "24/7 Emergency Service",
+      descriptions: `We understand that home repairs can't wait. That's why we offer round-the-clock emergency services to handle your urgent repair needs.`,
     },
     {
       id: 3,
-      icon: "flaticon-profit",
-      title: "Financing Made Easy",
-      descriptions: `Aliquam dictum elit vitae mauris facilisis at dictum urna
-      dignissim donec vel lectus vel felis.`,
+      icon: "flaticon-money-bag",
+      title: "Transparent Pricing",
+      descriptions: `No hidden fees or surprises. We provide upfront pricing and detailed estimates before starting any work, ensuring you know exactly what to expect.`,
     },
   ];
 

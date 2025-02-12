@@ -15,14 +15,6 @@ const Hero = () => {
                 <p>Get connected with trusted professionals for all your home repair needs</p>
               </div>
             </div>
-            <div className="home1_image">
-              <img
-                src="/assets/images/Sample envato images/54683-stone-fireplace-in-living-room-2023-11-27-05-19-47-utc.jpg"
-                alt="Handyman Services"
-                className="img-fluid w100 h-100 cover"
-                style={{objectFit: 'cover', height: '400px'}}
-              />
-            </div>
             <HeroFilter />
           </div>
         </div>

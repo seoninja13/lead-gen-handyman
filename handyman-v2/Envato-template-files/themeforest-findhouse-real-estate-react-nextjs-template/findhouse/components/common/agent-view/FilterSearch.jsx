@@ -49,50 +49,53 @@ const FilterSearch = () => {
           <input
             type="text"
             className="form-control"
-            id="exampleInputName1"
-            placeholder="Enter Agent Name"
-            onChange={(e) => setName(e.target.value)}
+            placeholder="Enter Handyman Name"
             value={getName}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
       </li>
-      {/* End .search_area */}
+      {/* End name */}
 
       <li>
-        <div className="search_option_two mb-3">
+        <div className="search_option_two">
           <div className="candidate_revew_select">
             <select
               onChange={(e) => setCategory(e.target.value)}
               className="selectpicker w100 show-tick form-select"
+              value={getCategory}
             >
-              <option value="">All Categories</option>
-              <option>Broker</option>
-              <option>Agent</option>
+              <option value="">Service Type</option>
+              <option value="Carpentry">Carpentry</option>
+              <option value="Plumbing">Plumbing</option>
+              <option value="Electrical">Electrical</option>
+              <option value="HVAC">HVAC</option>
+              <option value="Painting">Painting</option>
+              <option value="Renovation">Renovation</option>
             </select>
           </div>
         </div>
       </li>
-      {/* End Categories search_area */}
+      {/* End Service Type */}
 
       <li>
-        <div className="search_option_two mb-3">
+        <div className="search_option_two">
           <div className="candidate_revew_select">
             <select
               onChange={(e) => setCity(e.target.value)}
               className="selectpicker w100 show-tick form-select"
+              value={getCity}
             >
-              <option value="">All Cities</option>
-              <option>Atlanta</option>
-              <option>Florida</option>
-              <option>Los Angeles</option>
-              <option>Miami</option>
-              <option>New York</option>
-              <option>Orlando</option>
+              <option value="">Location</option>
+              <option value="Sacramento">Sacramento</option>
+              <option value="Elk Grove">Elk Grove</option>
+              <option value="Folsom">Folsom</option>
+              <option value="Roseville">Roseville</option>
             </select>
           </div>
         </div>
       </li>
-      {/* End City search_area */}
+      {/* End Location */}
 
       <li>
         <div className="search_option_button">
@@ -101,11 +104,11 @@ const FilterSearch = () => {
             type="button"
             className="btn btn-block btn-thm w-100"
           >
-            Clear
+            Clear Filters
           </button>
         </div>
       </li>
-      {/* End submit serch button */}
+      {/* End submit */}
     </ul>
   );
 };

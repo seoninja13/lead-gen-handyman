@@ -30,9 +30,9 @@ const TopFilterBar = () => {
               {length}{" "}
             </span>
             {length !== 0 ? (
-              "Search results"
+              "Handymen found"
             ) : (
-              <span className="text-danger">No result found</span>
+              <span className="text-danger">No handymen found</span>
             )}
           </p>
         </div>
@@ -49,11 +49,12 @@ const TopFilterBar = () => {
                 className="selectpicker show-tick"
                 value={getListen}
               >
-                <option value="">Select Type</option>
-                <option value="1">1 Listings</option>
-                <option value="2">2 Listings</option>
-                <option value="3">3 Listings</option>
-                <option value="4">4 Listings</option>
+                <option value="">Default</option>
+                <option value="150+">Most Jobs (150+)</option>
+                <option value="120+">Popular (120+)</option>
+                <option value="200+">Highly Experienced (200+)</option>
+                <option value="5.0">Top Rated (5.0)</option>
+                <option value="4.5">Highly Rated (4.5+)</option>
               </select>
             </li>
           </ul>

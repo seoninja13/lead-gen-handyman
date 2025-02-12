@@ -1,16 +1,16 @@
+'use client'
+
 import dynamic from "next/dynamic";
 import AgencyDetails from "@/components/agency-details";
-
-export const metadata = {
-  title: 'Agency Details || FindHouse - Real Estate React Template',
-  description:
-    'FindHouse - Real Estate React Template',
-}
+import { useSearchParams } from "next/navigation";
 
 const index = () => {
+  const searchParams = useSearchParams();
+  const service = searchParams.get('service');
+
   return (
     <>
-      <AgencyDetails />
+      <AgencyDetails service={service} />
     </>
   );
 };

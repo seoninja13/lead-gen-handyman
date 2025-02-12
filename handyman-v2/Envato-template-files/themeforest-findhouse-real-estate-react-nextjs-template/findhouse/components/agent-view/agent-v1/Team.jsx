@@ -1,4 +1,3 @@
-
 'use client'
 
 import Link from "next/link";
@@ -26,7 +25,6 @@ const Team = () => {
     item.city.toLowerCase().includes(city.toLowerCase());
 
   let content = agents
-    .slice(7, 16)
     .filter(nameHandler)
     .filter(categoryHandler)
     .filter(cityHandler)
@@ -37,70 +35,63 @@ const Team = () => {
       <div className="col-md-6 col-lg-6" key={item.id}>
         <div className="feat_property home7 agent">
           <div className="thumb">
-            <Link href={`/agent-details/${item.id}`}>
+            <Link href={`/handyman-details/${item.id}`}>
               <Image
                 width={342}
                 height={262}
                 className="img-whp w-100 h-100 cover"
                 src={item.img}
-                alt="bh1.jpg"
+                alt={item.name}
               />
             </Link>
             <div className="thmb_cntnt">
               <ul className="tag mb0">
-                <li className="list-inline-item dn"></li>
-                <li className="list-inline-item">
-                  <a href="#">{item.noOfListings} Listings</a>
-                </li>
+                {item.specialties.map((specialty, index) => (
+                  <li className="list-inline-item" key={index}>
+                    <a href="#">{specialty}</a>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
-          {/* End .thumb */}
-
           <div className="details">
             <div className="tc_content">
               <h4>
-                <Link href={`/agent-details/${item.id}`}>{item.name}</Link>
+                <Link href={`/handyman-details/${item.id}`}>{item.name}</Link>
               </h4>
               <p className="text-thm">{item.type}</p>
               <ul className="prop_details mb0">
                 <li>
-                  <a href="#">Office: {item.office}</a>
+                  <a href="#">
+                    Experience: {item.yearsExperience} years
+                  </a>
                 </li>
                 <li>
-                  <a href="#">Mobile: {item.mobile}</a>
+                  <a href="#">
+                    Jobs Completed: {item.noOfListings}
+                  </a>
                 </li>
                 <li>
-                  <a href="#">Fax: {item.fax}</a>
-                </li>
-                <li>
-                  <a href="#">Email: {item.email}</a>
+                  <a href="#">
+                    Rating: {item.ratings} ⭐
+                  </a>
                 </li>
               </ul>
             </div>
-            {/* End .tc_content */}
-
             <div className="fp_footer">
               <ul className="fp_meta float-start mb0">
-                {item.socialList.map((social, i) => (
-                  <li className="list-inline-item" key={i}>
-                    <a
-                      href={social.liveLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                {item.socialList.map((social, index) => (
+                  <li className="list-inline-item" key={index}>
+                    <a href={social.liveLink} target="_blank" rel="noopener noreferrer">
                       <i className={`fa ${social.icon}`}></i>
                     </a>
                   </li>
                 ))}
               </ul>
-              <div className="fp_pdate float-end ">
-                <Link href={`/agent-details/${item.id}`} className="text-thm">
-                  View My Listings <i className="fa fa-angle-right"></i>
-                </Link>
+              <div className="fp_pdate float-end text-thm">
+                {item.licensedInsured ? "Licensed & Insured" : ""}
               </div>
             </div>
-            {/* End .fp_footer */}
           </div>
         </div>
       </div>

@@ -6,13 +6,13 @@ import Footer from "../common/footer/Footer";
 import MobileMenu from "../common/header/MobileMenu";
 import Partners from "../common/Partners";
 import Blogs from "../common/Blogs";
-import FeaturedServices from "./FeaturedServices";
-import Header from "./Header";
+import FeaturedServices from "../home/FeaturedServices";
+import Header from "../common/header/DefaultHeader";
 import Hero from "./Hero";
 import WhyChoose from "../common/WhyChoose";
 import PopupSignInUp from "../common/PopupSignInUp";
 
-const Index = () => {
+const Home1 = () => {
   return (
     <>
       {/* <!-- Main Header Nav --> */}
@@ -31,6 +31,12 @@ const Index = () => {
       <section id="feature-services" className="feature-services bgc-f7">
         <div className="container">
           <div className="row">
+            <div className="col-lg-6 offset-lg-3">
+              <div className="main-title text-center mb40">
+                <h2>Featured Services</h2>
+                <p>Professional handyman services in your area</p>
+              </div>
+            </div>
             <div className="col-lg-12">
               <div className="feature_property_slider gutter-x15">
                 <FeaturedServices />
@@ -53,23 +59,6 @@ const Index = () => {
           </div>
           <div className="row">
             <WhyChoose />
-          </div>
-        </div>
-      </section>
-
-      {/* <!-- Our Blog --> */}
-      <section className="our-blog bgc-f7 pb30">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-6 offset-lg-3">
-              <div className="main-title text-center">
-                <h2>Articles & Tips</h2>
-                <p>Expert advice and home maintenance tips</p>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <Blogs />
           </div>
         </div>
       </section>
@@ -117,4 +106,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Home1;

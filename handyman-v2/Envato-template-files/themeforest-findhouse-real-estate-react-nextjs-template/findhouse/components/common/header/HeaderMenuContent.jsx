@@ -212,10 +212,9 @@ const HeaderMenuContent = ({ float = "" }) => {
         </a>
         <ul className="sub-menu ">
           {services.map((item) => (
-            <li className="dropitem arrow" key={item.id}>
+            <li className="dropitem" key={item.id}>
               <a href="#">
                 {item.title}
-                <span className="arrow"></span>
               </a>
               <ul className="sub-menu">
                 {item.items.map((subitem) => (
@@ -240,6 +239,15 @@ const HeaderMenuContent = ({ float = "" }) => {
         </ul>
       </li>
       {/* End .dropitem */}
+
+      <li className="list-inline-item">
+        <Link
+          href="/businesses"
+          className={pathname === "/businesses" ? "ui-active" : undefined}
+        >
+          Businesses
+        </Link>
+      </li>
 
       <li className="dropitem">
         <a

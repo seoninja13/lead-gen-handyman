@@ -28,5 +28,12 @@
     "sass": "^1.68.0",
     "slick-carousel": "^1.8.1",
     "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@popperjs/core": "^2.11.8",
+    "eslint": "^8.0.0",
+    "jquery": "^3.7.1",
+    "prop-types": "^15.8.1",
+    "typescript": "^4.9.5"
   }
 }

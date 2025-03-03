@@ -1,0 +1,28 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "18"
+  NEXT_USE_NETLIFY_EDGE = "true"
+  NEXT_PRIVATE_TARGET = "server"
+
+[dev]
+  framework = "next"
+  command = "npm run dev"
+  targetPort = 3001
+  port = 8888
+  publish = ".next"
+  autoLaunch = true
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "frame-ancestors 'self' https://app.netlify.com"

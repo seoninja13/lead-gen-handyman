@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 
 const Partners = () => {
@@ -51,9 +50,9 @@ const Partners = () => {
           <div className="our_partner">
             <Link href={item.url}>
               <img
-                className="img-fluid"
                 src={item.image}
                 alt={item.name}
+                className="img-fluid"
               />
             </Link>
           </div>

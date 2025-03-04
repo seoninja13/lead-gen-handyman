@@ -1,6 +1,8 @@
 /**
  * @type {import('next').NextConfig}
  */
+const path = require('path');
+
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
@@ -9,7 +11,15 @@ const nextConfig = {
     config.resolve.alias = {
       ...config.resolve.alias,
       // Add your path aliases here
+      '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
     };
+    
+    // Add support for font files
+    config.module.rules.push({
+      test: /\.(woff|woff2|eot|ttf|otf)$/i,
+      type: 'asset/resource',
+    });
+    
     return config;
   },
   // Add support for importing from the Envato template
@@ -17,12 +27,15 @@ const nextConfig = {
   
   // Configure image optimization
   images: {
+    unoptimized: true, // Allow unoptimized images
     remotePatterns: [
       {
         protocol: 'http',
-        hostname: 'localhost',
-        port: '3000',
-        pathname: '/**',
+        hostname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: '**',
       },
     ],
   },

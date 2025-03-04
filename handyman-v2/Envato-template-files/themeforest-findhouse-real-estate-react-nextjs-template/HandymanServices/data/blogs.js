@@ -1,7 +1,7 @@
 module.exports = [
   {
     id: 1,
-    img: "/assets/images/blog/1.jpg",
+    img: "/assets/images/Sample envato images/a-big-house-in-the-middle-of-a-hill-with-a-tree-an-2024-01-19-22-55-37-utc.jpg",
     postMeta: "Maintenance",
     title: "Essential Home Maintenance Tips for Every Season",
     posterAvatar: "/assets/images/agency/2.jpg",
@@ -11,7 +11,7 @@ module.exports = [
   },
   {
     id: 2,
-    img: "/assets/images/blog/2.jpg",
+    img: "/assets/images/Sample envato images/beautiful-modern-house-surrounded-by-nature-in-win-2023-11-27-05-09-17-utc.jpg",
     postMeta: "DIY",
     title: "10 DIY Home Repairs Anyone Can Do",
     posterAvatar: "/assets/images/agency/3.jpg",
@@ -21,7 +21,7 @@ module.exports = [
   },
   {
     id: 3,
-    img: "/assets/images/blog/3.jpg",
+    img: "/assets/images/Sample envato images/close-up-image-of-a-wooden-staircase-with-several-2024-01-08-22-11-19-utc.jpg",
     postMeta: "Improvement",
     title: "Top Home Improvement Projects with the Best ROI",
     posterAvatar: "/assets/images/agency/4.jpg",

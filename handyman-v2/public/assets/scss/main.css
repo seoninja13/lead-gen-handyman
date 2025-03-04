@@ -9,7 +9,7 @@ Tag: advanced custom search, agency, agent, business, clean, corporate, director
 
 ********/
 /* CSS Document */
-@import "~bootstrap/scss/bootstrap";
+/* Bootstrap is imported in _app.js */
 @import url(../scss/font-awesome.min.css);
 @import url(../scss/font-awesome-animation.min.css);
 @import url(../scss/flaticon.css);

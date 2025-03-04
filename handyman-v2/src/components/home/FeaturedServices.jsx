@@ -7,7 +7,6 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 
 const FeaturedServices = () => {
   // Sample featured services data
@@ -56,13 +55,13 @@ const FeaturedServices = () => {
         <div className="col-lg-3 col-md-6" key={service.id}>
           <div className="feat_property">
             <div className="thumb">
-              <Image 
-                className="img-whp" 
-                src={service.image} 
-                alt={service.title}
-                width={350}
-                height={220}
-              />
+              <Link href={`/service-details/${service.id}`}>
+                <img
+                  className="img-whp"
+                  src={service.image}
+                  alt={service.title}
+                />
+              </Link>
               <div className="thmb_cntnt">
                 <ul className="tag mb0">
                   <li className="list-inline-item">

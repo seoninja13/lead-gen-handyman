@@ -7,7 +7,6 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 
 const Blogs = () => {
   // Sample blog data - in a real application, this would come from an API or CMS
@@ -49,25 +48,19 @@ const Blogs = () => {
             <div className="thumb">
               <Link href={`/blog-details/${item.id}`}>
                 <div style={{ position: 'relative', width: '100%', height: '240px' }}>
-                  <Image
-                    className="img-whp"
+                  <img
                     src={item.image}
                     alt={item.title}
-                    fill
-                    style={{ objectFit: 'cover' }}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
                 </div>
               </Link>
-              <div className="blog_tag">
-                {item.category}
-              </div>
+              <div className="blog_tag">{item.category}</div>
             </div>
             <div className="details">
               <div className="tc_content">
                 <h4>
-                  <Link href={`/blog-details/${item.id}`}>
-                    {item.title}
-                  </Link>
+                  <Link href={`/blog-details/${item.id}`}>{item.title}</Link>
                 </h4>
                 <p>{item.description}</p>
               </div>

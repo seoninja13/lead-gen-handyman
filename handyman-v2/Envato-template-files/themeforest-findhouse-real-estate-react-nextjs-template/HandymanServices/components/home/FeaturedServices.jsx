@@ -3,7 +3,6 @@
 import Link from "next/link";
 import Slider from "react-slick";
 import services from "../../data/services";
-import Image from "next/image";
 
 const FeaturedServices = () => {
   const settings = {
@@ -35,7 +34,7 @@ const FeaturedServices = () => {
     <div className="item" key={item.id}>
       <div className="feat_service">
         <div className="thumb">
-          <Image
+          <img
             width={343}
             height={220}
             className="img-whp w-100 h-100 cover"
@@ -44,7 +43,7 @@ const FeaturedServices = () => {
           />
           <div className="thmb_cntnt">
             <ul className="tag mb0">
-              {item.saleTag.map((val, i) => (
+              {item.saleTag && item.saleTag.map((val, i) => (
                 <li className="list-inline-item" key={i}>
                   <a href="#">{val}</a>
                 </li>

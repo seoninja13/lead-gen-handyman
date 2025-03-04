@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import Image from 'next/image';
 
 const Partners = () => {
   // Sample partners data
@@ -14,27 +13,27 @@ const Partners = () => {
     {
       id: 1,
       name: "Partner 1",
-      image: "/images/partner1.png"
+      image: "/assets/images/partners/1.png"
     },
     {
       id: 2,
       name: "Partner 2",
-      image: "/images/partner2.png"
+      image: "/assets/images/partners/2.png"
     },
     {
       id: 3,
       name: "Partner 3",
-      image: "/images/partner3.png"
+      image: "/assets/images/partners/3.png"
     },
     {
       id: 4,
       name: "Partner 4",
-      image: "/images/partner4.png"
+      image: "/assets/images/partners/4.png"
     },
     {
       id: 5,
       name: "Partner 5",
-      image: "/images/partner5.png"
+      image: "/assets/images/partners/5.png"
     }
   ];
 
@@ -44,11 +43,12 @@ const Partners = () => {
         <div className="our_partner">
           {partners.map((partner) => (
             <div className="single_partner" key={partner.id}>
-              <Image
+              <img
                 src={partner.image}
                 alt={partner.name}
                 width={120}
                 height={80}
+                style={{ objectFit: 'contain' }}
               />
             </div>
           ))}

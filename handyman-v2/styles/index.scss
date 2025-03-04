@@ -1,0 +1,29 @@
+/**
+ * Main SCSS file for the Handyman Lead Generation application
+ * This file imports all the necessary CSS files from the Envato template
+ */
+
+// Import Bootstrap directly
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+// Import Google Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,400i,500,600,700&display=swap');
+
+// Import FontAwesome
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
+// Import template CSS files
+@import '../public/assets/scss/bootstrap-fix.css';
+@import '../public/assets/scss/main.css';
+@import '../public/assets/scss/responsive.css';
+@import '../public/assets/scss/menu.css';
+@import '../public/assets/scss/megadropdown.css';
+@import '../public/assets/scss/ace-responsive-menu.css';
+@import '../public/assets/scss/dashbord_navitaion.css';
+@import '../public/assets/scss/flaticon.css';
+@import '../public/assets/scss/font-awesome.min.css';
+@import '../public/assets/scss/font-awesome-animation.min.css';
+
+// Import custom styles
+@import './globals.css';
+@import './components.css';

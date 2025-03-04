@@ -28,12 +28,53 @@ The Handyman v2 project aims to create a website for handyman services based on 
         *   `components/common/GlobalFilter.jsx`: Contains the global filter component. The keyword input and service category dropdown have been updated for handyman services.
         *   `components/home/FeaturedServices.jsx`: Contains the Featured Services component for the home page.
         *   `components/home/FindServices.jsx`: Contains the Find Services component for the home page.
-    *   `handyman-v2/documentation/handyman-v2-documentation.md`: Central documentation hub.
+*   `handyman-v2/documentation/handyman-v2-documentation.md`: Central documentation hub.
 *   `NEXT_STEPS.md`: Tracks immediate next steps and progress.
 *   `project-requirements.md`: Outlines overall project requirements.
+
+## Current CSS Issues and Troubleshooting
+
+We're currently experiencing issues with CSS styling in the project. Here's what you need to know:
+
+1. **CSS Integration Approach**:
+   - We've created a script (`scripts/copy-template-css.js`) that copies CSS and font files from the original Envato template to the project
+   - We've updated the `_app.js` file to import the template's CSS files
+   - We've added SCSS support by installing the `sass` package
+   - We've created an `index.scss` file that imports all necessary CSS files
+
+2. **Current Issues**:
+   - Some CSS styles are not being applied correctly
+   - Font files might not be loading properly
+   - The layout doesn't match the original template exactly
+
+3. **Troubleshooting Steps**:
+   - Compare the working HandymanServices template with our implementation
+   - Check the CSS import order in `_app.js` and `index.scss`
+   - Verify that all font files are correctly copied and referenced
+   - Inspect the browser's developer tools to identify missing or conflicting styles
+   - Consider using the `_document.js` approach to include CSS files directly in the HTML head
+
+4. **Reference Implementation**:
+   - The original HandymanServices template in `Envato-template-files/themeforest-findhouse-real-estate-react-nextjs-template/HandymanServices` is working correctly
+   - Use this as a reference for CSS structure and implementation
 
 ## Conversion Process
 1. Review [CONVERSION_GUIDELINES.md](cci:7://file:///C:/Users/IvoD/repos/lead-gen-handyman/handyman-v2/CONVERSION_GUIDELINES.md)
 2. Follow image replacement protocols
+
+## Next Steps
+
+1. **Fix CSS Issues**:
+   - Complete the CSS integration by resolving the remaining styling issues
+   - Ensure all font files are correctly referenced and accessible
+
+2. **Component Implementation**:
+   - Implement HeaderMenuContent.jsx
+   - Update MobileMenu.jsx to match the template
+   - Test the application to ensure it renders correctly
+
+3. **MCP Integration**:
+   - Integrate the MCP functionality from the 03-03-AddPSEOEnrichment branch
+   - Focus on MCP Configuration, Utility Functions, and Components
 
 By following these instructions, you should be well-equipped to start contributing to the Handyman v2 project.

@@ -7,6 +7,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Blogs = () => {
   // Sample blog data - in a real application, this would come from an API or CMS
@@ -47,39 +48,45 @@ const Blogs = () => {
           <div className="for_blog feat_property">
             <div className="thumb">
               <Link href={`/blog-details/${item.id}`}>
-                <img className="img-whp" src={item.image} alt={item.title} />
+                <div style={{ position: 'relative', width: '100%', height: '240px' }}>
+                  <Image
+                    className="img-whp"
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
               </Link>
-              <div className="blog_tag">{item.category}</div>
+              <div className="blog_tag">
+                {item.category}
+              </div>
             </div>
-            {/* End .thumb */}
-
             <div className="details">
               <div className="tc_content">
-                <h4 className="mb15">
-                  <Link href={`/blog-details/${item.id}`}>{item.title}</Link>
+                <h4>
+                  <Link href={`/blog-details/${item.id}`}>
+                    {item.title}
+                  </Link>
                 </h4>
                 <p>{item.description}</p>
               </div>
-              {/* End .tc_content */}
-
               <div className="fp_footer">
                 <ul className="fp_meta float-start mb0">
                   <li className="list-inline-item">
-                    <Link href="/agent-details">
-                      <img src="/assets/images/property/pposter1.png" alt="pposter1.png" />
+                    <Link href={`/author/${item.author.toLowerCase().replace(/\s+/g, '-')}`}>
+                      <span className="flaticon-user"></span> {item.author}
                     </Link>
                   </li>
-                  <li className="list-inline-item">
-                    <Link href="/agent-details">{item.author}</Link>
-                  </li>
                 </ul>
-                <a className="fp_pdate float-end" href="#">
+                <Link
+                  className="fp_pdate float-end"
+                  href={`/blog-archive/${item.date.split(' ')[0].toLowerCase()}-${item.date.split(' ')[1].replace(',', '')}-${item.date.split(' ')[2]}`}
+                >
                   {item.date}
-                </a>
+                </Link>
               </div>
-              {/* End .fp_footer */}
             </div>
-            {/* End .details */}
           </div>
         </div>
       ))}

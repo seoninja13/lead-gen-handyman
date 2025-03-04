@@ -17,7 +17,7 @@ const FeaturedServices = () => {
       title: "Plumbing Repair",
       price: "$75",
       type: "Residential",
-      image: "/images/service1.jpg",
+      image: "/assets/images/service/1.jpg",
       location: "Sacramento, CA",
       description: "Professional plumbing services including leak repair, pipe installation, and drain cleaning."
     },
@@ -26,7 +26,7 @@ const FeaturedServices = () => {
       title: "Electrical Services",
       price: "$85",
       type: "Commercial & Residential",
-      image: "/images/service2.jpg",
+      image: "/assets/images/service/2.jpg",
       location: "Folsom, CA",
       description: "Electrical installation, repair, and maintenance for homes and businesses."
     },
@@ -35,7 +35,7 @@ const FeaturedServices = () => {
       title: "Carpentry & Woodwork",
       price: "$65",
       type: "Residential",
-      image: "/images/service3.jpg",
+      image: "/assets/images/service/3.jpg",
       location: "Roseville, CA",
       description: "Custom woodworking, furniture repair, and general carpentry services."
     },
@@ -44,7 +44,7 @@ const FeaturedServices = () => {
       title: "Painting Services",
       price: "$45",
       type: "Commercial & Residential",
-      image: "/images/service4.jpg",
+      image: "/assets/images/service/4.jpg",
       location: "Elk Grove, CA",
       description: "Interior and exterior painting for homes and commercial properties."
     }

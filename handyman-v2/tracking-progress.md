@@ -84,6 +84,27 @@
    - Update inquiry forms for handyman services
    - Add service request functionality
 
+## Testing and Quality Assurance
+
+### Completed
+1. Testing Isolation
+   - Created a dedicated test page at `/test` to isolate testing functionality
+   - Fixed routing configuration to properly use Pages Router
+
+### In Progress
+1. Action Plan Implementation
+   - Updated comprehensive plan of action (see `documentation/plan-of-action.md`)
+   - Identified next steps for development and testing
+
+### To Do
+1. Unit Testing Setup
+   - Set up Jest and React Testing Library
+   - Create test templates for components
+   - Implement automated test runs
+2. End-to-End Testing (Future)
+   - Set up Cypress or Playwright
+   - Create basic end-to-end test scenarios
+
 ## Next Tasks
 1. Convert Property page to Businesses page
    - Implement Listing Single - Single v2 template for business profiles

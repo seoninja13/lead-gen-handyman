@@ -9,6 +9,7 @@
  */
 
 import { PlaceData } from '../../lib/google-places-client';
+import { MCP_ENDPOINTS, getMcpRequestOptions, handleMcpError } from '../../config/mcp-config';
 
 /**
  * Execute a SQL query using the Supabase MCP server
@@ -32,10 +33,31 @@ export async function executeQuery(sql: string): Promise<any> {
     }
 
     const result = await response.json();
-    return result.data;
+    return result.rows || [];
   } catch (error) {
     console.error('Error in executeQuery:', error);
     throw error;
+  }
+}
+
+/**
+ * Execute a SQL query directly using the Supabase MCP endpoint
+ * 
+ * @param sql The SQL query to execute
+ * @returns Promise resolving to the query results
+ */
+export async function executeQueryDirect(sql: string): Promise<any> {
+  try {
+    const response = await fetch(MCP_ENDPOINTS.SUPABASE_QUERY, getMcpRequestOptions({ sql }));
+    
+    if (!response.ok) {
+      throw new Error(`MCP server error: ${response.status} ${response.statusText}`);
+    }
+    
+    const result = await response.json();
+    return result.rows || [];
+  } catch (error) {
+    throw handleMcpError(error);
   }
 }
 
@@ -92,6 +114,11 @@ export async function getPlaceById(placeId: string): Promise<PlaceData | null> {
  */
 export async function savePlace(place: PlaceData): Promise<boolean> {
   try {
+    if (!place || !place.place_id) {
+      console.error('Invalid place data');
+      return false;
+    }
+
     // Use parameterized query to prevent SQL injection
     const sql = `
       INSERT INTO places (
@@ -99,13 +126,13 @@ export async function savePlace(place: PlaceData): Promise<boolean> {
         description, phone_number, website, latitude, longitude, last_updated
       ) VALUES (
         '${place.place_id}', 
-        '${place.name?.replace(/'/g, "''")}', 
-        '${place.formatted_address?.replace(/'/g, "''")}', 
+        '${(place.name || '').replace(/'/g, "''")}', 
+        '${(place.formatted_address || '').replace(/'/g, "''")}', 
         ${place.rating || 'NULL'}, 
         ${place.user_ratings_total || 'NULL'}, 
-        '${place.description?.replace(/'/g, "''")}', 
-        '${place.phone_number?.replace(/'/g, "''")}', 
-        '${place.website?.replace(/'/g, "''")}', 
+        '${(place.description || '').replace(/'/g, "''")}', 
+        '${(place.phone_number || '').replace(/'/g, "''")}', 
+        '${(place.website || '').replace(/'/g, "''")}', 
         ${place.geometry?.location.lat || 'NULL'}, 
         ${place.geometry?.location.lng || 'NULL'}, 
         NOW()
@@ -143,7 +170,7 @@ export async function getPlacesByCity(city: string, limit: number = 10): Promise
   try {
     const sql = `
       SELECT * FROM places 
-      WHERE address ILIKE '%${city}%' 
+      WHERE address ILIKE '%${city.replace(/'/g, "''")}%' 
       ORDER BY rating DESC NULLS LAST 
       LIMIT ${limit}
     `;
@@ -200,13 +227,16 @@ export async function getNearbyPlaces(
     const lngDegrees = radiusMiles / 55;
     
     const sql = `
-      SELECT * FROM places 
+      SELECT *,
+        (
+          (latitude - ${latitude})^2 + 
+          (longitude - ${longitude})^2
+        ) AS distance_squared
+      FROM places
       WHERE 
-        latitude >= ${latitude - latDegrees} AND 
-        latitude <= ${latitude + latDegrees} AND 
-        longitude >= ${longitude - lngDegrees} AND 
-        longitude <= ${longitude + lngDegrees} 
-      ORDER BY rating DESC NULLS LAST 
+        latitude BETWEEN ${latitude - latDegrees} AND ${latitude + latDegrees} AND
+        longitude BETWEEN ${longitude - lngDegrees} AND ${longitude + lngDegrees}
+      ORDER BY distance_squared ASC
       LIMIT ${limit}
     `;
     
@@ -237,6 +267,80 @@ export async function getNearbyPlaces(
   } catch (error) {
     console.error('Error in getNearbyPlaces:', error);
     return [];
+  }
+}
+
+/**
+ * Save a service area to the database
+ * 
+ * @param serviceArea The service area data to save
+ * @returns Promise resolving to true if successful, false otherwise
+ */
+export async function saveServiceArea(serviceArea: any): Promise<boolean> {
+  try {
+    const sql = `
+      INSERT INTO service_areas (
+        provider_id, name, address, latitude, longitude, radius_miles, created_at
+      ) VALUES (
+        '${serviceArea.provider_id}', 
+        '${serviceArea.name.replace(/'/g, "''")}', 
+        '${serviceArea.address.replace(/'/g, "''")}', 
+        ${serviceArea.latitude}, 
+        ${serviceArea.longitude}, 
+        ${serviceArea.radius_miles}, 
+        NOW()
+      )
+      RETURNING id
+    `;
+    
+    const result = await executeQuery(sql);
+    return result && result.length > 0;
+  } catch (error) {
+    console.error('Error in saveServiceArea:', error);
+    return false;
+  }
+}
+
+/**
+ * Get service areas for a provider
+ * 
+ * @param providerId The provider ID
+ * @returns Promise resolving to an array of service areas
+ */
+export async function getServiceAreas(providerId: string): Promise<any[]> {
+  try {
+    const sql = `
+      SELECT * FROM service_areas 
+      WHERE provider_id = '${providerId}'
+      ORDER BY created_at DESC
+    `;
+    
+    const results = await executeQuery(sql);
+    return results || [];
+  } catch (error) {
+    console.error('Error in getServiceAreas:', error);
+    return [];
+  }
+}
+
+/**
+ * Delete a service area
+ * 
+ * @param areaId The service area ID
+ * @returns Promise resolving to true if successful, false otherwise
+ */
+export async function deleteServiceArea(areaId: string): Promise<boolean> {
+  try {
+    const sql = `
+      DELETE FROM service_areas 
+      WHERE id = '${areaId}'
+    `;
+    
+    await executeQuery(sql);
+    return true;
+  } catch (error) {
+    console.error('Error in deleteServiceArea:', error);
+    return false;
   }
 }
 
@@ -287,55 +391,6 @@ export async function addServiceArea(
     return true;
   } catch (error) {
     console.error('Error in addServiceArea:', error);
-    return false;
-  }
-}
-
-/**
- * Get service areas for a provider
- * 
- * @param providerId The provider ID
- * @returns Promise resolving to an array of service areas
- */
-export async function getServiceAreas(providerId: string): Promise<any[]> {
-  try {
-    const sql = `
-      SELECT sa.*, p.name, p.address, p.latitude, p.longitude 
-      FROM service_areas sa 
-      JOIN places p ON sa.place_id = p.place_id 
-      WHERE sa.provider_id = '${providerId}' 
-      ORDER BY sa.is_primary DESC, p.name ASC
-    `;
-    
-    const results = await executeQuery(sql);
-    return results || [];
-  } catch (error) {
-    console.error('Error in getServiceAreas:', error);
-    return [];
-  }
-}
-
-/**
- * Delete a service area
- * 
- * @param providerId The provider ID
- * @param placeId The Google Place ID
- * @returns Promise resolving to true if successful, false otherwise
- */
-export async function deleteServiceArea(
-  providerId: string,
-  placeId: string
-): Promise<boolean> {
-  try {
-    const sql = `
-      DELETE FROM service_areas 
-      WHERE provider_id = '${providerId}' AND place_id = '${placeId}'
-    `;
-    
-    await executeQuery(sql);
-    return true;
-  } catch (error) {
-    console.error('Error in deleteServiceArea:', error);
     return false;
   }
 }

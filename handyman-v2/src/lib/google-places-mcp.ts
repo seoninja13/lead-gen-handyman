@@ -6,8 +6,8 @@
  */
 
 import { PlaceData } from './google-places-client';
-import { executeMapsRequest } from '../utils/mcp-helpers';
 import { savePlace } from '../utils/supabase/mcp-client';
+import { MCP_ENDPOINTS, getMcpRequestOptions, handleMcpError } from '../config/mcp-config';
 
 /**
  * Process API results into PlaceData format
@@ -31,17 +31,46 @@ function processPlaceResults(results: any[]): PlaceData[] {
 }
 
 /**
+ * Execute a request to the Google Maps MCP server
+ * 
+ * @param endpoint The MCP endpoint to call
+ * @param params The parameters to send
+ * @returns Promise resolving to the response data
+ */
+async function executeMapsRequest(endpoint: keyof typeof MCP_ENDPOINTS, params: any): Promise<any> {
+  try {
+    const response = await fetch(MCP_ENDPOINTS[endpoint], getMcpRequestOptions(params));
+    
+    if (!response.ok) {
+      throw new Error(`MCP server error: ${response.status} ${response.statusText}`);
+    }
+    
+    return await response.json();
+  } catch (error) {
+    throw handleMcpError(error);
+  }
+}
+
+/**
  * Search for places using Google Places API via MCP
  * 
  * @param query The search query
+ * @param location Optional center point for the search
+ * @param radius Search radius in meters (max 50000)
  * @param maxResults Maximum number of results to return
  * @returns Promise resolving to array of place data
  */
-export async function searchPlaces(query: string, maxResults: number = 10): Promise<PlaceData[]> {
+export async function searchPlaces(
+  query: string, 
+  location?: { latitude: number; longitude: number },
+  radius: number = 50000,
+  maxResults: number = 10
+): Promise<PlaceData[]> {
   try {
-    const response = await executeMapsRequest('mcp0_maps_search_places', {
+    const response = await executeMapsRequest('MAPS_SEARCH_PLACES', {
       query,
-      radius: 50000 // 50km radius
+      location,
+      radius
     });
 
     if (!response || !response.results) {
@@ -72,7 +101,7 @@ export async function searchPlaces(query: string, maxResults: number = 10): Prom
  */
 export async function getPlaceDetails(placeId: string): Promise<PlaceData | null> {
   try {
-    const response = await executeMapsRequest('mcp0_maps_place_details', {
+    const response = await executeMapsRequest('MAPS_PLACE_DETAILS', {
       place_id: placeId
     });
 
@@ -108,7 +137,7 @@ export async function getDirections(
   mode: 'driving' | 'walking' | 'bicycling' | 'transit' = 'driving'
 ): Promise<any> {
   try {
-    const response = await executeMapsRequest('mcp0_maps_directions', {
+    const response = await executeMapsRequest('MAPS_DIRECTIONS', {
       origin,
       destination,
       mode
@@ -135,7 +164,7 @@ export async function getDistanceMatrix(
   mode: 'driving' | 'walking' | 'bicycling' | 'transit' = 'driving'
 ): Promise<any> {
   try {
-    const response = await executeMapsRequest('mcp0_maps_distance_matrix', {
+    const response = await executeMapsRequest('MAPS_DISTANCE_MATRIX', {
       origins,
       destinations,
       mode
@@ -156,11 +185,11 @@ export async function getDistanceMatrix(
  */
 export async function geocodeAddress(address: string): Promise<any> {
   try {
-    const response = await executeMapsRequest('mcp0_maps_geocode', {
+    const response = await executeMapsRequest('MAPS_GEOCODE', {
       address
     });
 
-    return response;
+    return response.results?.[0] || null;
   } catch (error) {
     console.error('Error in geocodeAddress:', error);
     throw error;
@@ -176,12 +205,12 @@ export async function geocodeAddress(address: string): Promise<any> {
  */
 export async function reverseGeocode(latitude: number, longitude: number): Promise<any> {
   try {
-    const response = await executeMapsRequest('mcp0_maps_reverse_geocode', {
+    const response = await executeMapsRequest('MAPS_REVERSE_GEOCODE', {
       latitude,
       longitude
     });
 
-    return response;
+    return response.results?.[0] || null;
   } catch (error) {
     console.error('Error in reverseGeocode:', error);
     throw error;

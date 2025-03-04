@@ -5,6 +5,8 @@
  * Model Context Protocol (MCP) servers.
  */
 
+import { MCP_ENDPOINTS, getMcpRequestOptions, handleMcpError } from '../config/mcp-config';
+
 /**
  * Execute a SQL query using the Supabase MCP server directly
  * 
@@ -16,15 +18,8 @@
  */
 export async function executeMcpQuery(sql: string): Promise<any> {
   try {
-    // Call the MCP server directly
-    // Note: This assumes the MCP server is running on port 3001
-    const response = await fetch('http://localhost:3001/mcp2_query', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ sql }),
-    });
+    // Call the MCP server directly using the configured endpoint
+    const response = await fetch(MCP_ENDPOINTS.SUPABASE_QUERY, getMcpRequestOptions({ sql }));
 
     if (!response.ok) {
       throw new Error(`Error executing query: ${response.statusText}`);
@@ -34,28 +29,27 @@ export async function executeMcpQuery(sql: string): Promise<any> {
     return result.rows || [];
   } catch (error) {
     console.error('Error in executeMcpQuery:', error);
-    throw error;
+    throw handleMcpError(error);
   }
 }
 
 /**
  * Execute a Google Maps API request using the MCP server
  * 
- * @param method The MCP method to call (e.g., 'mcp0_maps_search_places')
+ * @param method The MCP method key from MCP_ENDPOINTS
  * @param params The parameters for the method
  * @returns Promise resolving to the API response
  */
-export async function executeMapsRequest(method: string, params: any): Promise<any> {
+export async function executeMapsRequest(method: keyof typeof MCP_ENDPOINTS, params: any): Promise<any> {
   try {
-    // Call the MCP server directly
-    // Note: This assumes the MCP server is running on port 3001
-    const response = await fetch(`http://localhost:3001/${method}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(params),
-    });
+    // Call the MCP server using the configured endpoint
+    const endpoint = MCP_ENDPOINTS[method];
+    
+    if (!endpoint) {
+      throw new Error(`Unknown MCP endpoint: ${method}`);
+    }
+    
+    const response = await fetch(endpoint, getMcpRequestOptions(params));
 
     if (!response.ok) {
       throw new Error(`Error executing Maps request: ${response.statusText}`);
@@ -64,6 +58,6 @@ export async function executeMapsRequest(method: string, params: any): Promise<a
     return await response.json();
   } catch (error) {
     console.error(`Error in executeMapsRequest (${method}):`, error);
-    throw error;
+    throw handleMcpError(error);
   }
 }

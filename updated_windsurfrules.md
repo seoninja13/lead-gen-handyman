@@ -10,7 +10,7 @@ We're developing a Next.js 14 application that connects customers with trusted h
 - **Testing Isolation**: All testing functionality should be isolated to the `/test` route
 - **SEO Optimization**: The URL structure follows a city-specific, service-oriented pattern (e.g., `/emergency-plumbing-repair-sacramento-ca`)
 - **Data Management**: Uses Supabase for data storage and Google Places API for location services
-- **MCP Integration**: Properly configured MCP server integration for Supabase, Google Maps, and OpenAI APIs
+- **MCP Integration**: Properly configured integration with Google Maps, OpenAI, and Supabase MCP servers
 
 ## Current Issue
 We need to ensure all MCP server integrations (Supabase, Google Maps, OpenAI) are functioning correctly with the proper URL scheme and configuration in the Envato template files.
@@ -27,11 +27,11 @@ We need to ensure all MCP server integrations (Supabase, Google Maps, OpenAI) ar
 ## 2. Tech Stack and Architecture
 
 - **Framework**: Next.js 14 with Pages Router
-- **Database**: Supabase (PostgreSQL) via MCP server
+- **Database**: Supabase (PostgreSQL) via Supabase MCP server
 - **API Integrations**: 
-  - Google Maps API via MCP server
-  - OpenAI API via MCP server
-  - Supabase via MCP server
+  - Google Maps API via Google Maps MCP server
+  - OpenAI API via OpenAI MCP server
+  - Supabase via Supabase MCP server
 - **URL Structure**: City-specific, service-oriented pattern
   - Example: `/emergency-plumbing-repair-sacramento-ca`
 
@@ -93,41 +93,41 @@ The MCP (Model Context Protocol) servers are managed by Windsurf and configured 
 C:\Users\JR\.codeium\windsurf\mcp_config.json
 ```
 
-There are three MCP servers configured:
+There are three specific MCP servers configured:
 
-1. **google-maps**: For Google Maps API integration
+1. **Google Maps MCP server**: For Google Maps API integration
    - Provides endpoints for places search, geocoding, directions, etc.
    - Uses the Google Maps API key configured in the MCP config
 
-2. **mcp-openai**: For OpenAI API integration
+2. **OpenAI MCP server**: For OpenAI API integration
    - Provides endpoints for chat completions and other OpenAI services
    - Uses the OpenAI API key configured in the MCP config
 
-3. **supabase**: For Supabase/PostgreSQL integration
+3. **Supabase MCP server**: For Supabase/PostgreSQL integration
    - Provides endpoints for executing SQL queries
    - Uses the Supabase connection string configured in the MCP config
 
 ## Important Notes:
-- The MCP servers are automatically started by Windsurf when needed
+- Each MCP server is automatically started by Windsurf when needed
 - All MCP servers run on port 8888 by default
-- The application connects to the MCP servers using HTTP protocol, not the MCP protocol
-- The base URL for MCP servers is configured as `http://localhost:8888` in the application
+- The application connects to the MCP servers using HTTP protocol
+- The base URL for all MCP servers is configured as `http://localhost:8888` in the application
 
 ## Testing MCP Endpoints
 
 When testing MCP endpoints, ensure that:
 1. The Next.js development server is running (on port 3000 or 3001)
-2. The MCP servers are running (managed by Windsurf)
+2. The specific MCP servers are running (managed by Windsurf)
 3. The correct port is used in the test commands (matching the port of the Next.js server)
 
-For testing the MCP server endpoints, use these PowerShell commands (adjust the port as needed):
+For testing the specific MCP server endpoints, use these PowerShell commands (adjust the port as needed):
 
 ## 1. Test Status Endpoint
 ```powershell
 Invoke-RestMethod -Uri "http://localhost:3000/api/mcp/status" -Method GET | ConvertTo-Json -Depth 5
 ```
 
-## 2. Test Supabase Endpoint
+## 2. Test Supabase MCP Server Endpoint
 ```powershell
 $body = @{
     sql = "SELECT 1 as test"
@@ -135,7 +135,7 @@ $body = @{
 Invoke-RestMethod -Uri "http://localhost:3000/api/mcp/supabase" -Method POST -Body $body -ContentType "application/json" | ConvertTo-Json -Depth 5
 ```
 
-## 3. Test Google Maps Places Search
+## 3. Test Google Maps MCP Server Places Search
 ```powershell
 $body = @{
     query = "restaurants"
@@ -145,10 +145,10 @@ $body = @{
     }
     radius = 1000
 } | ConvertTo-Json
-Invoke-RestMethod -Uri "http://localhost:3000/api/mcp/places/search" -Method POST -Body $body -ContentType "application/json" | ConvertTo-Json -Depth 5
+Invoke-RestMethod -Uri "http://localhost:3000/api/mcp/maps/places/search" -Method POST -Body $body -ContentType "application/json" | ConvertTo-Json -Depth 5
 ```
 
-## 4. Test Google Maps Geocode
+## 4. Test Google Maps MCP Server Geocode
 ```powershell
 $body = @{
     address = "1600 Amphitheatre Parkway, Mountain View, CA"
@@ -156,7 +156,7 @@ $body = @{
 Invoke-RestMethod -Uri "http://localhost:3000/api/mcp/maps/geocode" -Method POST -Body $body -ContentType "application/json" | ConvertTo-Json -Depth 5
 ```
 
-## 5. Test Google Maps Directions
+## 5. Test Google Maps MCP Server Directions
 ```powershell
 $body = @{
     origin = "San Francisco, CA"
@@ -166,7 +166,7 @@ $body = @{
 Invoke-RestMethod -Uri "http://localhost:3000/api/mcp/maps/directions" -Method POST -Body $body -ContentType "application/json" | ConvertTo-Json -Depth 5
 ```
 
-## 6. Test OpenAI Chat
+## 6. Test OpenAI MCP Server Chat
 ```powershell
 $body = @{
     messages = @(

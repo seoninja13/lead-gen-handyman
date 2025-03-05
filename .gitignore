@@ -37,9 +37,15 @@ Thumbs.db
 
 # Project specific
 secrets.txt
+commit_message.txt
 
-# Envato template files - only include specific modified files
-handyman-v2/Envato-template-files/WorkDirectory/
-!handyman-v2/Envato-template-files/WorkDirectory/HandymanServices/utils/mcp/config.js
-!handyman-v2/Envato-template-files/WorkDirectory/HandymanServices/pages/api/mcp/
-!handyman-v2/Envato-template-files/WorkDirectory/HandymanServices/pages/api/mcp/**
+# Original template files - exclude completely
+handyman-v2/Envato-template-files/themeforest-findhouse-real-estate-react-nextjs-template/
+
+# WorkDirectory temporary files
+handyman-v2/Envato-template-files/WorkDirectory/**/node_modules/
+handyman-v2/Envato-template-files/WorkDirectory/**/.next/
+handyman-v2/Envato-template-files/WorkDirectory/**/.env.local
+handyman-v2/Envato-template-files/WorkDirectory/**/.env.development.local
+handyman-v2/Envato-template-files/WorkDirectory/**/.env.test.local
+handyman-v2/Envato-template-files/WorkDirectory/**/.env.production.local

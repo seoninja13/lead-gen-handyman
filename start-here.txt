@@ -1,7 +1,7 @@
-To start working on the Handyman project, navigate to the `handyman-v2/Envato-template-files/themeforest-fdkNKA8O-findhouse-real-estate-react-nextjs-template/findhouse` directory. This is the new project built with Next.js, Supabase, and OpenAI.
+To start working on the Handyman project, navigate to the `handyman-v2/Envato-template-files/themeforest-findhouse-real-estate-react-nextjs-template/HandymanServices` directory. This is the current project built with Next.js, Supabase, and OpenAI.
 
 A new developer should read the following files in this order:
-1. handyman-v2/new-developer-instructions.md
-2. project-requirements.md
-3. handyman-v2/documentation/handyman-v2-documentation.md
-4. NEXT_STEPS.md
+1. NEXT_STEPS.md (at the root of the repository) - Quick start guide
+2. handyman-v2/Envato-template-files/themeforest-findhouse-real-estate-react-nextjs-template/HandymanServices/documentation/tracking-progress.md - Current project status and tasks
+3. handyman-v2/Envato-template-files/themeforest-findhouse-real-estate-react-nextjs-template/HandymanServices/documentation/handyman-v2-documentation.md - Project architecture
+4. handyman-v2/Envato-template-files/themeforest-findhouse-real-estate-react-nextjs-template/HandymanServices/documentation/mcp-integration.md - MCP functionality

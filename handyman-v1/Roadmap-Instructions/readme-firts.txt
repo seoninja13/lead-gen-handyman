@@ -1,1 +1,0 @@
-There was a project which was deletd by accident, now we are trying to recover it. All the instruction the folder "Roadmap-Instructions" are from the old script. we also already have existing 3 Tables in supabase. we hwill have to connnect to supabse and see the content of the tables. Then we have to match  instructions form the existing old instruction to recreate the project.

@@ -86,26 +86,41 @@ This structure follows standard Next.js organization with the Pages Router patte
 - Display success/error states in adjacent UI elements
 - Use consistent component styling across the application
 
-# Progress Tracking System
+## MCP Server Configuration
 
-All feature implementations must be documented in the tracking-progress.md file located at:
-C:\Users\IvoD\repos\lead-gen-handyman\handyman-v2\tracking-progress.md
+The MCP (Model Context Protocol) servers are managed by Windsurf and configured in the Windsurf MCP configuration file located at:
+```
+C:\Users\JR\.codeium\windsurf\mcp_config.json
+```
 
-The tracking system categorizes features into three statuses:
-1. Completed - Features that have been fully implemented
-2. Pending Review - Features that have been implemented but need verification
-3. To Do - Features that still need to be implemented
+There are three MCP servers configured:
 
-When implementing a new feature or fixing an issue:
-- Add the feature to the appropriate section in tracking-progress.md
-- Include details about what was changed or implemented
-- Update the status as development progresses
+1. **google-maps**: For Google Maps API integration
+   - Provides endpoints for places search, geocoding, directions, etc.
+   - Uses the Google Maps API key configured in the MCP config
 
-The tracking-progress.md file is organized by major sections of the application (Home Page, Navigation, Services, etc.) to provide a clear overview of the project's current state.
+2. **mcp-openai**: For OpenAI API integration
+   - Provides endpoints for chat completions and other OpenAI services
+   - Uses the OpenAI API key configured in the MCP config
 
-# Testing MCP Endpoints
+3. **supabase**: For Supabase/PostgreSQL integration
+   - Provides endpoints for executing SQL queries
+   - Uses the Supabase connection string configured in the MCP config
 
-For testing the MCP server endpoints, use these PowerShell commands:
+## Important Notes:
+- The MCP servers are automatically started by Windsurf when needed
+- All MCP servers run on port 8888 by default
+- The application connects to the MCP servers using HTTP protocol, not the MCP protocol
+- The base URL for MCP servers is configured as `http://localhost:8888` in the application
+
+## Testing MCP Endpoints
+
+When testing MCP endpoints, ensure that:
+1. The Next.js development server is running (on port 3000 or 3001)
+2. The MCP servers are running (managed by Windsurf)
+3. The correct port is used in the test commands (matching the port of the Next.js server)
+
+For testing the MCP server endpoints, use these PowerShell commands (adjust the port as needed):
 
 ## 1. Test Status Endpoint
 ```powershell
@@ -163,3 +178,22 @@ $body = @{
     model = "gpt-4o-mini"
 } | ConvertTo-Json
 Invoke-RestMethod -Uri "http://localhost:3000/api/mcp/openai" -Method POST -Body $body -ContentType "application/json" | ConvertTo-Json -Depth 5
+
+```
+
+# Progress Tracking System
+
+All feature implementations must be documented in the tracking-progress.md file located at:
+C:\Users\IvoD\repos\lead-gen-handyman\handyman-v2\tracking-progress.md
+
+The tracking system categorizes features into three statuses:
+1. Completed - Features that have been fully implemented
+2. Pending Review - Features that have been implemented but need verification
+3. To Do - Features that still need to be implemented
+
+When implementing a new feature or fixing an issue:
+- Add the feature to the appropriate section in tracking-progress.md
+- Include details about what was changed or implemented
+- Update the status as development progresses
+
+The tracking-progress.md file is organized by major sections of the application (Home Page, Navigation, Services, etc.) to provide a clear overview of the project's current state.

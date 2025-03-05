@@ -37,3 +37,9 @@ Thumbs.db
 
 # Project specific
 secrets.txt
+
+# Envato template files - only include specific modified files
+handyman-v2/Envato-template-files/WorkDirectory/
+!handyman-v2/Envato-template-files/WorkDirectory/HandymanServices/utils/mcp/config.js
+!handyman-v2/Envato-template-files/WorkDirectory/HandymanServices/pages/api/mcp/
+!handyman-v2/Envato-template-files/WorkDirectory/HandymanServices/pages/api/mcp/**

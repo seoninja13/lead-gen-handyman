@@ -1,8 +1,8 @@
 # Handyman v2 Project Plan of Action
 
 **Phase 1: FindHouse Template Setup (Completed)**
-1. Explore the `handyman-v2/Envato-template-files/themeforest-findhouse-real-estate-react-nextjs-template/findhouse` directory to understand the structure of the FindHouse template.
-2. Install the necessary dependencies for the FindHouse application by running `yarn install` in the `handyman-v2/Envato-template-files/themeforest-findhouse-real-estate-react-nextjs-template/findhouse` directory.
+1. Explore the `handyman-v2/Envato-template-files/WorkDirectory/findhouse` directory to understand the structure of the FindHouse template.
+2. Install the necessary dependencies for the FindHouse application by running `yarn install` in the `handyman-v2/Envato-template-files/WorkDirectory/findhouse` directory.
 3. Start the original FindHouse application in development mode using the command `yarn dev` in the same `findhouse` directory and verify it is running correctly.
 
 **Phase 2: Template Adaptation and Handyman Content Integration (In Progress)**

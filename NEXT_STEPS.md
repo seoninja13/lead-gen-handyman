@@ -7,29 +7,29 @@ This document serves as a quick-start guide for the Handyman Lead Generation pro
 ## Project Location
 
 All development work should take place in:
-`C:\Users\IvoD\repos\lead-gen-handyman\handyman-v2\Envato-template-files\themeforest-findhouse-real-estate-react-nextjs-template\HandymanServices`
+`C:\Users\IvoD\repos\lead-gen-handyman\handyman-v2\Envato-template-files\WorkDirectory\HandymanServices`
 
 ## Documentation Reference
 
 For detailed information about the project, refer to these documentation files:
 
 1. **Project Status and Progress:**
-   - [tracking-progress.md](./handyman-v2/Envato-template-files/themeforest-findhouse-real-estate-react-nextjs-template/HandymanServices/documentation/tracking-progress.md)
+   - [tracking-progress.md](./handyman-v2/Envato-template-files/WorkDirectory/HandymanServices/documentation/tracking-progress.md)
    - Contains detailed progress tracking by component/feature
    - Includes current status, immediate next steps, and future tasks
 
 2. **Project Architecture and Design:**
-   - [handyman-v2-documentation.md](./handyman-v2/Envato-template-files/themeforest-findhouse-real-estate-react-nextjs-template/HandymanServices/documentation/handyman-v2-documentation.md)
+   - [handyman-v2-documentation.md](./handyman-v2/Envato-template-files/WorkDirectory/HandymanServices/documentation/handyman-v2-documentation.md)
    - Comprehensive overview of project architecture and design
    - Includes data model, URL structure, and technical implementation details
 
 3. **Implementation Strategy:**
-   - [plan-of-action.md](./handyman-v2/Envato-template-files/themeforest-findhouse-real-estate-react-nextjs-template/HandymanServices/documentation/plan-of-action.md)
+   - [plan-of-action.md](./handyman-v2/Envato-template-files/WorkDirectory/HandymanServices/documentation/plan-of-action.md)
    - Phased implementation strategy for the project
    - Detailed steps for each phase of development
 
 4. **MCP Integration:**
-   - [mcp-integration.md](./handyman-v2/Envato-template-files/themeforest-findhouse-real-estate-react-nextjs-template/HandymanServices/documentation/mcp-integration.md)
+   - [mcp-integration.md](./handyman-v2/Envato-template-files/WorkDirectory/HandymanServices/documentation/mcp-integration.md)
    - Technical details of MCP implementation
    - Includes components, configuration, and usage examples
 
@@ -51,4 +51,4 @@ For detailed information about the project, refer to these documentation files:
 
 ## Immediate Action Items
 
-For the most up-to-date list of immediate action items, refer to the "Immediate Next Steps" and "To Do" sections in the [tracking-progress.md](./handyman-v2/Envato-template-files/themeforest-findhouse-real-estate-react-nextjs-template/HandymanServices/documentation/tracking-progress.md) file.
+For the most up-to-date list of immediate action items, refer to the "Immediate Next Steps" and "To Do" sections in the [tracking-progress.md](./handyman-v2/Envato-template-files/WorkDirectory/HandymanServices/documentation/tracking-progress.md) file.

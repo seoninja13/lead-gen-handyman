@@ -24,6 +24,12 @@ export default function SupabaseTest() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // State for MCP server test
+  const [mcpSqlQuery, setMcpSqlQuery] = useState("SELECT tablename FROM pg_tables WHERE schemaname = 'public';");
+  const [mcpResult, setMcpResult] = useState(null);
+  const [mcpLoading, setMcpLoading] = useState(false);
+  const [mcpError, setMcpError] = useState(null);
+
   // Check connection status on mount
   useEffect(() => {
     checkConnectionStatus();
@@ -107,10 +113,44 @@ export default function SupabaseTest() {
     }
   };
 
+  // Function to execute a SQL query via Supabase MCP server
+  const executeMcpQuery = async () => {
+    try {
+      setMcpLoading(true);
+      setMcpError(null);
+      setMcpResult(null);
+
+      // Call the MCP server directly
+      const response = await fetch('http://localhost:8888/mcp3_execute_postgresql', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          query: mcpSqlQuery
+        })
+      });
+
+      const data = await response.json();
+      setMcpResult(data);
+    } catch (error) {
+      console.error('Error executing MCP query:', error);
+      setMcpError(error.message || 'Failed to execute SQL query via MCP server');
+    } finally {
+      setMcpLoading(false);
+    }
+  };
+
   // Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     executeQuery();
+  };
+
+  // Function to handle MCP form submission
+  const handleMcpSubmit = (e) => {
+    e.preventDefault();
+    executeMcpQuery();
   };
 
   // Function to set example query parameters based on operation
@@ -130,6 +170,26 @@ export default function SupabaseTest() {
         break;
       default:
         setQueryParams('{\n  "limit": 5\n}');
+    }
+  };
+
+  // Function to set example MCP SQL queries
+  const setExampleMcpQuery = (queryType) => {
+    switch (queryType) {
+      case 'list_tables':
+        setMcpSqlQuery("SELECT tablename FROM pg_tables WHERE schemaname = 'public';");
+        break;
+      case 'table_info':
+        setMcpSqlQuery(`SELECT column_name, data_type, is_nullable 
+FROM information_schema.columns 
+WHERE table_schema = 'public' 
+AND table_name = 'places';`);
+        break;
+      case 'count_records':
+        setMcpSqlQuery("SELECT COUNT(*) FROM places;");
+        break;
+      default:
+        setMcpSqlQuery("SELECT tablename FROM pg_tables WHERE schemaname = 'public';");
     }
   };
 
@@ -165,6 +225,84 @@ export default function SupabaseTest() {
         >
           Refresh Status
         </button>
+      </div>
+
+      {/* Supabase MCP Server Test */}
+      <div className="mb-6 p-4 border rounded bg-purple-50">
+        <h2 className="text-xl font-semibold mb-4">Supabase MCP Server Test</h2>
+        <form onSubmit={handleMcpSubmit}>
+          <div className="mb-4">
+            <div className="flex justify-between items-center mb-1">
+              <label className="font-medium">SQL Query:</label>
+              <div className="space-x-2">
+                <button 
+                  type="button"
+                  onClick={() => setExampleMcpQuery('list_tables')}
+                  className="text-sm text-purple-600 hover:text-purple-800"
+                >
+                  List Tables
+                </button>
+                <button 
+                  type="button"
+                  onClick={() => setExampleMcpQuery('table_info')}
+                  className="text-sm text-purple-600 hover:text-purple-800"
+                >
+                  Table Info
+                </button>
+                <button 
+                  type="button"
+                  onClick={() => setExampleMcpQuery('count_records')}
+                  className="text-sm text-purple-600 hover:text-purple-800"
+                >
+                  Count Records
+                </button>
+              </div>
+            </div>
+            <textarea 
+              value={mcpSqlQuery} 
+              onChange={(e) => setMcpSqlQuery(e.target.value)}
+              className="w-full p-2 border rounded font-mono text-sm"
+              rows="5"
+              required
+            />
+          </div>
+          <button 
+            type="submit"
+            disabled={mcpLoading}
+            className={`w-full p-2 rounded text-white ${
+              mcpLoading ? 'bg-purple-300' : 'bg-purple-600 hover:bg-purple-700'
+            } transition`}
+          >
+            {mcpLoading ? 'Executing...' : 'Execute SQL via MCP Server'}
+          </button>
+        </form>
+
+        {/* MCP Results */}
+        <div className="mt-4">
+          <h3 className="font-semibold mb-2">MCP Server Results:</h3>
+          {mcpError && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+              <p><strong>Error:</strong> {mcpError}</p>
+            </div>
+          )}
+          {mcpLoading && (
+            <div className="flex items-center justify-center p-6">
+              <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-purple-500"></div>
+            </div>
+          )}
+          {!mcpLoading && mcpResult && (
+            <div>
+              <pre className="bg-gray-100 p-4 rounded overflow-auto max-h-60 text-sm">
+                {JSON.stringify(mcpResult, null, 2)}
+              </pre>
+            </div>
+          )}
+          {!mcpLoading && !mcpResult && !mcpError && (
+            <p className="text-gray-500 text-center p-4">
+              Execute a SQL query via MCP server to see results
+            </p>
+          )}
+        </div>
       </div>
 
       {/* Query Form */}

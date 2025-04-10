@@ -53,6 +53,22 @@ export default async function handler(req, res) {
       console.log('Error getting version:', e);
     }
 
+    // Try to check auth status
+    try {
+      const { data: session, error: sessionError } = await supabase.auth.getSession();
+      
+      if (!sessionError) {
+        return res.status(200).json({
+          status: 'ok',
+          message: 'Connected to Supabase Auth',
+          session: session ? 'Valid' : 'No active session',
+          url: process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://nshlrphkirhzchuodpeo.supabase.co'
+        });
+      }
+    } catch (e) {
+      console.log('Error checking auth status:', e);
+    }
+
     // If we get here, we couldn't connect to Supabase
     // Return a mock response for testing purposes
     return res.status(200).json({

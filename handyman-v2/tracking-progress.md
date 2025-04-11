@@ -128,6 +128,7 @@
    - Created comprehensive integration examples
    - Added troubleshooting guide and best practices
    - Created detailed documentation in supabase-mcp-server.md
+   - **Note:** The primary table used for Supabase CRUD testing is `test-delete`. The implementation handles potential hyphens in table names.
 
 ### To Do
 1. Enhance Perplexity MCP Server

@@ -1,92 +1,57 @@
+import { createClient } from '@supabase/supabase-js';
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
+
 /**
- * Supabase Status API Route
- *
- * This API route checks the status of the Supabase connection.
- * It can be used to verify that the Supabase client is properly configured.
- *
- * Endpoint: /api/supabase/status
- * Method: GET
+ * Check Supabase connection status
  */
-
-import { supabase } from '../../../utils/supabase/client';
-
 export default async function handler(req, res) {
-  // Only allow GET requests
+  // Set CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
   if (req.method !== 'GET') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    return res.status(405).json({
+      error: 'Method not allowed',
+      details: 'Only GET requests are supported'
+    });
   }
 
   try {
-    // Try to get a list of tables
-    try {
-      const { data: tables, error: tablesError } = await supabase
-        .from('_tables')
-        .select('*')
-        .limit(1);
+    // Simple query to test connection
+    const { data, error } = await supabase
+      .from('test-delete')
+      .select('*')
+      .limit(1);
 
-      if (!tablesError) {
-        return res.status(200).json({
-          status: 'ok',
-          message: 'Successfully connected to Supabase',
-          tables: tables,
-          url: process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://nshlrphkirhzchuodpeo.supabase.co'
-        });
-      }
-    } catch (e) {
-      console.log('Error getting tables:', e);
+    if (error) {
+      console.error('Supabase connection error:', error);
+      return res.status(200).json({
+        connected: false,
+        message: 'Failed to connect to Supabase',
+        error: error.message
+      });
     }
 
-    // Try to get the Supabase version
-    try {
-      const { data: version, error: versionError } = await supabase
-        .rpc('version');
-
-      if (!versionError) {
-        return res.status(200).json({
-          status: 'ok',
-          message: 'Successfully connected to Supabase',
-          version: version,
-          url: process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://nshlrphkirhzchuodpeo.supabase.co'
-        });
-      }
-    } catch (e) {
-      console.log('Error getting version:', e);
-    }
-
-    // Try to check auth status
-    try {
-      const { data: session, error: sessionError } = await supabase.auth.getSession();
-      
-      if (!sessionError) {
-        return res.status(200).json({
-          status: 'ok',
-          message: 'Connected to Supabase Auth',
-          session: session ? 'Valid' : 'No active session',
-          url: process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://nshlrphkirhzchuodpeo.supabase.co'
-        });
-      }
-    } catch (e) {
-      console.log('Error checking auth status:', e);
-    }
-
-    // If we get here, we couldn't connect to Supabase
-    // Return a mock response for testing purposes
     return res.status(200).json({
-      status: 'connected', // We're connected but with errors
-      message: 'Connected to Supabase but encountered errors',
-      mockData: true,
-      url: process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://nshlrphkirhzchuodpeo.supabase.co'
+      connected: true,
+      message: 'Successfully connected to Supabase'
     });
+
   } catch (error) {
-    console.error('Error in Supabase status API route:', error);
-    // Return a 200 status with error information for testing purposes
+    console.error('Server error:', error);
     return res.status(200).json({
-      status: 'error',
-      message: 'Internal server error',
-      error: error.message,
-      details: error.toString(),
-      mockData: true,
-      url: process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://nshlrphkirhzchuodpeo.supabase.co'
+      connected: false,
+      message: 'Failed to connect to Supabase',
+      error: error.message
     });
   }
 }

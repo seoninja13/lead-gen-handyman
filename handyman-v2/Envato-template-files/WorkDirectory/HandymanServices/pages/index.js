@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 /**
- * Home Page - MCP Server Test
- * 
- * This page provides a direct interface to test the Supabase MCP server.
- * Heavily commented code as per user preference.
+ * Home Page - Redirects to the Handyman Services home page
+ *
+ * This page redirects to the handyman services home page while preserving
+ * the MCP testing functionality at /mcp-test
  */
 const HomePage = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    // Redirect to the handyman services home page
+    router.push('/home');
+  }, []);
+
   // Function to test Supabase MCP server
   const testSupabaseMCP = async () => {
     try {
       // SQL query to list all tables in the public schema
       const query = "SELECT tablename FROM pg_tables WHERE schemaname = 'public';";
-      
+
       // Make a direct request to the MCP server
       const response = await fetch('http://localhost:8888/mcp3_execute_postgresql', {
         method: 'POST',
@@ -22,10 +30,10 @@ const HomePage = () => {
         },
         body: JSON.stringify({ query })
       });
-      
+
       // Parse the response
       const data = await response.json();
-      
+
       // Display the result
       console.log('Supabase MCP Response:', data);
       alert('Check console for Supabase MCP response');
@@ -46,10 +54,10 @@ const HomePage = () => {
         },
         body: JSON.stringify({ address: 'Sacramento, CA' })
       });
-      
+
       // Parse the response
       const data = await response.json();
-      
+
       // Display the result
       console.log('Google Maps MCP Response:', data);
       alert('Check console for Google Maps MCP response');
@@ -70,10 +78,10 @@ const HomePage = () => {
         },
         body: JSON.stringify({ query: 'handyman services in Sacramento' })
       });
-      
+
       // Parse the response
       const data = await response.json();
-      
+
       // Display the result
       console.log('Perplexity MCP Response:', data);
       alert('Check console for Perplexity MCP response');
@@ -100,10 +108,10 @@ const HomePage = () => {
           ]
         })
       });
-      
+
       // Parse the response
       const data = await response.json();
-      
+
       // Display the result
       console.log('OpenAI MCP Response:', data);
       alert('Check console for OpenAI MCP response');
@@ -118,51 +126,51 @@ const HomePage = () => {
       <Head>
         <title>MCP Servers Test</title>
       </Head>
-      
+
       <h1 className="text-4xl font-bold mb-8 text-center">MCP Servers Test</h1>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
         {/* Supabase MCP Server Test */}
         <div className="border rounded-lg p-6 shadow-md bg-purple-50">
           <h2 className="text-2xl font-semibold mb-4">Supabase MCP Server</h2>
           <p className="mb-6">Test the Supabase MCP server by listing all tables in the public schema.</p>
-          <button 
+          <button
             onClick={testSupabaseMCP}
             className="w-full py-3 px-4 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition"
           >
             Test Supabase MCP
           </button>
         </div>
-        
+
         {/* Google Maps MCP Server Test */}
         <div className="border rounded-lg p-6 shadow-md bg-green-50">
           <h2 className="text-2xl font-semibold mb-4">Google Maps MCP Server</h2>
           <p className="mb-6">Test the Google Maps MCP server by geocoding "Sacramento, CA".</p>
-          <button 
+          <button
             onClick={testGoogleMapsMCP}
             className="w-full py-3 px-4 bg-green-600 text-white rounded-md hover:bg-green-700 transition"
           >
             Test Google Maps MCP
           </button>
         </div>
-        
+
         {/* Perplexity MCP Server Test */}
         <div className="border rounded-lg p-6 shadow-md bg-blue-50">
           <h2 className="text-2xl font-semibold mb-4">Perplexity MCP Server</h2>
           <p className="mb-6">Test the Perplexity MCP server by searching for "handyman services in Sacramento".</p>
-          <button 
+          <button
             onClick={testPerplexityMCP}
             className="w-full py-3 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
           >
             Test Perplexity MCP
           </button>
         </div>
-        
+
         {/* OpenAI MCP Server Test */}
         <div className="border rounded-lg p-6 shadow-md bg-gray-50">
           <h2 className="text-2xl font-semibold mb-4">OpenAI MCP Server</h2>
           <p className="mb-6">Test the OpenAI MCP server by generating a description for a handyman service business.</p>
-          <button 
+          <button
             onClick={testOpenAIMCP}
             className="w-full py-3 px-4 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition"
           >
@@ -170,7 +178,7 @@ const HomePage = () => {
           </button>
         </div>
       </div>
-      
+
       <div className="mt-8 p-4 bg-yellow-50 border border-yellow-200 rounded-md max-w-4xl mx-auto">
         <h3 className="font-semibold text-lg mb-2">Instructions:</h3>
         <ol className="list-decimal pl-5 space-y-2">

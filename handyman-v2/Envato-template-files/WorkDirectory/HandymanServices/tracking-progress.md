@@ -1,110 +1,107 @@
 # Handyman Lead Generation Project - Development Progress
 
+## Content Adaptation and Database Integration
+
+### April 11, 2025 - Static Content Files Creation
+
+- ✅ Created `data/properties.js` with handyman businesses data
+- ✅ Created `data/findServices.js` with handyman service categories
+- ✅ Created `data/cities.js` for location-based filtering
+- ✅ Created `data/testimonial.js` for customer reviews
+- ✅ Created `data/service.js` for service offerings
+
+**Next Steps:**
+- ✅ Implement database schema in Supabase
+  - ✅ Created SQL files for all tables
+  - ✅ Created script to execute SQL files
+  - ✅ Created script to seed database with initial data
+- ✅ Connect components to Supabase
+  - ✅ Created service layer for businesses
+  - ✅ Created service layer for services
+  - ✅ Created service layer for cities
+  - ✅ Created service layer for reviews
+  - ✅ Created service layer for bookings
+- ✅ Adapt global components for handyman services
+  - ✅ Created modified GlobalFilter component
+  - ✅ Created modified GlobalHeroFilter component
+  - ✅ Created modified GlobalSelectBox component
+  - ✅ Created modified CheckBoxFilter component
+  - ✅ Created modified PricingRangeSlider component
+  - ✅ Created modified Hero component
+- ✅ Implement URL Structure
+  - ✅ Verified main services page (`/services`)
+  - ✅ Verified specific service pages (`/services/[service-slug]`)
+  - ✅ Created location-specific service pages (`/services/[service-slug]/[location-slug]`)
+  - ✅ Created business-specific pages (`/services/[service-slug]/[location-slug]/[business-slug]`)
+- ✅ Adapt Home Page
+  - ✅ Created new home page with handyman-focused content
+  - ✅ Updated "Featured Properties" to "Featured Service Providers"
+  - ✅ Modified "Find Properties" to "Find Services"
+  - ✅ Updated "Why Choose Us" section for handyman context
+  - ✅ Updated "Partners" section with relevant handyman industry partners
+- ✅ Test Current Implementation
+  - ✅ Tested URL structure and navigation
+  - ✅ Verified that the home page displays correctly
+  - ✅ Checked that service pages show the correct data
+  - ✅ Preserved MCP testing functionality at /mcp-test
+
 ## Supabase Integration
 
-### March 9 2025 - Direct Supabase Connection Implementation
+### April 11 2025 - Direct SQL Query Implementation
 
-#### Completed Tasks
+#### Implementation Guidelines
 
-- **Enhanced Supabase Client**
-  - Updated the Supabase client in `utils/supabase/client.js` with comprehensive utility functions
-  - Added functions for executing SQL queries, checking table existence, and creating tables
-  - Implemented robust error handling and fallback mechanisms for testing
+**Correct Approach - DO:**
+1. Use direct SQL queries for all Supabase operations:
+   ```sql
+   -- Read data
+   SELECT * FROM "test-delete";
 
-- **API Routes Enhancement**
-  - Improved `/api/supabase/status.js` with multiple connection verification methods
-  - Enhanced `/api/supabase/execute-sql.js` to handle different query types with better error handling
-  - Ensured all API routes return 200 status codes with appropriate error information
+   -- Insert data
+   INSERT INTO "test-delete" (name, description, price) VALUES (...);
 
-- **Test Interface Development**
-  - Created a comprehensive test page at `/supabase-test.js` for verifying Supabase connection
-  - Implemented UI for executing SQL queries, checking connection status, and creating test tables
-  - Added CSS styling for the test interface in `styles/SupabaseTest.module.css`
+   -- Update data
+   UPDATE "test-delete" SET ... WHERE id = ...;
 
-#### Key Improvements
+   -- Delete data
+   DELETE FROM "test-delete" WHERE id = ...;
+   ```
+2. Use the existing table `test-delete` that's already in Supabase
+3. Always use double quotes for table names with hyphens: `"test-delete"`
 
-- **Error Handling**: All API routes now include robust error handling to prevent 500 Internal Server Errors
-- **Fallback Mechanisms**: Added mock responses for testing when actual Supabase operations fail
-- **Connection Verification**: Implemented multiple methods to verify Supabase connection status
-- **User Interface**: Created a user-friendly interface for testing Supabase operations
+**DO NOT:**
+1. ❌ Use Supabase client's built-in methods:
+   ```javascript
+   // DON'T use these
+   supabase.from('test-delete').select()
+   supabase.from('test-delete').insert()
+   supabase.from('test-delete').update()
+   supabase.from('test-delete').delete()
+   ```
+2. ❌ Use RPC functions:
+   ```javascript
+   // DON'T use this
+   supabase.rpc('execute_sql', { query_text: query })
+   ```
+3. ❌ Try to create tables that already exist
+4. ❌ Use MCP servers or try to configure them
+5. ❌ Use count(*) queries or other complex operations when simple SELECT would work
 
-#### Next Steps
+#### Files Modified:
+- `utils/supabase-client.js`: Supabase connection and SQL operations
+- `components/SupabaseTest.jsx`: UI component for testing SQL operations
 
-- Test the implementation with various SQL operations
-- Integrate the direct Supabase connection with other parts of the application
-- Implement additional database operations as needed
+### April 11, 2025
 
-### April 9 2025 - Supabase Direct SQL Execution with Hyphenated Tables
-
-#### Implementation Details
-
-- **Enhanced SQL Execution API**
-  - Completely rewrote the SQL execution logic in `/api/supabase/execute-sql.js` to prioritize real data
-  - Implemented special handling for tables with hyphens in their names (e.g., `test-delete` → `test_delete`)
-  - Added support for all SQL operations (SELECT, INSERT, UPDATE, DELETE) with direct Supabase client calls
-  - Removed all mock data responses to ensure real data is always returned
-
-- **Test Page Updates**
-  - Updated the default SQL query on the test page to use `test-delete` table
-  - Enhanced error handling and result display for better debugging
-
-#### Development Status
-
-- **500 Internal Server Error**
-  - The SQL execution API is returning a 500 error when attempting to query the `test-delete` table
-  - Possible causes:
-    - Connection issues with Supabase
-    - Improper handling of hyphenated table names
-    - Error in the SQL query parsing logic
-    - Issues with the Supabase client configuration
-
-#### Development Plan
-
-- Debug the 500 error by:
-  - Adding more detailed error logging in the API route
-  - Verifying the Supabase connection credentials
-  - Testing with different SQL queries and table names
-  - Implementing a more robust fallback mechanism
-
-- Implement additional error handling:
-  - Add try/catch blocks around all Supabase client operations
-  - Provide more descriptive error messages
-  - Add validation for SQL queries before execution
-
-- Test with real data:
-  - Verify the `test-delete` table exists in Supabase
-  - Test various SQL operations once the connection is working
-  - Document the results for future reference
-
-### April 10 2025 - Enhanced Error Logging and Monitoring
-
-#### System Enhancements
-
-- **Logging System Implementation**
-  - Created new logging utility in `utils/logging.js` for comprehensive error tracking
-  - Implemented detailed error logging with timestamps and metadata
-  - Added performance monitoring for SQL operations
-  - Set up structured JSON logging for better analysis
-
-- **SQL Execution API Enhancements**
-  - Updated `/api/supabase/execute-sql.js` with new logging system
-  - Added operation duration tracking for performance analysis
-  - Implemented consistent error handling across all operations
-  - Simplified code structure for better maintainability
-
-#### System Improvements
-
-- **Error Tracking**: All SQL operations now log detailed information to `logs/sql-operations.log`
-- **Performance Metrics**: Each operation is timed and logged with duration information
-- **Structured Logging**: JSON-formatted logs for easy parsing and analysis
-- **Operation Categories**: All operations are properly categorized and tracked
-
-#### Development Roadmap
-
-- Monitor and analyze logs to identify patterns in 500 errors
-- Use performance metrics to optimize slow queries
-- Implement log rotation to manage log file size
-- Add log analysis tools for better debugging
+- **Supabase Test Interface & API:**
+  - Refined the Supabase test UI (`SupabaseTest.js`) and SQL execution API (`/api/supabase/execute-sql.js`) for CRUD operations.
+  - Temporarily disabled the frontend connection status check due to issues with the `/api/supabase/status` endpoint.
+- **Development Server:**
+  - Encountered persistent `EPERM` file lock errors on `.next/trace` when running `yarn dev`.
+  - This prevents the development server from starting fully and causes API routes to fail (resulting in "Failed to fetch" errors in the UI).
+- **Next Steps:**
+  - Manually stop the server and delete the `.next` folder to resolve the file lock issue.
+  - Restart the development server with `yarn dev`.
 
 ## [In Progress] Debug Supabase CRUD Test Script (April 10, 2025)
 

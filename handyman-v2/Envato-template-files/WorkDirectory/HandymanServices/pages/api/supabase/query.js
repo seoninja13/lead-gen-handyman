@@ -23,6 +23,11 @@ const mockData = {
     { id: 3, name: 'Quick Fix Handyman', address: '789 Pine Rd', city: 'Dallas', state: 'TX', phone: '(214) 555-9012' },
     { id: 4, name: 'Reliable Home Services', address: '321 Elm St', city: 'Houston', state: 'TX', phone: '(713) 555-3456' },
     { id: 5, name: 'Handy Helpers', address: '654 Maple Dr', city: 'San Antonio', state: 'TX', phone: '(210) 555-7890' }
+  ],
+  'test-delete': [
+    { id: 1, name: 'Test Item 1', description: 'This is a test item for CRUD operations' },
+    { id: 2, name: 'Test Item 2', description: 'Another test item for CRUD operations' },
+    { id: 3, name: 'Test Item 3', description: 'Yet another test item for CRUD operations' }
   ]
 };
 
@@ -75,34 +80,23 @@ export default async function handler(req, res) {
     } catch (operationError) {
       console.error(`Error in ${operation} operation:`, operationError);
 
-      // Return mock data for testing purposes
-      if (operation.toLowerCase() === 'select' && mockData[table]) {
-        console.log(`Returning mock data for ${table}`);
-        return res.status(200).json({
-          data: mockData[table],
-          count: mockData[table].length,
-          mockData: true,
-          error: operationError.message
-        });
-      }
+      // Log the error for debugging
+      console.error(`Error details for ${operation} operation on ${table}:`, operationError);
 
-      // For other operations, return a success response with mock data
-      return res.status(200).json({
-        data: [],
-        mockData: true,
+      // Return the error to the client
+      return res.status(500).json({
+        error: operationError.message,
+        details: operationError.details || operationError.toString(),
         operation: operation.toLowerCase(),
-        table,
-        error: operationError.message
+        table
       });
     }
   } catch (error) {
     console.error('Error in Supabase query API route:', error);
-    return res.status(200).json({
+    return res.status(500).json({
       error: 'Internal server error',
       message: error.message,
-      details: error.details || error.toString(),
-      mockData: true,
-      data: []
+      details: error.details || error.toString()
     });
   }
 }

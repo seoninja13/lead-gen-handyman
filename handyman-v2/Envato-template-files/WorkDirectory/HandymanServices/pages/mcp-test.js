@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 
 /**
  * MCP Test Page
- * 
+ *
  * This page provides a direct interface to test the Supabase MCP server.
  */
 export default function MCPTestPage() {
@@ -52,9 +53,9 @@ export default function MCPTestPage() {
         setMcpSqlQuery("SELECT tablename FROM pg_tables WHERE schemaname = 'public';");
         break;
       case 'table_info':
-        setMcpSqlQuery(`SELECT column_name, data_type, is_nullable 
-FROM information_schema.columns 
-WHERE table_schema = 'public' 
+        setMcpSqlQuery(`SELECT column_name, data_type, is_nullable
+FROM information_schema.columns
+WHERE table_schema = 'public'
 AND table_name = 'places';`);
         break;
       case 'count_records':
@@ -70,36 +71,42 @@ AND table_name = 'places';`);
       <Head>
         <title>MCP Test Page</title>
       </Head>
-      
-      <h1 className="text-4xl font-bold mb-8">Supabase MCP Server Test</h1>
-      
+
+      <div className="mb-4">
+        <Link href="/home" className="text-blue-600 hover:text-blue-800">
+          &larr; Back to Home Page
+        </Link>
+      </div>
+
+      <h1 className="text-4xl font-bold mb-8">MCP Servers Test</h1>
+
       {/* Supabase MCP Server Test */}
       <div className="mb-12 p-6 border rounded-lg shadow-md bg-purple-50">
         <h2 className="text-2xl font-semibold mb-4">SQL Query Execution</h2>
         <p className="mb-4">
           Test the Supabase MCP server by executing SQL queries directly.
         </p>
-        
+
         <form onSubmit={(e) => { e.preventDefault(); executeSupabaseMCP(); }}>
           <div className="mb-4">
             <div className="flex justify-between items-center mb-2">
               <label className="font-medium">SQL Query:</label>
               <div className="space-x-2">
-                <button 
+                <button
                   type="button"
                   onClick={() => setExampleMcpQuery('list_tables')}
                   className="px-3 py-1 bg-purple-200 text-purple-800 rounded hover:bg-purple-300"
                 >
                   List Tables
                 </button>
-                <button 
+                <button
                   type="button"
                   onClick={() => setExampleMcpQuery('table_info')}
                   className="px-3 py-1 bg-purple-200 text-purple-800 rounded hover:bg-purple-300"
                 >
                   Table Info
                 </button>
-                <button 
+                <button
                   type="button"
                   onClick={() => setExampleMcpQuery('count_records')}
                   className="px-3 py-1 bg-purple-200 text-purple-800 rounded hover:bg-purple-300"
@@ -108,15 +115,15 @@ AND table_name = 'places';`);
                 </button>
               </div>
             </div>
-            <textarea 
-              value={mcpSqlQuery} 
+            <textarea
+              value={mcpSqlQuery}
               onChange={(e) => setMcpSqlQuery(e.target.value)}
               className="w-full p-3 border rounded font-mono text-sm"
               rows="5"
               required
             />
           </div>
-          <button 
+          <button
             type="submit"
             disabled={mcpLoading}
             className={`w-full p-3 rounded text-white font-medium ${

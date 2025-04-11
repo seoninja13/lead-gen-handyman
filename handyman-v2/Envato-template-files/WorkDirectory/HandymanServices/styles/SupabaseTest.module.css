@@ -224,6 +224,36 @@
   color: #b91c1c;
 }
 
+.resultBlock {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+.resultBlock h4 {
+  margin: 0 0 0.5rem;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.resultBlock h5 {
+  margin: 1rem 0 0.5rem;
+  color: #666;
+  font-size: 1rem;
+}
+
+.code {
+  background-color: #f4f4f4;
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 1rem;

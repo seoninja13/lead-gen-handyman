@@ -13,7 +13,14 @@ export default function SupabaseTestPage() {
   // State variables
   const [connectionStatus, setConnectionStatus] = useState('Checking...');
   const [statusDetails, setStatusDetails] = useState({});
-  const [sqlQuery, setSqlQuery] = useState('SELECT * FROM test-delete LIMIT 10');
+  const [sqlQuery, setSqlQuery] = useState(`-- Insert new test data
+INSERT INTO "test-delete" (name, email) 
+VALUES 
+  ('Alice Johnson', 'alice@example.com'),
+  ('Bob Wilson', 'bob@example.com');
+
+-- Query all data
+SELECT * FROM "test-delete" ORDER BY id DESC;`);
   const [queryResult, setQueryResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -61,7 +68,17 @@ export default function SupabaseTestPage() {
       setLoading(true);
       setError(null);
       setQueryResult(null);
-      
+
+      // Get the first non-comment line to determine operation type
+      const operation = sqlQuery
+        .split('\n')
+        .find(line => !line.trim().startsWith('--'))
+        ?.trim()
+        .split(/\s+/)[0]
+        ?.toLowerCase() || 'unknown';
+
+      console.log('Operation type:', operation);
+
       const response = await fetch('/api/supabase/execute-sql', {
         method: 'POST',
         headers: {
@@ -69,16 +86,20 @@ export default function SupabaseTestPage() {
         },
         body: JSON.stringify({ query: sqlQuery }),
       });
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error ${response.status}`);
-      }
-      
+
       const data = await response.json();
+
+      if (!response.ok) {
+        console.error('Error response:', data);
+        throw new Error(
+          `${data.error} (Operation: ${operation})`
+        );
+      }
+
       setQueryResult(data);
     } catch (err) {
       console.error('Error executing query:', err);
-      setError(err.message);
+      setError(err.message || 'An unknown error occurred');
     } finally {
       setLoading(false);
     }
@@ -215,35 +236,24 @@ export default function SupabaseTestPage() {
             </button>
           </div>
           
+          {error && (
+            <div className={styles.error}>
+              <h3>Error:</h3>
+              <pre>{error}</pre>
+            </div>
+          )}
+
           {queryResult && (
             <div className={styles.results}>
-              <h3>Query Results</h3>
-              <pre>{JSON.stringify(queryResult, null, 2)}</pre>
-              
-              {queryResult.data && Array.isArray(queryResult.data) && queryResult.data.length > 0 && (
-                <div className={styles.tableContainer}>
-                  <table className={styles.resultsTable}>
-                    <thead>
-                      <tr>
-                        {Object.keys(queryResult.data[0]).map((key) => (
-                          <th key={key}>{key}</th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {queryResult.data.map((row, i) => (
-                        <tr key={i}>
-                          {Object.values(row).map((value, j) => (
-                            <td key={j}>
-                              {typeof value === 'object' ? JSON.stringify(value) : value}
-                            </td>
-                          ))}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+              <h3>Results:</h3>
+              {queryResult.results?.map((result, index) => (
+                <div key={index} className={styles.resultBlock}>
+                  <h4>Statement {index + 1} ({result.operation})</h4>
+                  <pre className={styles.code}>{result.statement}</pre>
+                  <h5>Data:</h5>
+                  <pre>{JSON.stringify(result.data, null, 2)}</pre>
                 </div>
-              )}
+              ))}
             </div>
           )}
         </div>
@@ -304,12 +314,6 @@ export default function SupabaseTestPage() {
           </div>
         </div>
         
-        {error && (
-          <div className={styles.error}>
-            <h3>Error</h3>
-            <p>{error}</p>
-          </div>
-        )}
       </main>
     </div>
   );

@@ -46,3 +46,16 @@ Today's focus was on enhancing the Supabase integration to support direct SQL ex
 - The development server is running on port 3001
 - Test page is accessible at http://localhost:3001/supabase-test
 - Focus on resolving the 500 error before implementing additional features
+
+## April 10, 2025
+
+- **Supabase CRUD Testing:**
+  - Continued debugging the `test-crud.js` script.
+  - Attempted direct Supabase connection (RPC, REST) - encountered API key errors.
+  - Switched strategy to use the Next.js API endpoint (`/api/supabase/execute-sql`) as a proxy.
+  - Started the Next.js development server (`npm run dev` on port 3002).
+  - Updated `test-crud.js` to use the local API endpoint (`http://localhost:3002/...`).
+  - Script execution appeared to hang or take too long.
+  - Added `CREATE TABLE IF NOT EXISTS` to `test-crud.js`.
+  - Added detailed timestamped logging to `test-crud.js` before/after each database operation call to diagnose performance issues.
+  - **Status:** Ready to re-run `test-crud.js` with enhanced logging to identify the bottleneck. Development server is running.

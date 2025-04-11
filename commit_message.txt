@@ -1,0 +1,22 @@
+fix: Update MCP server integration and documentation
+
+- Fixed MCP server configuration in config.js
+  - Restored missing exports (getMcpRequestOptions, handleMcpError, MCP_ENDPOINTS)
+  - Changed URL scheme from mcp:// to http:// for Node.js fetch compatibility
+  
+- Updated all MCP API endpoints:
+  - Supabase API
+  - Places Search API
+  - Maps Directions API
+  - Maps Geocode API
+  - OpenAI API
+  - Status API
+  
+- Improved documentation:
+  - Updated Windsurf rules with current project structure
+  - Added PowerShell commands for testing MCP endpoints
+  - Updated tracking-progress.md with latest changes
+  
+- Added proper error handling to all MCP endpoints
+
+This commit resolves the import errors and URL scheme issues in the MCP server integrations.

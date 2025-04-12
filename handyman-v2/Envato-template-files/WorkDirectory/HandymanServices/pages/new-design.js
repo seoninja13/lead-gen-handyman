@@ -96,7 +96,7 @@ const NewDesign = () => {
                   <div className="thumb">
                     <img
                       className="img-fluid w100"
-                      src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=340&h=230&q=80"
+                      src="/assets/images/service/electrical.jpg"
                       alt="Electrical Services"
                     />
                     <div className="property-tag">Featured</div>
@@ -121,14 +121,14 @@ const NewDesign = () => {
                   </div>
                 </div>
               </div>
-              
+
               {/* Service 2 */}
               <div className="col-lg-4 col-md-6">
                 <div className="feat_property">
                   <div className="thumb">
                     <img
                       className="img-fluid w100"
-                      src="https://images.unsplash.com/photo-1585704032915-c3400305e979?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=340&h=230&q=80"
+                      src="/assets/images/service/plumbing.jpg"
                       alt="Plumbing Services"
                     />
                     <div className="property-tag">Featured</div>
@@ -153,14 +153,14 @@ const NewDesign = () => {
                   </div>
                 </div>
               </div>
-              
+
               {/* Service 3 */}
               <div className="col-lg-4 col-md-6">
                 <div className="feat_property">
                   <div className="thumb">
                     <img
                       className="img-fluid w100"
-                      src="https://images.unsplash.com/photo-1601564921647-b446839a013a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=340&h=230&q=80"
+                      src="/assets/images/service/carpentry.jpg"
                       alt="Carpentry Services"
                     />
                     <div className="property-tag">Featured</div>
@@ -215,7 +215,7 @@ const NewDesign = () => {
                   </div>
                 </div>
               </div>
-              
+
               {/* Reason 2 */}
               <div className="col-md-4">
                 <div className="why_chose_us text-center">
@@ -230,7 +230,7 @@ const NewDesign = () => {
                   </div>
                 </div>
               </div>
-              
+
               {/* Reason 3 */}
               <div className="col-md-4">
                 <div className="why_chose_us text-center">
@@ -265,9 +265,11 @@ const NewDesign = () => {
               <div className="col-lg-4">
                 <div className="blog_post">
                   <div className="thumb">
-                    <div className="blog-img-placeholder" style={{ width: "100%", height: "250px", backgroundColor: "#f0f0f0", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <span style={{ fontSize: "24px", color: "#888" }}>752X450</span>
-                    </div>
+                    <img
+                      className="img-fluid w100"
+                      src="/assets/images/blog/home-maintenance.jpg"
+                      alt="Home Maintenance Tips"
+                    />
                   </div>
                   <div className="details">
                     <div className="post_meta">
@@ -291,9 +293,11 @@ const NewDesign = () => {
               <div className="col-lg-4">
                 <div className="blog_post">
                   <div className="thumb">
-                    <div className="blog-img-placeholder" style={{ width: "100%", height: "250px", backgroundColor: "#f0f0f0", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <span style={{ fontSize: "24px", color: "#888" }}>752X450</span>
-                    </div>
+                    <img
+                      className="img-fluid w100"
+                      src="/assets/images/blog/diy-repairs.jpg"
+                      alt="DIY Home Repairs"
+                    />
                   </div>
                   <div className="details">
                     <div className="post_meta">
@@ -317,9 +321,11 @@ const NewDesign = () => {
               <div className="col-lg-4">
                 <div className="blog_post">
                   <div className="thumb">
-                    <div className="blog-img-placeholder" style={{ width: "100%", height: "250px", backgroundColor: "#f0f0f0", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <span style={{ fontSize: "24px", color: "#888" }}>752X450</span>
-                    </div>
+                    <img
+                      className="img-fluid w100"
+                      src="/assets/images/blog/find-handyman.jpg"
+                      alt="Find the Right Handyman"
+                    />
                   </div>
                   <div className="details">
                     <div className="post_meta">
@@ -360,35 +366,35 @@ const NewDesign = () => {
                     {/* Partner 1 */}
                     <div className="col-6 col-md-4 col-lg-2">
                       <div className="our_partner">
-                        <img src="/assets/images/partners/1.png" alt="Partner Logo" className="img-fluid" />
+                        <img src="/assets/images/partners/home-depot.png" alt="Home Depot" className="img-fluid" />
                       </div>
                     </div>
 
                     {/* Partner 2 */}
                     <div className="col-6 col-md-4 col-lg-2">
                       <div className="our_partner">
-                        <img src="/assets/images/partners/2.png" alt="Partner Logo" className="img-fluid" />
+                        <img src="/assets/images/partners/lowes.png" alt="Lowes" className="img-fluid" />
                       </div>
                     </div>
 
                     {/* Partner 3 */}
                     <div className="col-6 col-md-4 col-lg-2">
                       <div className="our_partner">
-                        <img src="/assets/images/partners/3.png" alt="Partner Logo" className="img-fluid" />
+                        <img src="/assets/images/partners/ace-hardware.png" alt="Ace Hardware" className="img-fluid" />
                       </div>
                     </div>
 
                     {/* Partner 4 */}
                     <div className="col-6 col-md-4 col-lg-2">
                       <div className="our_partner">
-                        <img src="/assets/images/partners/4.png" alt="Partner Logo" className="img-fluid" />
+                        <img src="/assets/images/partners/sherwin-williams.png" alt="Sherwin Williams" className="img-fluid" />
                       </div>
                     </div>
 
                     {/* Partner 5 */}
                     <div className="col-6 col-md-4 col-lg-2">
                       <div className="our_partner">
-                        <img src="/assets/images/partners/5.png" alt="Partner Logo" className="img-fluid" />
+                        <img src="/assets/images/partners/benjamin-moore.png" alt="Benjamin Moore" className="img-fluid" />
                       </div>
                     </div>
                   </div>

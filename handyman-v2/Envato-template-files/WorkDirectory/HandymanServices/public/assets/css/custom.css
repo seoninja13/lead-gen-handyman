@@ -1,6 +1,42 @@
 /* Custom styles for Handyman Services */
 
 /* Hero Section */
+.home-one.home1_bgi1 {
+  background-image: url('/assets/images/home/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  padding: 100px 0;
+}
+
+.home-one.home1_bgi1::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.home-one .home_content {
+  position: relative;
+  z-index: 1;
+}
+
+.home-one .home-text h2 {
+  color: #ffffff;
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.home-one .home-text p {
+  color: #ffffff;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
 .home1-advnc-search {
   padding: 15px;
   border-radius: 8px;

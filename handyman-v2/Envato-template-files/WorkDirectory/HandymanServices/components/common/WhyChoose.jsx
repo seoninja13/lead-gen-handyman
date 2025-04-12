@@ -2,27 +2,21 @@ const WhyChoose = () => {
   const whyChooseContent = [
     {
       id: 1,
-      icon: "flaticon-high-five",
-      title: "Trusted Professionals",
-      descriptions: `All our service providers are thoroughly vetted, licensed, and insured for your peace of mind.`,
+      icon: "flaticon-user-experience",
+      title: "Expert Guidance",
+      descriptions: `Our experienced professionals provide expert advice and solutions for all your home service needs.`,
     },
     {
       id: 2,
-      icon: "flaticon-home-1",
-      title: "Quality Workmanship",
-      descriptions: `We stand behind the quality of our work with satisfaction guarantees and warranties.`,
+      icon: "flaticon-alarm",
+      title: "24/7 Emergency Service",
+      descriptions: `We're available around the clock to handle any urgent home repair or maintenance issues.`,
     },
     {
       id: 3,
-      icon: "flaticon-profit",
-      title: "Competitive Pricing",
-      descriptions: `Get fair, transparent pricing with no hidden fees or surprise charges.`,
-    },
-    {
-      id: 4,
-      icon: "flaticon-heart",
-      title: "Customer Satisfaction",
-      descriptions: `Our service providers are rated and reviewed by real customers to ensure quality service.`,
+      icon: "flaticon-money-bag",
+      title: "Transparent Pricing",
+      descriptions: `Get upfront, honest pricing with no hidden fees or surprise charges after the work is done.`,
     },
   ];
 

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Placeholder Image Generator</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    canvas { border: 1px solid #ddd; margin: 10px 0; }
+    .controls { margin-bottom: 20px; }
+    button { padding: 8px 16px; background: #4CAF50; color: white; border: none; cursor: pointer; margin-right: 10px; }
+    input, select { padding: 8px; margin-right: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Placeholder Image Generator</h1>
+  
+  <div class="controls">
+    <input type="number" id="width" value="400" placeholder="Width">
+    <input type="number" id="height" value="300" placeholder="Height">
+    <input type="text" id="text" value="Placeholder" placeholder="Text">
+    <select id="color">
+      <option value="#3498db">Blue</option>
+      <option value="#2ecc71">Green</option>
+      <option value="#e74c3c">Red</option>
+      <option value="#f39c12">Orange</option>
+      <option value="#9b59b6">Purple</option>
+      <option value="#1abc9c">Teal</option>
+      <option value="#34495e">Dark</option>
+    </select>
+    <button onclick="generateImage()">Generate</button>
+    <button onclick="downloadImage()">Download</button>
+  </div>
+  
+  <canvas id="canvas"></canvas>
+  
+  <script>
+    function generateImage() {
+      const width = document.getElementById('width').value;
+      const height = document.getElementById('height').value;
+      const text = document.getElementById('text').value;
+      const color = document.getElementById('color').value;
+      
+      const canvas = document.getElementById('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      
+      const ctx = canvas.getContext('2d');
+      
+      // Background
+      ctx.fillStyle = color;
+      ctx.fillRect(0, 0, width, height);
+      
+      // Text
+      ctx.fillStyle = 'white';
+      ctx.font = `${Math.max(20, Math.min(width, height) / 10)}px Arial`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(text, width / 2, height / 2);
+      
+      // Dimensions
+      ctx.font = '14px Arial';
+      ctx.fillText(`${width} × ${height}`, width / 2, height - 20);
+    }
+    
+    function downloadImage() {
+      const canvas = document.getElementById('canvas');
+      const link = document.createElement('a');
+      link.download = document.getElementById('text').value + '.jpg';
+      link.href = canvas.toDataURL('image/jpeg', 0.8);
+      link.click();
+    }
+    
+    // Generate default image on load
+    window.onload = generateImage;
+  </script>
+</body>
+</html>

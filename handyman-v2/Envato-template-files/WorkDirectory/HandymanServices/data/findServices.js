@@ -1,7 +1,7 @@
 module.exports = [
   {
     id: 1,
-    img: "/assets/images/service/electrical.jpg",
+    img: "/assets/images/service/electrical.png",
     name: "Electrical",
     number: "22",
     column: "col-lg-4 col-xl-4",
@@ -9,7 +9,7 @@ module.exports = [
   },
   {
     id: 2,
-    img: "/assets/images/service/plumbing.jpg",
+    img: "/assets/images/service/plumbing.png",
     name: "Plumbing",
     number: "18",
     column: "col-lg-4 col-xl-4",
@@ -17,7 +17,7 @@ module.exports = [
   },
   {
     id: 3,
-    img: "/assets/images/service/carpentry.jpg",
+    img: "/assets/images/service/carpentry.png",
     name: "Carpentry",
     number: "15",
     column: "col-lg-4 col-xl-4",
@@ -25,7 +25,7 @@ module.exports = [
   },
   {
     id: 4,
-    img: "/assets/images/service/painting.jpg",
+    img: "/assets/images/service/painting.svg",
     name: "Painting",
     number: "20",
     column: "col-lg-6 col-xl-6",
@@ -33,7 +33,7 @@ module.exports = [
   },
   {
     id: 5,
-    img: "/assets/images/service/flooring.jpg",
+    img: "/assets/images/service/flooring.svg",
     name: "Flooring",
     number: "12",
     column: "col-lg-6 col-xl-6",
@@ -41,7 +41,7 @@ module.exports = [
   },
   {
     id: 6,
-    img: "/assets/images/service/drywall.jpg",
+    img: "/assets/images/service/drywall.svg",
     name: "Drywall Repair",
     number: "10",
     column: "col-lg-4 col-xl-4",
@@ -49,18 +49,18 @@ module.exports = [
   },
   {
     id: 7,
-    img: "/assets/images/service/appliance.jpg",
+    img: "/assets/images/service/appliance.svg",
     name: "Appliance Repair",
-    number: "14",
+    number: "8",
     column: "col-lg-4 col-xl-4",
     slug: "appliance-repair"
   },
   {
     id: 8,
-    img: "/assets/images/service/hvac.jpg",
+    img: "/assets/images/service/hvac.svg",
     name: "HVAC",
-    number: "16",
+    number: "14",
     column: "col-lg-4 col-xl-4",
     slug: "hvac"
-  }
+  },
 ];

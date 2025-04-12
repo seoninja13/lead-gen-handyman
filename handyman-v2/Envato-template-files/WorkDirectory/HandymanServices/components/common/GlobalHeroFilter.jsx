@@ -14,7 +14,7 @@ const GlobalHeroFilter = ({ className = "" }) => {
             aria-controls="pills-home"
             aria-selected="true"
           >
-            Find Services
+            Find a Handyman
           </a>
         </li>
 
@@ -28,7 +28,7 @@ const GlobalHeroFilter = ({ className = "" }) => {
             aria-controls="pills-profile"
             aria-selected="false"
           >
-            Book Now
+            Schedule Service
           </a>
         </li>
       </ul>

@@ -1,7 +1,7 @@
 module.exports = [
   {
     id: 1,
-    img: "/assets/images/handyman/business1.jpg",
+    img: "/assets/images/handyman/business1.svg",
     price: "Starting at $75/hr",
     type: "Electrical",
     title: "Quick Fix Handyman",
@@ -22,14 +22,14 @@ module.exports = [
         number: "350+",
       },
     ],
-    posterAvatar: "/assets/images/handyman/owner1.png",
+    posterAvatar: "/assets/images/handyman/owner1.svg",
     posterName: "John Smith",
     postedYear: "2 years in business",
     imgList: [
-      "/assets/images/handyman/electrical1.jpg",
-      "/assets/images/handyman/electrical2.jpg",
-      "/assets/images/handyman/electrical3.jpg",
-      "/assets/images/handyman/electrical4.jpg",
+      "/assets/images/service/electrical.svg",
+      "/assets/images/service/electrical.svg",
+      "/assets/images/service/electrical.svg",
+      "/assets/images/service/electrical.svg",
     ],
     built: "2018",
     amenities: "Air Conditioning, Lawn, Garage",
@@ -39,7 +39,7 @@ module.exports = [
     video: {
       id: "0yW7w8F2TVA",
       title: "Quick Fix Handyman Services",
-      posterPath: "/assets/images/handyman/video-poster1.jpg",
+      posterPath: "/assets/images/handyman/business1.svg",
     },
     floorPlans: [
       {
@@ -47,14 +47,14 @@ module.exports = [
         price: "$75-150/hr",
         details:
           "Our electrical services include installation, repair, and maintenance of electrical systems, lighting, outlets, and more.",
-        imgPath: "/assets/images/handyman/electrical-services.jpg",
+        imgPath: "/assets/images/service/electrical.svg",
       },
       {
         name: "Emergency Services",
         price: "$100-200/hr",
         details:
           "24/7 emergency electrical services for urgent issues that require immediate attention.",
-        imgPath: "/assets/images/handyman/emergency-services.jpg",
+        imgPath: "/assets/images/handyman/emergency-services.svg",
       },
     ],
     otherFeatures: [
@@ -99,7 +99,7 @@ module.exports = [
   },
   {
     id: 2,
-    img: "/assets/images/handyman/business2.jpg",
+    img: "/assets/images/handyman/business2.svg",
     price: "Starting at $85/hr",
     type: "Electrical",
     title: "HandyPro",
@@ -120,13 +120,13 @@ module.exports = [
         number: "200+",
       },
     ],
-    posterAvatar: "/assets/images/handyman/owner2.png",
+    posterAvatar: "/assets/images/handyman/owner2.svg",
     posterName: "Michael Johnson",
     postedYear: "5 years in business",
     imgList: [
-      "/assets/images/handyman/electrical5.jpg",
-      "/assets/images/handyman/electrical6.jpg",
-      "/assets/images/handyman/electrical7.jpg",
+      "/assets/images/service/electrical.svg",
+      "/assets/images/service/electrical.svg",
+      "/assets/images/service/electrical.svg",
     ],
     built: "2019",
     amenities: "Fully Equipped, Mobile Service",
@@ -139,14 +139,14 @@ module.exports = [
         price: "$85-120/hr",
         details:
           "Complete electrical services for homes including wiring, lighting, panel upgrades, and troubleshooting.",
-        imgPath: "/assets/images/handyman/residential-electrical.jpg",
+        imgPath: "/assets/images/service/electrical.svg",
       },
       {
         name: "Commercial Electrical",
         price: "$100-150/hr",
         details:
           "Electrical services for businesses including office buildings, retail spaces, and restaurants.",
-        imgPath: "/assets/images/handyman/commercial-electrical.jpg",
+        imgPath: "/assets/images/service/electrical.svg",
       },
     ],
     otherFeatures: [
@@ -191,7 +191,7 @@ module.exports = [
   },
   {
     id: 3,
-    img: "/assets/images/handyman/business3.jpg",
+    img: "/assets/images/handyman/business3.svg",
     price: "Starting at $70/hr",
     type: "Plumbing",
     title: "Master Plumbers",
@@ -212,13 +212,13 @@ module.exports = [
         number: "500+",
       },
     ],
-    posterAvatar: "/assets/images/handyman/owner3.png",
+    posterAvatar: "/assets/images/handyman/owner3.svg",
     posterName: "David Williams",
     postedYear: "10 years in business",
     imgList: [
-      "/assets/images/handyman/plumbing1.jpg",
-      "/assets/images/handyman/plumbing2.jpg",
-      "/assets/images/handyman/plumbing3.jpg",
+      "/assets/images/service/plumbing.svg",
+      "/assets/images/service/plumbing.svg",
+      "/assets/images/service/plumbing.svg",
     ],
     built: "2013",
     amenities: "24/7 Service, Free Estimates",
@@ -231,14 +231,14 @@ module.exports = [
         price: "$70-100/hr",
         details:
           "Repair of leaks, clogs, broken pipes, water heaters, toilets, faucets, and more.",
-        imgPath: "/assets/images/handyman/plumbing-repair.jpg",
+        imgPath: "/assets/images/service/plumbing.svg",
       },
       {
         name: "Installation Services",
         price: "$90-150/hr",
         details:
           "Installation of new fixtures, water heaters, pipes, sump pumps, and water treatment systems.",
-        imgPath: "/assets/images/handyman/plumbing-installation.jpg",
+        imgPath: "/assets/images/service/plumbing.svg",
       },
     ],
     otherFeatures: [
@@ -283,7 +283,7 @@ module.exports = [
   },
   {
     id: 4,
-    img: "/assets/images/handyman/business4.jpg",
+    img: "/assets/images/handyman/business4.svg",
     price: "Starting at $80/hr",
     type: "Plumbing",
     title: "LA Repairs",
@@ -304,13 +304,13 @@ module.exports = [
         number: "300+",
       },
     ],
-    posterAvatar: "/assets/images/handyman/owner4.png",
+    posterAvatar: "/assets/images/handyman/owner4.svg",
     posterName: "Richard Martinez",
     postedYear: "7 years in business",
     imgList: [
-      "/assets/images/handyman/plumbing4.jpg",
-      "/assets/images/handyman/plumbing5.jpg",
-      "/assets/images/handyman/plumbing6.jpg",
+      "/assets/images/service/plumbing.svg",
+      "/assets/images/service/plumbing.svg",
+      "/assets/images/service/plumbing.svg",
     ],
     built: "2016",
     amenities: "Same-Day Service, Mobile Units",
@@ -323,14 +323,14 @@ module.exports = [
         price: "$80-120/hr",
         details:
           "Complete plumbing services for homes including repairs, installations, and maintenance.",
-        imgPath: "/assets/images/handyman/residential-plumbing.jpg",
+        imgPath: "/assets/images/service/plumbing.svg",
       },
       {
         name: "Commercial Plumbing",
         price: "$100-180/hr",
         details:
           "Plumbing services for businesses including restaurants, offices, and retail spaces.",
-        imgPath: "/assets/images/handyman/commercial-plumbing.jpg",
+        imgPath: "/assets/images/service/plumbing.svg",
       },
     ],
     otherFeatures: [
@@ -375,7 +375,7 @@ module.exports = [
   },
   {
     id: 5,
-    img: "/assets/images/handyman/business5.jpg",
+    img: "/assets/images/handyman/business5.svg",
     price: "Starting at $65/hr",
     type: "General Repairs",
     title: "NYC Handyman",
@@ -396,13 +396,14 @@ module.exports = [
         number: "450+",
       },
     ],
-    posterAvatar: "/assets/images/handyman/owner5.png",
+    posterAvatar: "/assets/images/handyman/owner5.svg",
     posterName: "James Wilson",
     postedYear: "8 years in business",
     imgList: [
-      "/assets/images/handyman/general1.jpg",
-      "/assets/images/handyman/general2.jpg",
-      "/assets/images/handyman/general3.jpg",
+      "/assets/images/service/carpentry.svg",
+      "/assets/images/service/painting.svg",
+      "/assets/images/service/flooring.svg",
+      "/assets/images/service/drywall.svg",
     ],
     built: "2015",
     amenities: "Weekend Availability, Fully Equipped",
@@ -415,14 +416,14 @@ module.exports = [
         price: "$65-90/hr",
         details:
           "Basic home repairs including furniture assembly, picture hanging, shelving installation, and more.",
-        imgPath: "/assets/images/handyman/basic-repairs.jpg",
+        imgPath: "/assets/images/service/carpentry.svg",
       },
       {
         name: "Advanced Repairs",
         price: "$90-130/hr",
         details:
           "More complex repairs including drywall, flooring, tiling, and carpentry work.",
-        imgPath: "/assets/images/handyman/advanced-repairs.jpg",
+        imgPath: "/assets/images/service/carpentry.svg",
       },
     ],
     otherFeatures: [

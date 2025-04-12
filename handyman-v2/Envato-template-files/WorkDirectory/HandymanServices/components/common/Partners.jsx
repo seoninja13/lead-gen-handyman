@@ -83,12 +83,11 @@ const Partners = () => {
         {partnersImages.map((item) => (
           <div className="item" key={item.id}>
             <div className="our_partner">
-              <Image
-                width={140}
-                height={37}
+              <img
                 className="img-fluid"
                 src={item.img}
                 alt={item.name}
+                style={{ width: "140px", height: "37px" }}
               />
             </div>
           </div>

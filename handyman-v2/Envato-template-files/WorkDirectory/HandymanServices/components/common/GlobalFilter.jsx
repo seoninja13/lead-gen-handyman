@@ -3,7 +3,7 @@
 import {
   addKeyword,
   addLocation,
-} from "../../features/properties/propertiesSlice";
+} from "../../features/properties/propertiesSlice";  // TODO: Rename to servicesSlice
 import PricingRangeSlider from "./PricingRangeSlider";
 import CheckBoxFilter from "./CheckBoxFilter";
 import GlobalSelectBox from "./GlobalSelectBox";
@@ -39,14 +39,17 @@ const GlobalFilter = ({ className = "" }) => {
             <div className="candidate_revew_select">
               <select className="selectpicker w100 form-select show-tick">
                 <option value="">Service Type</option>
-                <option>Electrical</option>
-                <option>Plumbing</option>
-                <option>Carpentry</option>
-                <option>Painting</option>
-                <option>Flooring</option>
-                <option>Drywall Repair</option>
-                <option>Appliance Repair</option>
-                <option>HVAC</option>
+                <option value="electrical">Electrical</option>
+                <option value="plumbing">Plumbing</option>
+                <option value="carpentry">Carpentry</option>
+                <option value="painting">Painting</option>
+                <option value="flooring">Flooring</option>
+                <option value="drywall-repair">Drywall Repair</option>
+                <option value="appliance-repair">Appliance Repair</option>
+                <option value="hvac">HVAC</option>
+                <option value="general-repairs">General Repairs</option>
+                <option value="landscaping">Landscaping</option>
+                <option value="roofing">Roofing</option>
               </select>
             </div>
           </div>

@@ -1,0 +1,214 @@
+/* Custom styles for Handyman Services */
+
+/* Hero Section */
+.home1-advnc-search {
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.home1-advnc-search .nav-pills {
+  border-bottom: 1px solid #eee;
+}
+
+.home1-advnc-search .nav-pills .nav-link {
+  color: #484848;
+  font-size: 14px;
+}
+
+.home1-advnc-search .nav-pills .nav-link.active {
+  background-color: transparent;
+  color: var(--color-primary);
+  border-bottom: 2px solid var(--color-primary);
+  border-radius: 0;
+}
+
+/* Featured Services */
+.feat_property {
+  transition: all 0.3s ease;
+  margin-bottom: 30px;
+}
+
+.feat_property:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.feat_property .thumb {
+  position: relative;
+}
+
+.feat_property .thumb img {
+  height: 240px;
+  object-fit: cover;
+}
+
+.feat_property .property-tag {
+  background-color: var(--color-primary);
+  border-radius: 3px;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 5px 15px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.feat_property .details {
+  background-color: #ffffff;
+  border: 1px solid #ebebeb;
+  border-radius: 0 0 8px 8px;
+}
+
+.feat_property .details .tc_content {
+  padding: 20px;
+}
+
+.feat_property .details .tc_content h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.feat_property .details .tc_content p {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 15px;
+}
+
+.feat_property .details .tc_content .prop_details {
+  margin-bottom: 0;
+}
+
+.feat_property .details .fp_footer {
+  border-top: 1px solid #ebebeb;
+  padding: 15px 20px;
+}
+
+.feat_property .details .fp_footer .fp_meta {
+  margin-bottom: 0;
+}
+
+.feat_property .details .fp_footer .fp_meta .list-inline-item a {
+  color: #ffc107;
+  font-size: 14px;
+}
+
+/* Why Choose Us */
+.why_chose_us {
+  margin-bottom: 30px;
+}
+
+.why_chose_us .circle-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.why_chose_us .circle-icon span {
+  font-size: 30px;
+}
+
+.bg-light-red {
+  background-color: #ffebee;
+}
+
+.bg-light-blue {
+  background-color: #e3f2fd;
+}
+
+.bg-light-green {
+  background-color: #e8f5e9;
+}
+
+.text-thm {
+  color: var(--color-primary);
+}
+
+/* Blog Posts */
+.blog_post {
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+}
+
+.blog_post:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.blog_post .thumb {
+  position: relative;
+}
+
+.blog-img-placeholder {
+  border-radius: 8px 8px 0 0;
+}
+
+.blog_post .details {
+  background-color: #ffffff;
+  border: 1px solid #ebebeb;
+  border-radius: 0 0 8px 8px;
+  padding: 20px;
+}
+
+.blog_post .details .post_meta ul {
+  margin-bottom: 15px;
+}
+
+.blog_post .details .post_meta ul li {
+  margin-right: 15px;
+}
+
+.blog_post .details .post_meta ul li a {
+  color: #777;
+  font-size: 14px;
+}
+
+.blog_post .details h4 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.blog_post .details .para {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 15px;
+}
+
+.blog_post .details .more-link {
+  color: var(--color-primary);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Partners */
+.our_partner {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.our_partner img {
+  max-height: 60px;
+  margin: 0 auto;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.our_partner:hover img {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+/* Utilities */
+.pr5 {
+  padding-right: 5px;
+}
+
+.pr10 {
+  padding-right: 10px;
+}
+
+.mb0 {
+  margin-bottom: 0 !important;
+}

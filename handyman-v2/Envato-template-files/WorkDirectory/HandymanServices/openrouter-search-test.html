@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>OpenRouter Search MCP Test</title>
+        <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-top: 0;
+        }
+        .search-form {
+            margin-bottom: 20px;
+        }
+        .search-input {
+            width: 70%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .search-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #6b46c1;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .search-button:hover {
+            background-color: #553c9a;
+        }
+        .model-select {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        .results {
+            margin-top: 20px;
+        }
+        .result {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .result h3 {
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+        .result a {
+            color: #6b46c1;
+            text-decoration: none;
+        }
+        .result a:hover {
+            text-decoration: underline;
+        }
+        .result .url {
+            color: #38a169;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .result .description {
+            color: #545454;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        .loading {
+            text-align: center;
+            padding: 20px;
+            display: none;
+        }
+        .error {
+            color: red;
+            padding: 10px;
+            background-color: #ffebee;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
+    </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>OpenRouter Search MCP Test</h1>
+
+            <div class="search-form">
+                <select id="model-select" class="model-select">
+                    <option value="google/gemini-2.0-flash-001">Google Gemini
+                        2.0 Flash</option>
+                    <option value="openrouter/optimus-alpha">Optimus
+                        Alpha</option>
+                    <option value="anthropic/claude-3-opus:beta">Claude 3
+                        Opus</option>
+                    <option value="anthropic/claude-3-sonnet:beta">Claude 3
+                        Sonnet</option>
+                    <option value="anthropic/claude-3-haiku:beta">Claude 3
+                        Haiku</option>
+                    <option value="google/gemini-pro">Google Gemini Pro</option>
+                    <option value="google/gemini-2.0-flash-001">Google Gemini
+                        2.0 Flash</option>
+                    <option value="openai/gpt-4o">GPT-4o</option>
+                    <option value="openai/gpt-4-turbo">GPT-4 Turbo</option>
+                    <option value="meta-llama/llama-3-70b-instruct">Llama 3
+                        70B</option>
+                </select>
+                <input type="text" id="search-input" class="search-input"
+                    placeholder="Enter your search query...">
+                <button id="search-button" class="search-button">Search</button>
+            </div>
+
+            <div id="error" class="error"></div>
+
+            <div id="loading" class="loading">
+                <p>Searching with AI... This may take a moment.</p>
+            </div>
+
+            <div id="results" class="results"></div>
+        </div>
+
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('search-input');
+            const searchButton = document.getElementById('search-button');
+            const modelSelect = document.getElementById('model-select');
+            const resultsContainer = document.getElementById('results');
+            const loadingElement = document.getElementById('loading');
+            const errorElement = document.getElementById('error');
+
+            // Function to perform search
+            async function performSearch(query, model) {
+                // Show loading indicator
+                loadingElement.style.display = 'block';
+                resultsContainer.innerHTML = '';
+                errorElement.style.display = 'none';
+
+                try {
+                    // Make request to OpenRouter MCP server
+                    const response = await fetch('http://localhost:8890/mcp5_openrouter_search', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            query,
+                            model,
+                            max_results: 5
+                        })
+                    });
+
+                    // Check for errors
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        throw new Error(`HTTP error ${response.status}: ${errorText}`);
+                    }
+
+                    // Parse response
+                    const data = await response.json();
+
+                    // Display results
+                    if (data.results && data.results.length > 0) {
+                        // Create results HTML
+                        const resultsHTML = data.results.map(result => `
+                            <div class="result">
+                                <h3><a href="${result.url}" target="_blank">${result.title}</a></h3>
+                                <div class="url">${result.url}</div>
+                                <div class="description">${result.description}</div>
+                            </div>
+                        `).join('');
+
+                        // Add total count
+                        const totalHTML = `<p>Found ${data.results.length} results:</p>`;
+
+                        // Update results container
+                        resultsContainer.innerHTML = totalHTML + resultsHTML;
+                    } else {
+                        resultsContainer.innerHTML = '<p>No results found.</p>';
+                    }
+                } catch (error) {
+                    // Display error
+                    errorElement.textContent = `Error: ${error.message}`;
+                    errorElement.style.display = 'block';
+                    console.error('Search error:', error);
+                } finally {
+                    // Hide loading indicator
+                    loadingElement.style.display = 'none';
+                }
+            }
+
+            // Handle search button click
+            searchButton.addEventListener('click', function() {
+                const query = searchInput.value.trim();
+                const model = modelSelect.value;
+                if (query) {
+                    performSearch(query, model);
+                }
+            });
+
+            // Handle Enter key press
+            searchInput.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    const query = searchInput.value.trim();
+                    const model = modelSelect.value;
+                    if (query) {
+                        performSearch(query, model);
+                    }
+                }
+            });
+        });
+    </script>
+    </body>
+</html>

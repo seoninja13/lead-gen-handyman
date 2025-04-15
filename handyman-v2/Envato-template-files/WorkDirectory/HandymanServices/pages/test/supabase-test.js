@@ -1,21 +1,21 @@
 /**
  * Supabase Test Page
- * 
+ *
  * This page provides a UI for testing the direct connection to Supabase.
  * It allows users to check connection status, execute SQL queries, and create test tables.
  */
 
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
-import styles from '../styles/SupabaseTest.module.css';
+import styles from '../../styles/SupabaseTest.module.css';
 
 export default function SupabaseTestPage() {
   // State variables
   const [connectionStatus, setConnectionStatus] = useState('Checking...');
   const [statusDetails, setStatusDetails] = useState({});
   const [sqlQuery, setSqlQuery] = useState(`-- Insert new test data
-INSERT INTO "test-delete" (name, email) 
-VALUES 
+INSERT INTO "test-delete" (name, email)
+VALUES
   ('Alice Johnson', 'alice@example.com'),
   ('Bob Wilson', 'bob@example.com');
 
@@ -42,15 +42,15 @@ SELECT * FROM "test-delete" ORDER BY id DESC;`);
     try {
       setLoading(true);
       setError(null);
-      
+
       const response = await fetch('/api/supabase/status');
-      
+
       if (!response.ok) {
         throw new Error(`HTTP error ${response.status}`);
       }
-      
+
       const data = await response.json();
-      
+
       setConnectionStatus(data.status === 'ok' ? 'Connected' : 'Error');
       setStatusDetails(data);
     } catch (err) {
@@ -110,16 +110,16 @@ SELECT * FROM "test-delete" ORDER BY id DESC;`);
     try {
       setLoading(true);
       setError(null);
-      
+
       // Generate CREATE TABLE SQL statement
       const columns = Object.entries(tableSchema)
         .map(([name, type]) => `${name} ${type}`)
         .join(', ');
-      
+
       const createTableQuery = `CREATE TABLE IF NOT EXISTS ${tableName} (${columns});`;
-      
+
       setSqlQuery(createTableQuery);
-      
+
       const response = await fetch('/api/supabase/execute-sql', {
         method: 'POST',
         headers: {
@@ -127,11 +127,11 @@ SELECT * FROM "test-delete" ORDER BY id DESC;`);
         },
         body: JSON.stringify({ query: createTableQuery }),
       });
-      
+
       if (!response.ok) {
         throw new Error(`HTTP error ${response.status}`);
       }
-      
+
       const data = await response.json();
       setQueryResult(data);
     } catch (err) {
@@ -153,7 +153,7 @@ SELECT * FROM "test-delete" ORDER BY id DESC;`);
   // Function to update a schema column
   const updateSchemaColumn = (key, value, type) => {
     const newSchema = { ...tableSchema };
-    
+
     if (type === 'name') {
       // Rename the key
       const val = newSchema[key];
@@ -163,7 +163,7 @@ SELECT * FROM "test-delete" ORDER BY id DESC;`);
       // Update the value
       newSchema[key] = value;
     }
-    
+
     setTableSchema(newSchema);
   };
 
@@ -184,31 +184,31 @@ SELECT * FROM "test-delete" ORDER BY id DESC;`);
 
       <main className={styles.main}>
         <h1 className={styles.title}>Supabase Direct Connection Test</h1>
-        
+
         <div className={styles.card}>
           <h2>Connection Status</h2>
           <div className={styles.statusContainer}>
             <div className={styles.statusIndicator}>
-              <span 
+              <span
                 className={`${styles.statusDot} ${
-                  connectionStatus === 'Connected' 
-                    ? styles.statusGreen 
-                    : connectionStatus === 'Error' 
-                      ? styles.statusRed 
+                  connectionStatus === 'Connected'
+                    ? styles.statusGreen
+                    : connectionStatus === 'Error'
+                      ? styles.statusRed
                       : styles.statusYellow
                 }`}
               ></span>
               <span>{connectionStatus}</span>
             </div>
-            <button 
-              className={styles.button} 
+            <button
+              className={styles.button}
               onClick={checkConnectionStatus}
               disabled={loading}
             >
               Refresh Status
             </button>
           </div>
-          
+
           {statusDetails && (
             <div className={styles.details}>
               <h3>Status Details</h3>
@@ -216,7 +216,7 @@ SELECT * FROM "test-delete" ORDER BY id DESC;`);
             </div>
           )}
         </div>
-        
+
         <div className={styles.card}>
           <h2>Execute SQL Query</h2>
           <div className={styles.queryContainer}>
@@ -227,15 +227,15 @@ SELECT * FROM "test-delete" ORDER BY id DESC;`);
               rows={5}
               placeholder="Enter SQL query here..."
             />
-            <button 
-              className={styles.button} 
+            <button
+              className={styles.button}
               onClick={executeQuery}
               disabled={loading}
             >
               Execute Query
             </button>
           </div>
-          
+
           {error && (
             <div className={styles.error}>
               <h3>Error:</h3>
@@ -257,7 +257,7 @@ SELECT * FROM "test-delete" ORDER BY id DESC;`);
             </div>
           )}
         </div>
-        
+
         <div className={styles.card}>
           <h2>Create Test Table</h2>
           <div className={styles.tableNameContainer}>
@@ -270,7 +270,7 @@ SELECT * FROM "test-delete" ORDER BY id DESC;`);
               placeholder="Enter table name..."
             />
           </div>
-          
+
           <div className={styles.schemaContainer}>
             <h3>Table Schema</h3>
             {Object.entries(tableSchema).map(([key, value]) => (
@@ -287,7 +287,7 @@ SELECT * FROM "test-delete" ORDER BY id DESC;`);
                   onChange={(e) => updateSchemaColumn(key, e.target.value, 'type')}
                   placeholder="Column type"
                 />
-                <button 
+                <button
                   className={styles.removeButton}
                   onClick={() => removeSchemaColumn(key)}
                 >
@@ -295,15 +295,15 @@ SELECT * FROM "test-delete" ORDER BY id DESC;`);
                 </button>
               </div>
             ))}
-            
+
             <div className={styles.schemaButtons}>
-              <button 
+              <button
                 className={styles.button}
                 onClick={addSchemaColumn}
               >
                 Add Column
               </button>
-              <button 
+              <button
                 className={styles.button}
                 onClick={createTestTable}
                 disabled={loading}
@@ -313,7 +313,7 @@ SELECT * FROM "test-delete" ORDER BY id DESC;`);
             </div>
           </div>
         </div>
-        
+
       </main>
     </div>
   );

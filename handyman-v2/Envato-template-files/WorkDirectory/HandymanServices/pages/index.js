@@ -1,15 +1,25 @@
 import React from 'react';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 /**
- * Home Page - Redirects to the Handyman Services home page
- *
- * This page redirects to the handyman services home page while preserving
- * the MCP testing functionality at /mcp-test
+ * Home Page - Simple landing page
  */
 const HomePage = () => {
-  return null;
+  return (
+    <div style={{ padding: '50px', textAlign: 'center' }}>
+      <Head>
+        <title>Handyman Services</title>
+      </Head>
+      <h1>Welcome to Handyman Services</h1>
+      <p>This is a simple landing page to test routing.</p>
+      <div style={{ marginTop: '20px' }}>
+        <Link href="/home" style={{ marginRight: '10px', color: 'blue' }}>Go to Home</Link>
+        <Link href="/new-design" style={{ marginRight: '10px', color: 'green' }}>Go to New Design</Link>
+        <Link href="/test-supabase" style={{ color: 'purple' }}>Test Supabase</Link>
+      </div>
+    </div>
+  );
 };
 
 /**
@@ -130,7 +140,7 @@ export default HomePage;
 export async function getServerSideProps() {
   return {
     redirect: {
-      destination: '/home',
+      destination: '/home-backup',
       permanent: false,
     },
   };

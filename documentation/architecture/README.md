@@ -100,7 +100,7 @@ The application uses Supabase (PostgreSQL) with the following main tables:
 - **listings**: Service listings
 - **reviews**: User reviews for services
 - **bookings**: Service booking information
-- **test-delete**: Test table for CRUD operations
+- **test-delete**: Test table for CRUD operations (NOT for production use)
 
 For detailed schema information, see the [Database Documentation](../database/README.md).
 
@@ -125,6 +125,19 @@ The application integrates with several external services:
 - Alternative AI service for content generation
 - Used for service description enhancement
 - Provides intelligent search capabilities
+
+### OpenRouter MCP Server
+
+- Provides web search capabilities using AI models
+- Enriches business data with detailed information
+- Saves enriched data to the businesses table in the enriched_data column
+- Uses Google's Gemini 2.0 Flash as the primary model with fallback options
+
+### Brave Search MCP Server
+
+- Alternative web search provider
+- Provides privacy-focused search results
+- Used as a backup for OpenRouter web search
 
 ## Security Architecture
 

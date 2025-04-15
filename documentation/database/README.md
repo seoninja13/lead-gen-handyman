@@ -60,7 +60,7 @@ This page provides a UI for testing CRUD operations against the test-delete tabl
 
 #### test-delete
 
-This table is used for testing CRUD operations.
+This table is used ONLY for testing CRUD operations and should NOT be used as a data source for production code.
 
 | Column   | Type    | Description                |
 |----------|---------|----------------------------|
@@ -68,6 +68,8 @@ This table is used for testing CRUD operations.
 | city     | text    | City name                  |
 | business | text    | Business name              |
 | service  | text    | Service description        |
+
+> **IMPORTANT**: The test-delete table is strictly for testing purposes. All production data should be stored in the appropriate tables (e.g., businesses, services, etc.). Be cautious about using the test-delete table as it may not have the appropriate structure or constraints for production data.
 
 #### users
 
@@ -89,6 +91,18 @@ This table is used for testing CRUD operations.
 | description  | text      | Service description        |
 | category     | text      | Service category           |
 | created_at   | timestamp | Creation timestamp         |
+
+#### businesses
+
+| Column       | Type      | Description                |
+|--------------|-----------|----------------------------|
+| id           | uuid      | Primary key                |
+| name         | text      | Business name              |
+| description  | text      | Business description       |
+| enriched_data| jsonb     | Enriched data from OpenRouter web search |
+| created_at   | timestamp | Creation timestamp         |
+
+> **IMPORTANT**: The enriched_data column stores the enriched data retrieved from the OpenRouter web search. This data is in JSON format and contains detailed information about the business, including review insights, service details, repair techniques, and maintenance tips.
 
 #### providers
 
@@ -145,7 +159,7 @@ SELECT * FROM "test-delete" WHERE city = 'New York';
 
 ```sql
 -- Insert a new record
-INSERT INTO "test-delete" (city, business, service) 
+INSERT INTO "test-delete" (city, business, service)
 VALUES ('New York', 'ABC Plumbing', 'Pipe repair');
 ```
 
@@ -153,8 +167,8 @@ VALUES ('New York', 'ABC Plumbing', 'Pipe repair');
 
 ```sql
 -- Update a record
-UPDATE "test-delete" 
-SET city = 'Chicago', business = 'XYZ Plumbing' 
+UPDATE "test-delete"
+SET city = 'Chicago', business = 'XYZ Plumbing'
 WHERE id = '123e4567-e89b-12d3-a456-426614174000';
 ```
 
@@ -162,7 +176,7 @@ WHERE id = '123e4567-e89b-12d3-a456-426614174000';
 
 ```sql
 -- Delete a record
-DELETE FROM "test-delete" 
+DELETE FROM "test-delete"
 WHERE id = '123e4567-e89b-12d3-a456-426614174000';
 ```
 
@@ -177,11 +191,11 @@ import { supabase } from '../../utils/supabaseClient';
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     const { data, error } = await supabase.from('listings').select('*');
-    
+
     if (error) return res.status(500).json({ error: error.message });
     return res.status(200).json(data);
   }
-  
+
   // Other methods...
 }
 ```
@@ -192,17 +206,17 @@ export default async function handler(req, res) {
 
 ```sql
 -- Get listings with provider and service information
-SELECT 
+SELECT
   l.id, l.title, l.description, l.price,
   p.business_name, p.city, p.state,
   s.name as service_name, s.category
-FROM 
+FROM
   listings l
-JOIN 
+JOIN
   providers p ON l.provider_id = p.id
-JOIN 
+JOIN
   services s ON l.service_id = s.id
-WHERE 
+WHERE
   p.city = 'New York';
 ```
 
@@ -210,15 +224,15 @@ WHERE
 
 ```sql
 -- Count listings by service category
-SELECT 
+SELECT
   s.category, COUNT(l.id) as listing_count
-FROM 
+FROM
   listings l
-JOIN 
+JOIN
   services s ON l.service_id = s.id
-GROUP BY 
+GROUP BY
   s.category
-ORDER BY 
+ORDER BY
   listing_count DESC;
 ```
 

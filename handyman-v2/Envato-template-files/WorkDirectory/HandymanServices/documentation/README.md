@@ -18,6 +18,7 @@ This documentation follows a pyramid structure with a single entry point (this f
 - [Technical Architecture](./technical-architecture.md)
 - [Enriched Data Format](./enriched-data-format.md)
 - [Code Changes for Enriched Data](./code-changes-for-enriched-data.md)
+- [Next Steps](./next-steps.md)
 
 ## Project Overview
 
@@ -56,4 +57,19 @@ To get started with the project, follow these steps:
 
 ## Next Steps
 
-For more detailed information, refer to the specific documentation sections linked above.
+For detailed information about planned future enhancements, refer to the [Next Steps](./next-steps.md) documentation. This includes:
+
+1. **Save Enriched Data from OpenRouter Web Search to Supabase Database**
+   - Implement a robust solution to store enriched business data from OpenRouter web searches directly in the Supabase database
+   - Create a scheduled job to periodically update the enriched data for all businesses
+   - Add admin interface for manually triggering enrichment for specific businesses
+
+2. **Enhance User Interface for Displaying Enriched Data**
+   - Create dedicated components for displaying different sections of the enriched data
+   - Implement a tabbed interface for navigating between different sections
+
+3. **Implement Analytics for Enrichment Process**
+   - Track API usage and costs
+   - Monitor enrichment success rates
+
+For more detailed information about these and other planned enhancements, see the [Next Steps](./next-steps.md) document.
